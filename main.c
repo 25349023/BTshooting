@@ -28,6 +28,7 @@ ALLEGRO_BITMAP *background = NULL;
 ALLEGRO_KEYBOARD_STATE keyState;
 ALLEGRO_TIMER *bulletUpdateTimer = NULL;
 ALLEGRO_TIMER *shootingDefaultBulletTimer = NULL;
+ALLEGRO_TIMER *enemyDefaultBulletTimer = NULL;
 ALLEGRO_TIMER *playerMovingTimer = NULL;
 ALLEGRO_TIMER *enemyMovingTimer = NULL;
 ALLEGRO_TIMER *collisionDetectTimer = NULL;
@@ -148,7 +149,7 @@ void game_init() {
 
 void load_images() {
     char filename[20];
-    for (int i = 0; i < 2; i++){
+    for (int i = 0; i < 3; i++){
         sprintf(filename, "bullet%d.png", i);
         bulletImgs[i] = al_load_bitmap(filename);
     }
@@ -451,6 +452,16 @@ int process_event() {
         }
         draw_count++;
     }
+    else if (event.timer.source == enemyDefaultBulletTimer){
+        for (Character *enemy = enemy_list; enemy != NULL; enemy = enemy->next){
+            enemy->shoot_interval++;
+            if (enemy->shoot_interval == enemy->CD){
+                enemy->shoot_interval = 0;
+                Bullet *bt = make_bullet(enemy->default_bullet, enemy->bullet_mode, enemy->pos);
+                register_bullet(bt, &enemy_bullet_list);
+            }
+        }
+    }
 
 
     // Keyboard
@@ -533,7 +544,7 @@ int process_event() {
             else if (within(event.mouse.x, event.mouse.y, 301, HEIGHT - 55, 400, HEIGHT)){
                 printf("Enemy");
                 Character *ene = create_enemy(enemyImgs[0], 10, (Vector2) {-1, 0}, 5, 180,
-                                              bulletImgs[1], (float) 1 / 2, down);
+                                              bulletImgs[2], 30, down);
                 register_enemy(ene);
             }
         }
@@ -575,18 +586,21 @@ int game_run() {
                 enemyMovingTimer = al_create_timer(1.0 / 30.0);
                 bulletUpdateTimer = al_create_timer(1.0 / 30.0);
                 shootingDefaultBulletTimer = al_create_timer(player.shooting_rate);
+                enemyDefaultBulletTimer = al_create_timer(1.0 / 60.0);
                 collisionDetectTimer = al_create_timer(1.0 / 60.0);
                 generateEnemyBulletTimer = al_create_timer(1.0 / 5.0);
                 al_register_event_source(event_queue, al_get_timer_event_source(playerMovingTimer));
                 al_register_event_source(event_queue, al_get_timer_event_source(enemyMovingTimer));
                 al_register_event_source(event_queue, al_get_timer_event_source(bulletUpdateTimer));
                 al_register_event_source(event_queue, al_get_timer_event_source(shootingDefaultBulletTimer));
+                al_register_event_source(event_queue, al_get_timer_event_source(enemyDefaultBulletTimer));
                 al_register_event_source(event_queue, al_get_timer_event_source(collisionDetectTimer));
                 al_register_event_source(event_queue, al_get_timer_event_source(generateEnemyBulletTimer));
                 al_start_timer(playerMovingTimer);
                 al_start_timer(enemyMovingTimer);
                 al_start_timer(bulletUpdateTimer);
                 al_start_timer(shootingDefaultBulletTimer);
+                al_start_timer(enemyDefaultBulletTimer);
                 al_start_timer(collisionDetectTimer);
                 al_start_timer(generateEnemyBulletTimer);
             }
@@ -649,8 +663,6 @@ bool within(float x, float y, float x1, float y1, float x2, float y2) {
 
 bool collide_with(Circle a, Circle b) {
     if (sqrtf(powf(b.center.x - a.center.x, 2) + powf(b.center.y - a.center.y, 2)) <= a.radius + b.radius){
-        printf("%lf\n", a.radius + b.radius);
-        printf("%lf\n", sqrtf(powf(b.center.x - a.center.x, 2) + powf(b.center.y - a.center.y, 2)));
         return true;
     }
     return false;

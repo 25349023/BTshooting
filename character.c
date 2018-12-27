@@ -23,12 +23,11 @@ void set_character(ALLEGRO_BITMAP *img, int hp, ALLEGRO_BITMAP *bt_img, float ra
     player.bullet_mode = md;
 }
 
-Character *
-create_enemy(ALLEGRO_BITMAP *img, int hp, Vector2 pos, float spd, float angle,
-             ALLEGRO_BITMAP *bt_img, float rate, enum flyMode md) {
+Character *create_enemy(ALLEGRO_BITMAP *img, int hp, Vector2 pos, float spd, float angle,
+                        ALLEGRO_BITMAP *bt_img, int cd, enum flyMode md) {
     Character *enemy = malloc(sizeof(Character));
     enemy->image = img;
-    enemy->pos.x = pos.x < 0 ? (rand() % 10 * 40 + 20) : pos.x;
+    enemy->pos.x = pos.x < 0 ? ((rand() % 18 + 1) * 20 + 10) : pos.x;
     enemy->pos.y = pos.y < 0 ? (rand() % (HEIGHT + 1)) : pos.y;
     enemy->size.x = al_get_bitmap_width(img);
     enemy->size.y = al_get_bitmap_height(img);
@@ -42,7 +41,8 @@ create_enemy(ALLEGRO_BITMAP *img, int hp, Vector2 pos, float spd, float angle,
     enemy->speed.y = enemy->e_speed * -cosf((float) (ALLEGRO_PI / 180 * angle));
     enemy->dire_angle = angle;
     enemy->default_bullet = bt_img;
-    enemy->shooting_rate = rate;
+    enemy->CD = cd;
+    enemy->shoot_interval = 0;
     enemy->bullet_mode = md;
 
     return enemy;

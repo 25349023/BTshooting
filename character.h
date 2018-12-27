@@ -18,6 +18,7 @@ typedef struct character {
     float shooting_rate;
     float e_speed;
     float dire_angle;  // in degree
+    int CD, shoot_interval;
     ALLEGRO_BITMAP *image;
     ALLEGRO_BITMAP *default_bullet;
     enum flyMode bullet_mode;
@@ -26,8 +27,8 @@ typedef struct character {
 
 void set_character(ALLEGRO_BITMAP *img, int hp, ALLEGRO_BITMAP *bt_img, float rate, enum flyMode md);
 
-Character *create_enemy(ALLEGRO_BITMAP *img, int hp, Vector2 pos, float spd, float angle, ALLEGRO_BITMAP *bt_img, float rate,
-                        enum flyMode md);
+Character *create_enemy(ALLEGRO_BITMAP *img, int hp, Vector2 pos, float spd, float angle,
+                        ALLEGRO_BITMAP *bt_img, int cd, enum flyMode md);
 void register_enemy(Character *enemy);
 void destroy_enemy(Character *curr, Character **prev);
 

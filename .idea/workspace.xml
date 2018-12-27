@@ -12,7 +12,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="def17dde-3e6d-444b-925d-22175e2bd139" name="Default Changelist" comment="" />
+    <list default="true" id="def17dde-3e6d-444b-925d-22175e2bd139" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/character.c" beforeDir="false" afterPath="$PROJECT_DIR$/character.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/character.h" beforeDir="false" afterPath="$PROJECT_DIR$/character.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/cmake-build-release/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,15 +42,15 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.8218884">
+    <splitter split-orientation="horizontal" split-proportion="0.9">
       <split-first>
-        <splitter split-orientation="horizontal" split-proportion="0.19554031">
+        <splitter split-orientation="horizontal" split-proportion="0.11276849">
           <split-first>
             <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
               <file pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="448">
+                    <state relative-caret-position="406">
                       <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
                     </state>
                   </provider>
@@ -54,34 +59,28 @@
               <file pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/main.c">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="207">
-                      <caret line="423" column="9" selection-start-line="423" selection-start-column="9" selection-end-line="423" selection-end-column="9" />
+                    <state relative-caret-position="361">
+                      <caret line="390" column="49" lean-forward="true" selection-start-line="390" selection-start-column="49" selection-end-line="390" selection-end-column="49" />
                       <folding>
-                        <marker date="1545891191627" expanded="true" signature="4923:13352" ph="{...}" />
-                        <marker date="1545891191627" expanded="false" signature="5242:8111" ph="{...}" />
-                        <marker date="1545891191627" expanded="false" signature="13406:13940" ph="{...}" />
-                        <marker date="1545891191627" expanded="false" signature="14003:14826" ph="{...}" />
-                        <marker date="1545891191627" expanded="false" signature="18247:18774" ph="{...}" />
-                        <marker date="1545891191627" expanded="false" signature="19562:20162" ph="{...}" />
-                        <marker date="1545891191627" expanded="false" signature="20064:20152" ph="{...}" />
-                        <marker date="1545891191627" expanded="false" signature="21277:21490" ph="{...}" />
-                        <marker date="1545891191627" expanded="true" signature="21772:23638" ph="{...}" />
-                        <marker date="1545891191627" expanded="false" signature="23700:24012" ph="{...}" />
-                        <marker date="1545891191627" expanded="false" signature="24038:24179" ph="{...}" />
+                        <marker date="1545925420620" expanded="false" signature="4970:13399" ph="{...}" />
+                        <marker date="1545925420620" expanded="false" signature="13453:13987" ph="{...}" />
+                        <marker date="1545925420620" expanded="true" signature="14050:14873" ph="{...}" />
+                        <marker date="1545925420620" expanded="false" signature="18753:19280" ph="{...}" />
+                        <marker date="1545925420620" expanded="false" signature="20068:20668" ph="{...}" />
+                        <marker date="1545925420620" expanded="false" signature="20570:20658" ph="{...}" />
+                        <marker date="1545925420620" expanded="false" signature="21772:21985" ph="{...}" />
+                        <marker date="1545925420620" expanded="false" signature="22267:24368" ph="{...}" />
+                        <marker date="1545925420620" expanded="false" signature="24430:24742" ph="{...}" />
+                        <marker date="1545925420620" expanded="false" signature="24768:24909" ph="{...}" />
                       </folding>
                     </state>
                   </provider>
                 </entry>
               </file>
               <file pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/cmake-build-debug/enemy0.png">
-                  <provider selected="true" editor-type-id="images" />
-                </entry>
-              </file>
-              <file pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/bullet.h">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="128">
+                    <state relative-caret-position="116">
                       <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
                       <folding>
                         <element signature="e#100#129#0" expanded="true" />
@@ -94,23 +93,25 @@
           </split-first>
           <split-second>
             <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-              <file pinned="false" current-in-tab="false">
+              <file pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/main.c">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="175">
-                      <caret line="413" selection-start-line="413" selection-end-line="413" />
+                    <state relative-caret-position="187">
+                      <caret line="562" column="22" selection-start-line="562" selection-start-column="16" selection-end-line="562" selection-end-column="22" />
                       <folding>
-                        <marker date="1545891191627" expanded="true" signature="4923:13352" ph="{...}" />
-                        <marker date="1545891191627" expanded="false" signature="5242:8111" ph="{...}" />
-                        <marker date="1545891191627" expanded="false" signature="13406:13940" ph="{...}" />
-                        <marker date="1545891191627" expanded="false" signature="14003:14826" ph="{...}" />
-                        <marker date="1545891191627" expanded="false" signature="18247:18774" ph="{...}" />
-                        <marker date="1545891191627" expanded="false" signature="19562:20162" ph="{...}" />
-                        <marker date="1545891191627" expanded="false" signature="20064:20152" ph="{...}" />
-                        <marker date="1545891191627" expanded="false" signature="21277:21490" ph="{...}" />
-                        <marker date="1545891191627" expanded="true" signature="21772:23638" ph="{...}" />
-                        <marker date="1545891191627" expanded="false" signature="23700:24012" ph="{...}" />
-                        <marker date="1545891191627" expanded="false" signature="24038:24179" ph="{...}" />
+                        <marker date="1545925420620" expanded="false" signature="4970:13399" ph="{...}" />
+                        <marker date="1545925420620" expanded="false" signature="13453:13987" ph="{...}" />
+                        <marker date="1545925420620" expanded="false" signature="14050:14873" ph="{...}" />
+                        <marker date="1545925420620" expanded="false" signature="14930:16552" ph="{...}" />
+                        <marker date="1545925420620" expanded="false" signature="16613:16743" ph="{...}" />
+                        <marker date="1545925420620" expanded="false" signature="16796:18040" ph="{...}" />
+                        <marker date="1545925420620" expanded="false" signature="18753:19280" ph="{...}" />
+                        <marker date="1545925420620" expanded="false" signature="20068:20668" ph="{...}" />
+                        <marker date="1545925420620" expanded="false" signature="20570:20658" ph="{...}" />
+                        <marker date="1545925420620" expanded="false" signature="21772:21985" ph="{...}" />
+                        <marker date="1545925420620" expanded="true" signature="22267:24368" ph="{...}" />
+                        <marker date="1545925420620" expanded="false" signature="24430:24742" ph="{...}" />
+                        <marker date="1545925420620" expanded="false" signature="24768:24909" ph="{...}" />
                       </folding>
                     </state>
                   </provider>
@@ -119,17 +120,17 @@
               <file pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/bullet.c">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="257">
-                      <caret line="20" column="1" lean-forward="true" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
+                    <state relative-caret-position="487">
+                      <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
                     </state>
                   </provider>
                 </entry>
               </file>
-              <file pinned="false" current-in-tab="true">
+              <file pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/character.c">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="347">
-                      <caret line="38" column="97" selection-start-line="38" selection-start-column="97" selection-end-line="38" selection-end-column="97" />
+                    <state relative-caret-position="673">
+                      <caret line="29" column="56" lean-forward="true" selection-start-line="29" selection-start-column="56" selection-end-line="29" selection-end-column="56" />
                       <folding>
                         <element signature="e#41#58#0" expanded="true" />
                       </folding>
@@ -143,32 +144,32 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/main.c">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="73">
-                  <caret line="34" selection-start-line="34" selection-end-line="34" />
+                <state relative-caret-position="282">
+                  <caret line="30" column="38" selection-start-line="30" selection-start-column="38" selection-end-line="30" selection-end-column="38" />
                   <folding>
-                    <marker date="1545891191627" expanded="false" signature="4923:13352" ph="{...}" />
-                    <marker date="1545891191627" expanded="false" signature="13406:13940" ph="{...}" />
-                    <marker date="1545891191627" expanded="false" signature="14003:14826" ph="{...}" />
-                    <marker date="1545891191627" expanded="false" signature="18247:18774" ph="{...}" />
-                    <marker date="1545891191627" expanded="false" signature="19562:20162" ph="{...}" />
-                    <marker date="1545891191627" expanded="false" signature="20064:20152" ph="{...}" />
-                    <marker date="1545891191627" expanded="false" signature="21277:21490" ph="{...}" />
-                    <marker date="1545891191627" expanded="false" signature="21772:23638" ph="{...}" />
-                    <marker date="1545891191627" expanded="false" signature="23700:24012" ph="{...}" />
-                    <marker date="1545891191627" expanded="false" signature="24038:24179" ph="{...}" />
+                    <marker date="1545925420620" expanded="false" signature="4970:13399" ph="{...}" />
+                    <marker date="1545925420620" expanded="false" signature="13453:13987" ph="{...}" />
+                    <marker date="1545925420620" expanded="false" signature="14050:14873" ph="{...}" />
+                    <marker date="1545925420620" expanded="false" signature="18753:19280" ph="{...}" />
+                    <marker date="1545925420620" expanded="false" signature="20068:20668" ph="{...}" />
+                    <marker date="1545925420620" expanded="false" signature="20570:20658" ph="{...}" />
+                    <marker date="1545925420620" expanded="false" signature="21772:21985" ph="{...}" />
+                    <marker date="1545925420620" expanded="false" signature="22267:24368" ph="{...}" />
+                    <marker date="1545925420620" expanded="false" signature="24430:24742" ph="{...}" />
+                    <marker date="1545925420620" expanded="false" signature="24768:24909" ph="{...}" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/character.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="513">
-                  <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+                <state relative-caret-position="467">
+                  <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="27" />
                   <folding>
                     <element signature="e#106#135#0" expanded="true" />
                   </folding>
@@ -179,7 +180,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/general.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="576">
+                <state relative-caret-position="522">
                   <caret line="18" column="2" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
                 </state>
               </provider>
@@ -204,6 +205,9 @@
       <replace>white</replace>
     </replaceStrings>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -214,8 +218,8 @@
         <option value="$PROJECT_DIR$/bullet.h" />
         <option value="$PROJECT_DIR$/general.h" />
         <option value="$PROJECT_DIR$/character.h" />
-        <option value="$PROJECT_DIR$/main.c" />
         <option value="$PROJECT_DIR$/character.c" />
+        <option value="$PROJECT_DIR$/main.c" />
       </list>
     </option>
   </component>
@@ -225,12 +229,12 @@
     <option name="width" value="1494" />
     <option name="height" value="1047" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -238,22 +242,18 @@
               <item name="Final_Clion" type="b2602c69:ProjectViewProjectNode" />
               <item name="Final_Clion" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="Final_Clion" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Final_Clion" type="462c0819:PsiDirectoryNode" />
-              <item name="cmake-build-debug" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C/C++" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -335,11 +335,15 @@
       <workItem from="1545816371637" duration="12293000" />
       <workItem from="1545838915726" duration="1196000" />
       <workItem from="1545888197356" duration="3702000" />
+      <workItem from="1545893297583" duration="644000" />
+      <workItem from="1545897146139" duration="976000" />
+      <workItem from="1545898529834" duration="1373000" />
+      <workItem from="1545919538976" duration="5222000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="110034000" />
+    <option name="totallyTimeSpent" value="118249000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -349,7 +353,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3288889" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.29666665" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.29666665" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.35222223" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -357,7 +361,7 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="10" weight="0.38444445" />
       <window_info anchor="bottom" id="CMake" order="11" weight="0.32962137" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.16777778" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -370,12 +374,51 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/main.c</url>
-          <line>413</line>
+          <line>414</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
@@ -526,14 +569,48 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
+        <state relative-caret-position="406">
           <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/general.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="522">
+          <caret line="18" column="2" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/character.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="467">
+          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="27" />
+          <folding>
+            <element signature="e#106#135#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bullet.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="487">
+          <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/character.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="673">
+          <caret line="29" column="56" lean-forward="true" selection-start-line="29" selection-start-column="56" selection-end-line="29" selection-end-column="56" />
+          <folding>
+            <element signature="e#41#58#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bullet.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
+        <state relative-caret-position="116">
           <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
           <folding>
             <element signature="e#100#129#0" expanded="true" />
@@ -541,59 +618,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/general.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="18" column="2" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/character.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
-          <folding>
-            <element signature="e#106#135#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cmake-build-debug/enemy0.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/bullet.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="20" column="1" lean-forward="true" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="413" selection-start-line="413" selection-end-line="413" />
+        <state relative-caret-position="187">
+          <caret line="562" column="22" selection-start-line="562" selection-start-column="16" selection-end-line="562" selection-end-column="22" />
           <folding>
-            <marker date="1545891191627" expanded="true" signature="4923:13352" ph="{...}" />
-            <marker date="1545891191627" expanded="false" signature="5242:8111" ph="{...}" />
-            <marker date="1545891191627" expanded="false" signature="13406:13940" ph="{...}" />
-            <marker date="1545891191627" expanded="false" signature="14003:14826" ph="{...}" />
-            <marker date="1545891191627" expanded="false" signature="18247:18774" ph="{...}" />
-            <marker date="1545891191627" expanded="false" signature="19562:20162" ph="{...}" />
-            <marker date="1545891191627" expanded="false" signature="20064:20152" ph="{...}" />
-            <marker date="1545891191627" expanded="false" signature="21277:21490" ph="{...}" />
-            <marker date="1545891191627" expanded="true" signature="21772:23638" ph="{...}" />
-            <marker date="1545891191627" expanded="false" signature="23700:24012" ph="{...}" />
-            <marker date="1545891191627" expanded="false" signature="24038:24179" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/character.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="38" column="97" selection-start-line="38" selection-start-column="97" selection-end-line="38" selection-end-column="97" />
-          <folding>
-            <element signature="e#41#58#0" expanded="true" />
+            <marker date="1545925420620" expanded="false" signature="4970:13399" ph="{...}" />
+            <marker date="1545925420620" expanded="false" signature="13453:13987" ph="{...}" />
+            <marker date="1545925420620" expanded="false" signature="14050:14873" ph="{...}" />
+            <marker date="1545925420620" expanded="false" signature="14930:16552" ph="{...}" />
+            <marker date="1545925420620" expanded="false" signature="16613:16743" ph="{...}" />
+            <marker date="1545925420620" expanded="false" signature="16796:18040" ph="{...}" />
+            <marker date="1545925420620" expanded="false" signature="18753:19280" ph="{...}" />
+            <marker date="1545925420620" expanded="false" signature="20068:20668" ph="{...}" />
+            <marker date="1545925420620" expanded="false" signature="20570:20658" ph="{...}" />
+            <marker date="1545925420620" expanded="false" signature="21772:21985" ph="{...}" />
+            <marker date="1545925420620" expanded="true" signature="22267:24368" ph="{...}" />
+            <marker date="1545925420620" expanded="false" signature="24430:24742" ph="{...}" />
+            <marker date="1545925420620" expanded="false" signature="24768:24909" ph="{...}" />
           </folding>
         </state>
       </provider>
