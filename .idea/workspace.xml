@@ -14,9 +14,12 @@
   <component name="ChangeListManager">
     <list default="true" id="def17dde-3e6d-444b-925d-22175e2bd139" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/character.c" beforeDir="false" afterPath="$PROJECT_DIR$/character.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/character.h" beforeDir="false" afterPath="$PROJECT_DIR$/character.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/C.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/C.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/character.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/character.c.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/main.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/main.c.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/objects.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/objects.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Final_Clion.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Final_Clion.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/allegro.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/allegro.log" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/cmake-build-release/" />
@@ -59,12 +62,12 @@
               <file pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/main.c">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="361">
-                      <caret line="390" column="49" lean-forward="true" selection-start-line="390" selection-start-column="49" selection-end-line="390" selection-end-column="49" />
+                    <state relative-caret-position="384">
+                      <caret line="378" column="62" selection-start-line="378" selection-start-column="62" selection-end-line="378" selection-end-column="62" />
                       <folding>
                         <marker date="1545925420620" expanded="false" signature="4970:13399" ph="{...}" />
                         <marker date="1545925420620" expanded="false" signature="13453:13987" ph="{...}" />
-                        <marker date="1545925420620" expanded="true" signature="14050:14873" ph="{...}" />
+                        <marker date="1545925420620" expanded="false" signature="14050:14873" ph="{...}" />
                         <marker date="1545925420620" expanded="false" signature="18753:19280" ph="{...}" />
                         <marker date="1545925420620" expanded="false" signature="20068:20668" ph="{...}" />
                         <marker date="1545925420620" expanded="false" signature="20570:20658" ph="{...}" />
@@ -96,20 +99,17 @@
               <file pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/main.c">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="187">
-                      <caret line="562" column="22" selection-start-line="562" selection-start-column="16" selection-end-line="562" selection-end-column="22" />
+                    <state relative-caret-position="523">
+                      <caret line="572" column="20" selection-start-line="572" selection-start-column="20" selection-end-line="572" selection-end-column="20" />
                       <folding>
                         <marker date="1545925420620" expanded="false" signature="4970:13399" ph="{...}" />
                         <marker date="1545925420620" expanded="false" signature="13453:13987" ph="{...}" />
                         <marker date="1545925420620" expanded="false" signature="14050:14873" ph="{...}" />
-                        <marker date="1545925420620" expanded="false" signature="14930:16552" ph="{...}" />
-                        <marker date="1545925420620" expanded="false" signature="16613:16743" ph="{...}" />
-                        <marker date="1545925420620" expanded="false" signature="16796:18040" ph="{...}" />
                         <marker date="1545925420620" expanded="false" signature="18753:19280" ph="{...}" />
                         <marker date="1545925420620" expanded="false" signature="20068:20668" ph="{...}" />
                         <marker date="1545925420620" expanded="false" signature="20570:20658" ph="{...}" />
                         <marker date="1545925420620" expanded="false" signature="21772:21985" ph="{...}" />
-                        <marker date="1545925420620" expanded="true" signature="22267:24368" ph="{...}" />
+                        <marker date="1545925420620" expanded="false" signature="22267:24368" ph="{...}" />
                         <marker date="1545925420620" expanded="false" signature="24430:24742" ph="{...}" />
                         <marker date="1545925420620" expanded="false" signature="24768:24909" ph="{...}" />
                       </folding>
@@ -120,7 +120,7 @@
               <file pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/bullet.c">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="487">
+                    <state relative-caret-position="580">
                       <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
                     </state>
                   </provider>
@@ -129,8 +129,8 @@
               <file pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/character.c">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="673">
-                      <caret line="29" column="56" lean-forward="true" selection-start-line="29" selection-start-column="56" selection-end-line="29" selection-end-column="56" />
+                    <state relative-caret-position="841">
+                      <caret line="29" column="56" selection-start-line="29" selection-start-column="56" selection-end-line="29" selection-end-column="56" />
                       <folding>
                         <element signature="e#41#58#0" expanded="true" />
                       </folding>
@@ -147,7 +147,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/main.c">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="282">
+                <state relative-caret-position="870">
                   <caret line="30" column="38" selection-start-line="30" selection-start-column="38" selection-end-line="30" selection-end-column="38" />
                   <folding>
                     <marker date="1545925420620" expanded="false" signature="4970:13399" ph="{...}" />
@@ -168,8 +168,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/character.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="467">
-                  <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="27" />
+                <state relative-caret-position="464">
+                  <caret line="26" selection-start-line="26" selection-end-line="26" />
                   <folding>
                     <element signature="e#106#135#0" expanded="true" />
                   </folding>
@@ -224,7 +224,7 @@
     </option>
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="433" />
     <option name="width" value="1494" />
     <option name="height" value="1047" />
@@ -338,22 +338,32 @@
       <workItem from="1545893297583" duration="644000" />
       <workItem from="1545897146139" duration="976000" />
       <workItem from="1545898529834" duration="1373000" />
-      <workItem from="1545919538976" duration="5222000" />
+      <workItem from="1545919538976" duration="5278000" />
+      <workItem from="1545926410103" duration="248000" />
     </task>
+    <task id="LOCAL-00001" summary="make enemy shoot bullets">
+      <created>1545925863420</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1545925863420</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="118249000" />
+    <option name="totallyTimeSpent" value="118553000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.12929185" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3288889" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.29666665" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.29666665" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.35222223" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -409,9 +419,25 @@
         </entry>
       </map>
     </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
+    <MESSAGE value="make enemy shoot bullets" />
+    <option name="LAST_COMMIT_MESSAGE" value="make enemy shoot bullets" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -567,44 +593,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/enemy0.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="406">
           <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/general.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="18" column="2" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/character.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="467">
-          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="27" />
-          <folding>
-            <element signature="e#106#135#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bullet.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="487">
-          <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/character.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="673">
-          <caret line="29" column="56" lean-forward="true" selection-start-line="29" selection-start-column="56" selection-end-line="29" selection-end-column="56" />
-          <folding>
-            <element signature="e#41#58#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -618,27 +613,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cmake-build-debug/enemy0.png">
-      <provider selected="true" editor-type-id="images" />
+    <entry file="file://$PROJECT_DIR$/bullet.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/character.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="841">
+          <caret line="29" column="56" selection-start-line="29" selection-start-column="56" selection-end-line="29" selection-end-column="56" />
+          <folding>
+            <element signature="e#41#58#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/general.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="522">
+          <caret line="18" column="2" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="562" column="22" selection-start-line="562" selection-start-column="16" selection-end-line="562" selection-end-column="22" />
+        <state relative-caret-position="870">
+          <caret line="30" column="38" selection-start-line="30" selection-start-column="38" selection-end-line="30" selection-end-column="38" />
           <folding>
             <marker date="1545925420620" expanded="false" signature="4970:13399" ph="{...}" />
             <marker date="1545925420620" expanded="false" signature="13453:13987" ph="{...}" />
             <marker date="1545925420620" expanded="false" signature="14050:14873" ph="{...}" />
-            <marker date="1545925420620" expanded="false" signature="14930:16552" ph="{...}" />
-            <marker date="1545925420620" expanded="false" signature="16613:16743" ph="{...}" />
-            <marker date="1545925420620" expanded="false" signature="16796:18040" ph="{...}" />
             <marker date="1545925420620" expanded="false" signature="18753:19280" ph="{...}" />
             <marker date="1545925420620" expanded="false" signature="20068:20668" ph="{...}" />
             <marker date="1545925420620" expanded="false" signature="20570:20658" ph="{...}" />
             <marker date="1545925420620" expanded="false" signature="21772:21985" ph="{...}" />
-            <marker date="1545925420620" expanded="true" signature="22267:24368" ph="{...}" />
+            <marker date="1545925420620" expanded="false" signature="22267:24368" ph="{...}" />
             <marker date="1545925420620" expanded="false" signature="24430:24742" ph="{...}" />
             <marker date="1545925420620" expanded="false" signature="24768:24909" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/character.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="464">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+          <folding>
+            <element signature="e#106#135#0" expanded="true" />
           </folding>
         </state>
       </provider>
