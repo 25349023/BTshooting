@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="Final_Clion" targetName="Final_Clion" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+      <configuration PROFILE_NAME="Release" CONFIG_NAME="Release" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="def17dde-3e6d-444b-925d-22175e2bd139" name="Default Changelist" comment="" />
+    <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
+    <ignored path="$PROJECT_DIR$/cmake-build-release/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="FileEditorManager">
+    <splitter split-orientation="horizontal" split-proportion="0.8218884">
+      <split-first>
+        <splitter split-orientation="horizontal" split-proportion="0.19554031">
+          <split-first>
+            <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+              <file pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state relative-caret-position="448">
+                      <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+              <file pinned="false" current-in-tab="true">
+                <entry file="file://$PROJECT_DIR$/main.c">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state relative-caret-position="207">
+                      <caret line="423" column="9" selection-start-line="423" selection-start-column="9" selection-end-line="423" selection-end-column="9" />
+                      <folding>
+                        <marker date="1545891191627" expanded="true" signature="4923:13352" ph="{...}" />
+                        <marker date="1545891191627" expanded="false" signature="5242:8111" ph="{...}" />
+                        <marker date="1545891191627" expanded="false" signature="13406:13940" ph="{...}" />
+                        <marker date="1545891191627" expanded="false" signature="14003:14826" ph="{...}" />
+                        <marker date="1545891191627" expanded="false" signature="18247:18774" ph="{...}" />
+                        <marker date="1545891191627" expanded="false" signature="19562:20162" ph="{...}" />
+                        <marker date="1545891191627" expanded="false" signature="20064:20152" ph="{...}" />
+                        <marker date="1545891191627" expanded="false" signature="21277:21490" ph="{...}" />
+                        <marker date="1545891191627" expanded="true" signature="21772:23638" ph="{...}" />
+                        <marker date="1545891191627" expanded="false" signature="23700:24012" ph="{...}" />
+                        <marker date="1545891191627" expanded="false" signature="24038:24179" ph="{...}" />
+                      </folding>
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+              <file pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/cmake-build-debug/enemy0.png">
+                  <provider selected="true" editor-type-id="images" />
+                </entry>
+              </file>
+              <file pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/bullet.h">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state relative-caret-position="128">
+                      <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+                      <folding>
+                        <element signature="e#100#129#0" expanded="true" />
+                      </folding>
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+            </leaf>
+          </split-first>
+          <split-second>
+            <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+              <file pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/main.c">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state relative-caret-position="175">
+                      <caret line="413" selection-start-line="413" selection-end-line="413" />
+                      <folding>
+                        <marker date="1545891191627" expanded="true" signature="4923:13352" ph="{...}" />
+                        <marker date="1545891191627" expanded="false" signature="5242:8111" ph="{...}" />
+                        <marker date="1545891191627" expanded="false" signature="13406:13940" ph="{...}" />
+                        <marker date="1545891191627" expanded="false" signature="14003:14826" ph="{...}" />
+                        <marker date="1545891191627" expanded="false" signature="18247:18774" ph="{...}" />
+                        <marker date="1545891191627" expanded="false" signature="19562:20162" ph="{...}" />
+                        <marker date="1545891191627" expanded="false" signature="20064:20152" ph="{...}" />
+                        <marker date="1545891191627" expanded="false" signature="21277:21490" ph="{...}" />
+                        <marker date="1545891191627" expanded="true" signature="21772:23638" ph="{...}" />
+                        <marker date="1545891191627" expanded="false" signature="23700:24012" ph="{...}" />
+                        <marker date="1545891191627" expanded="false" signature="24038:24179" ph="{...}" />
+                      </folding>
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+              <file pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/bullet.c">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state relative-caret-position="257">
+                      <caret line="20" column="1" lean-forward="true" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+              <file pinned="false" current-in-tab="true">
+                <entry file="file://$PROJECT_DIR$/character.c">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state relative-caret-position="347">
+                      <caret line="38" column="97" selection-start-line="38" selection-start-column="97" selection-end-line="38" selection-end-column="97" />
+                      <folding>
+                        <element signature="e#41#58#0" expanded="true" />
+                      </folding>
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+            </leaf>
+          </split-second>
+        </splitter>
+      </split-first>
+      <split-second>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/main.c">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="73">
+                  <caret line="34" selection-start-line="34" selection-end-line="34" />
+                  <folding>
+                    <marker date="1545891191627" expanded="false" signature="4923:13352" ph="{...}" />
+                    <marker date="1545891191627" expanded="false" signature="13406:13940" ph="{...}" />
+                    <marker date="1545891191627" expanded="false" signature="14003:14826" ph="{...}" />
+                    <marker date="1545891191627" expanded="false" signature="18247:18774" ph="{...}" />
+                    <marker date="1545891191627" expanded="false" signature="19562:20162" ph="{...}" />
+                    <marker date="1545891191627" expanded="false" signature="20064:20152" ph="{...}" />
+                    <marker date="1545891191627" expanded="false" signature="21277:21490" ph="{...}" />
+                    <marker date="1545891191627" expanded="false" signature="21772:23638" ph="{...}" />
+                    <marker date="1545891191627" expanded="false" signature="23700:24012" ph="{...}" />
+                    <marker date="1545891191627" expanded="false" signature="24038:24179" ph="{...}" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/character.h">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="513">
+                  <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+                  <folding>
+                    <element signature="e#106#135#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/general.h">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="576">
+                  <caret line="18" column="2" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>rand</find>
+      <find>draw_game_scene</find>
+      <find>firing_point</find>
+      <find>flip</find>
+      <find>al_clear_to_color</find>
+      <find>keyState</find>
+      <find>load_images</find>
+      <find>al_flip_display</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>white</replace>
+    </replaceStrings>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/main.cpp" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/bullet.c" />
+        <option value="$PROJECT_DIR$/character.cpp" />
+        <option value="$PROJECT_DIR$/bullet.h" />
+        <option value="$PROJECT_DIR$/general.h" />
+        <option value="$PROJECT_DIR$/character.h" />
+        <option value="$PROJECT_DIR$/main.c" />
+        <option value="$PROJECT_DIR$/character.c" />
+      </list>
+    </option>
+  </component>
+  <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="433" />
+    <option name="width" value="1494" />
+    <option name="height" value="1047" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Final_Clion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Final_Clion" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Final_Clion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Final_Clion" type="462c0819:PsiDirectoryNode" />
+              <item name="cmake-build-debug" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C/C++" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Program\C_And_C++\Final_Clion\cmake-build-debug" />
+      <recent name="D:\Program\C_And_C++\Final_Clion\cmake-build-release" />
+      <recent name="D:\Program\C_And_C++\Final_Clion" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Program\C_And_C++\Final_Clion\cmake-build-release" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.Final_Clion">
+    <configuration name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" EXPLICIT_BUILD_TARGET_NAME="all">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Final_Clion" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Final_Clion" TARGET_NAME="Final_Clion" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Final_Clion" RUN_TARGET_NAME="Final_Clion">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Build All" />
+      <item itemvalue="Application.Final_Clion" />
+    </list>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="def17dde-3e6d-444b-925d-22175e2bd139" name="Default Changelist" comment="" />
+      <created>1544837069873</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1544837069873</updated>
+      <workItem from="1544837075124" duration="561000" />
+      <workItem from="1544838559739" duration="945000" />
+      <workItem from="1544865509169" duration="3088000" />
+      <workItem from="1544868640079" duration="922000" />
+      <workItem from="1544873225744" duration="6053000" />
+      <workItem from="1544937612414" duration="13233000" />
+      <workItem from="1544974590595" duration="595000" />
+      <workItem from="1544976949719" duration="408000" />
+      <workItem from="1545043599929" duration="2315000" />
+      <workItem from="1545045937371" duration="12235000" />
+      <workItem from="1545112824962" duration="1717000" />
+      <workItem from="1545114705373" duration="618000" />
+      <workItem from="1545130172262" duration="5688000" />
+      <workItem from="1545192441997" duration="185000" />
+      <workItem from="1545208921090" duration="596000" />
+      <workItem from="1545234010854" duration="1341000" />
+      <workItem from="1545316988491" duration="5631000" />
+      <workItem from="1545375816925" duration="3580000" />
+      <workItem from="1545379833420" duration="597000" />
+      <workItem from="1545396198613" duration="4064000" />
+      <workItem from="1545449135379" duration="242000" />
+      <workItem from="1545460938357" duration="5565000" />
+      <workItem from="1545479751259" duration="7831000" />
+      <workItem from="1545540764343" duration="4688000" />
+      <workItem from="1545558790220" duration="2648000" />
+      <workItem from="1545647468075" duration="3200000" />
+      <workItem from="1545653467267" duration="1025000" />
+      <workItem from="1545749071128" duration="1641000" />
+      <workItem from="1545810326549" duration="1631000" />
+      <workItem from="1545816371637" duration="12293000" />
+      <workItem from="1545838915726" duration="1196000" />
+      <workItem from="1545888197356" duration="3702000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="110034000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" weight="0.12929185" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3288889" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.29666665" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.35222223" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="CMake" order="11" weight="0.32962137" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.16777778" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="LuaJ" order="3" weight="0.3299356" />
+      <window_info anchor="right" id="Database" order="4" weight="0.3299356" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/main.c</url>
+          <line>413</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="watch">
+      <expression>
+        <expression-string>bullet_queue</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>bullet_list</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/Makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5016" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.cpp" />
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1188" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmake-build-release/Final_Clion.cbp">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/events.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="974">
+          <caret line="141" column="16" selection-start-line="141" selection-start-column="16" selection-end-line="141" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/mouse_cursor.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="41" column="63" selection-start-line="41" selection-start-column="63" selection-end-line="41" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/bitmap_io.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="19" column="65" selection-start-line="19" selection-start-column="65" selection-end-line="19" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/color.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="57" column="105" selection-start-line="57" selection-start-column="105" selection-end-line="57" selection-end-column="105" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Program Files (x86)/CodeBlocks/MinGW/include/stdlib.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="351" column="36" selection-start-line="351" selection-start-column="36" selection-end-line="351" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Program Files (x86)/CodeBlocks/MinGW/include/_mingw.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="156" column="10" selection-start-line="156" selection-start-column="10" selection-end-line="156" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Program Files (x86)/CodeBlocks/MinGW/include/sys/types.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="26" column="12" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/base.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="85" column="8" selection-start-line="85" selection-start-column="8" selection-end-line="85" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/bitmap_draw.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="17" column="86" selection-start-line="17" selection-start-column="86" selection-end-line="17" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/platform/almngw32.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="53" column="8" selection-start-line="53" selection-start-column="8" selection-end-line="53" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/inline/fmaths.inl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="245" column="2" selection-start-line="245" selection-start-column="2" selection-end-line="245" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/bitmap.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="11" column="30" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Program Files (x86)/CodeBlocks/MinGW/include/time.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="101" column="12" selection-start-line="101" selection-start-column="12" selection-end-line="101" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Program Files (x86)/CodeBlocks/MinGW/lib/gcc/mingw32/5.1.0/include/stdbool.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="32" column="8" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Program Files (x86)/CodeBlocks/MinGW/include/math.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="446" column="21" selection-start-line="446" selection-start-column="21" selection-end-line="446" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Program Files (x86)/CodeBlocks/MinGW/include/stdio.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="293" column="36" selection-start-line="293" selection-start-column="36" selection-end-line="293" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="448">
+          <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bullet.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+          <folding>
+            <element signature="e#100#129#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/general.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="18" column="2" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/character.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+          <folding>
+            <element signature="e#106#135#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/enemy0.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bullet.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="20" column="1" lean-forward="true" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="413" selection-start-line="413" selection-end-line="413" />
+          <folding>
+            <marker date="1545891191627" expanded="true" signature="4923:13352" ph="{...}" />
+            <marker date="1545891191627" expanded="false" signature="5242:8111" ph="{...}" />
+            <marker date="1545891191627" expanded="false" signature="13406:13940" ph="{...}" />
+            <marker date="1545891191627" expanded="false" signature="14003:14826" ph="{...}" />
+            <marker date="1545891191627" expanded="false" signature="18247:18774" ph="{...}" />
+            <marker date="1545891191627" expanded="false" signature="19562:20162" ph="{...}" />
+            <marker date="1545891191627" expanded="false" signature="20064:20152" ph="{...}" />
+            <marker date="1545891191627" expanded="false" signature="21277:21490" ph="{...}" />
+            <marker date="1545891191627" expanded="true" signature="21772:23638" ph="{...}" />
+            <marker date="1545891191627" expanded="false" signature="23700:24012" ph="{...}" />
+            <marker date="1545891191627" expanded="false" signature="24038:24179" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/character.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="38" column="97" selection-start-line="38" selection-start-column="97" selection-end-line="38" selection-end-column="97" />
+          <folding>
+            <element signature="e#41#58#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

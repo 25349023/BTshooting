@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Final_Clion"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="D:/Program/C_And_C++/Final_Clion/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/Program Files (x86)/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;D:/Program/C_And_C++/Final_Clion/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="D:/Program Files (x86)/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;D:/Program/C_And_C++/Final_Clion/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Program Files (x86)/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;D:/Program/C_And_C++/Final_Clion/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Program Files (x86)/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;D:/Program/C_And_C++/Final_Clion/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Final_Clion">
+				<Option output="D:/Program/C_And_C++/Final_Clion/cmake-build-debug/Final_Clion.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/Program/C_And_C++/Final_Clion/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DDEBUG"/>
+					<Add directory="D:/Allegro/allegro-5.0.10-mingw-4.7.0/include"/>
+					<Add directory="D:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/5.1.0/include"/>
+					<Add directory="D:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/5.1.0/../../../../include"/>
+					<Add directory="D:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/5.1.0/include-fixed"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="D:/Program Files (x86)/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;D:/Program/C_And_C++/Final_Clion/cmake-build-debug/Makefile&quot;  VERBOSE=1 Final_Clion"/>
+					<CompileFile command="D:/Program Files (x86)/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;D:/Program/C_And_C++/Final_Clion/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Program Files (x86)/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;D:/Program/C_And_C++/Final_Clion/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Program Files (x86)/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;D:/Program/C_And_C++/Final_Clion/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Final_Clion/fast">
+				<Option output="D:/Program/C_And_C++/Final_Clion/cmake-build-debug/Final_Clion.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/Program/C_And_C++/Final_Clion/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DDEBUG"/>
+					<Add directory="D:/Allegro/allegro-5.0.10-mingw-4.7.0/include"/>
+					<Add directory="D:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/5.1.0/include"/>
+					<Add directory="D:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/5.1.0/../../../../include"/>
+					<Add directory="D:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/5.1.0/include-fixed"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="D:/Program Files (x86)/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;D:/Program/C_And_C++/Final_Clion/cmake-build-debug/Makefile&quot;  VERBOSE=1 Final_Clion/fast"/>
+					<CompileFile command="D:/Program Files (x86)/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;D:/Program/C_And_C++/Final_Clion/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Program Files (x86)/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;D:/Program/C_And_C++/Final_Clion/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Program Files (x86)/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;D:/Program/C_And_C++/Final_Clion/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="D:/Program/C_And_C++/Final_Clion/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/Program Files (x86)/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;D:/Program/C_And_C++/Final_Clion/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="D:/Program Files (x86)/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;D:/Program/C_And_C++/Final_Clion/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Program Files (x86)/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;D:/Program/C_And_C++/Final_Clion/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Program Files (x86)/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;D:/Program/C_And_C++/Final_Clion/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="D:/Program/C_And_C++/Final_Clion/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/Program Files (x86)/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;D:/Program/C_And_C++/Final_Clion/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="D:/Program Files (x86)/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;D:/Program/C_And_C++/Final_Clion/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Program Files (x86)/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;D:/Program/C_And_C++/Final_Clion/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Program Files (x86)/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;D:/Program/C_And_C++/Final_Clion/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="D:/Program/C_And_C++/Final_Clion/bullet.c">
+			<Option target="Final_Clion"/>
+		</Unit>
+		<Unit filename="D:/Program/C_And_C++/Final_Clion/bullet.h">
+			<Option target="Final_Clion"/>
+		</Unit>
+		<Unit filename="D:/Program/C_And_C++/Final_Clion/character.c">
+			<Option target="Final_Clion"/>
+		</Unit>
+		<Unit filename="D:/Program/C_And_C++/Final_Clion/character.h">
+			<Option target="Final_Clion"/>
+		</Unit>
+		<Unit filename="D:/Program/C_And_C++/Final_Clion/general.h">
+			<Option target="Final_Clion"/>
+		</Unit>
+		<Unit filename="D:/Program/C_And_C++/Final_Clion/main.c">
+			<Option target="Final_Clion"/>
+		</Unit>
+		<Unit filename="D:/Program/C_And_C++/Final_Clion/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
