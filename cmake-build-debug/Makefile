@@ -176,6 +176,60 @@ character.c.s:
 	$(MAKE) -f CMakeFiles\Final_Clion.dir\build.make CMakeFiles/Final_Clion.dir/character.c.s
 .PHONY : character.c.s
 
+draw.obj: draw.c.obj
+
+.PHONY : draw.obj
+
+# target to build an object file
+draw.c.obj:
+	$(MAKE) -f CMakeFiles\Final_Clion.dir\build.make CMakeFiles/Final_Clion.dir/draw.c.obj
+.PHONY : draw.c.obj
+
+draw.i: draw.c.i
+
+.PHONY : draw.i
+
+# target to preprocess a source file
+draw.c.i:
+	$(MAKE) -f CMakeFiles\Final_Clion.dir\build.make CMakeFiles/Final_Clion.dir/draw.c.i
+.PHONY : draw.c.i
+
+draw.s: draw.c.s
+
+.PHONY : draw.s
+
+# target to generate assembly for a file
+draw.c.s:
+	$(MAKE) -f CMakeFiles\Final_Clion.dir\build.make CMakeFiles/Final_Clion.dir/draw.c.s
+.PHONY : draw.c.s
+
+levelSetting.obj: levelSetting.c.obj
+
+.PHONY : levelSetting.obj
+
+# target to build an object file
+levelSetting.c.obj:
+	$(MAKE) -f CMakeFiles\Final_Clion.dir\build.make CMakeFiles/Final_Clion.dir/levelSetting.c.obj
+.PHONY : levelSetting.c.obj
+
+levelSetting.i: levelSetting.c.i
+
+.PHONY : levelSetting.i
+
+# target to preprocess a source file
+levelSetting.c.i:
+	$(MAKE) -f CMakeFiles\Final_Clion.dir\build.make CMakeFiles/Final_Clion.dir/levelSetting.c.i
+.PHONY : levelSetting.c.i
+
+levelSetting.s: levelSetting.c.s
+
+.PHONY : levelSetting.s
+
+# target to generate assembly for a file
+levelSetting.c.s:
+	$(MAKE) -f CMakeFiles\Final_Clion.dir\build.make CMakeFiles/Final_Clion.dir/levelSetting.c.s
+.PHONY : levelSetting.c.s
+
 main.obj: main.c.obj
 
 .PHONY : main.obj
@@ -218,6 +272,12 @@ help:
 	@echo ... character.obj
 	@echo ... character.i
 	@echo ... character.s
+	@echo ... draw.obj
+	@echo ... draw.i
+	@echo ... draw.s
+	@echo ... levelSetting.obj
+	@echo ... levelSetting.i
+	@echo ... levelSetting.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

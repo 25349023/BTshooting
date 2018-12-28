@@ -398,7 +398,13 @@ allegro5/allegro.h
 general.h
 D:/Program/C_And_C++/Final_Clion/general.h
 
+D:/Program/C_And_C++/Final_Clion/draw.h
+
 D:/Program/C_And_C++/Final_Clion/general.h
+
+D:/Program/C_And_C++/Final_Clion/levelSetting.h
+allegro5/allegro.h
+D:/Program/C_And_C++/Final_Clion/allegro5/allegro.h
 
 D:/Program/C_And_C++/Final_Clion/main.c
 stdio.h
@@ -431,4 +437,8 @@ bullet.h
 D:/Program/C_And_C++/Final_Clion/bullet.h
 character.h
 D:/Program/C_And_C++/Final_Clion/character.h
+draw.h
+D:/Program/C_And_C++/Final_Clion/draw.h
+levelSetting.h
+D:/Program/C_And_C++/Final_Clion/levelSetting.h
 
