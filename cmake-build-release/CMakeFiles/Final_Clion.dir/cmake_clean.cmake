@@ -3,7 +3,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/Final_Clion.dir/bullet.c.obj"
   "CMakeFiles/Final_Clion.dir/character.c.obj"
   "CMakeFiles/Final_Clion.dir/levelSetting.c.obj"
-  "CMakeFiles/Final_Clion.dir/draw.c.obj"
   "CMakeFiles/Final_Clion.dir/fireworks.c.obj"
   "Final_Clion.pdb"
   "Final_Clion.exe"

@@ -39,8 +39,11 @@ ALLEGRO_TIMER *generateEnemyBulletTimer = NULL;
 ALLEGRO_TIMER *fireworksTickTimer = NULL;
 ALLEGRO_TIMER *generateFirework1Timer = NULL;
 ALLEGRO_TIMER *happyTimer = NULL;
+ALLEGRO_TIMER *the2019Timer = NULL;
 
 ALLEGRO_SAMPLE *song = NULL;
+ALLEGRO_SAMPLE *letoff, *letoff2;
+ALLEGRO_SAMPLE_INSTANCE *letoffInstance[2];
 ALLEGRO_FONT *bigFont = NULL;
 ALLEGRO_FONT *smallFont = NULL;
 ALLEGRO_MOUSE_CURSOR *cursor = NULL;
@@ -172,7 +175,16 @@ void load_images() {
 void game_begin() {
     // Load sound
     song = al_load_sample("hello.wav");
-    if (!song){
+    letoff = al_load_sample("fireworks.wav");
+    letoff2 = al_load_sample("fireworks2.wav");
+    al_reserve_samples(3);
+    for (int i = 0; i < 2; i++){
+        letoffInstance[i] = al_create_sample_instance(letoff);
+        al_set_sample_instance_playmode(letoffInstance[i], ALLEGRO_PLAYMODE_ONCE);
+        al_set_sample_instance_gain(letoffInstance[i], 1.0);
+        al_attach_sample_instance_to_mixer(letoffInstance[i], al_get_default_mixer());
+    }
+    if (!song || !letoff){
         printf("Audio clip sample not loaded!\n");
         show_err_msg(-6);
     }
@@ -622,26 +634,26 @@ int process_event() {
         }
     }
 
+    static bool normal_fireworks = true;
     if (window == 4){
-        static Vector2 tmp;
-        static int size;
-        static int tick = 0, tick_saved = -100;
-        static bool random = true;
         if (event.timer.source == fireworksTickTimer){
+            static Vector2 tmp;
+            static int size, track = 0;
+            static int tick = 0, tick_saved = -100;
             for (Bullet *curr = fireworks_bullet_list; curr != NULL; curr = curr->next){
                 curr->time--;
                 if (curr->time == 0){
                     curr->mode = stopped;
                 }
-                if (curr->time == 100){
+                if (curr->time == 249){
                     curr->pause = false;
                 }
-                if (curr->time == 6){
+                if (curr->time == 15 && curr->pause){
                     curr->pause = false;
                 }
             }
             tick++;
-            if (random){
+            if (normal_fireworks){
                 if (tick % 65 == 0){
                     tmp = (Vector2) {rand() % 280 + 60, rand() % 250 + 350};
                     tick_saved = 0;
@@ -652,6 +664,7 @@ int process_event() {
                     tmp.y -= 240;
                 }
                 if (tick == tick_saved + 15){
+                    al_play_sample(letoff, 0.8, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
                     draw_fireworks1(size, tmp);
                 }
                 if (tick == tick_saved + 20){
@@ -663,14 +676,58 @@ int process_event() {
             }
         }
         else if (event.timer.source == generateFirework1Timer){
+            al_play_sample(letoff, (float) (1.0 / (rand() % 4 + 2)), 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
             draw_fireworks1(rand() % 4 + 16, (Vector2) {rand() % 240 + 80, rand() % 400 + 200});
             al_set_timer_speed(generateFirework1Timer, 1.0 / (rand() % 3 + 1));
         }
         else if (event.timer.source == happyTimer){
-            draw_H((Vector2) {50, 200}, true, 4);
-            draw_A((Vector2) {140, 200}, true, 4);
-            draw_P2((Vector2) {240, 200}, true, 4);
+            al_play_sample(letoff, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+            al_play_sample(letoff2, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+            draw_H((Vector2) {48, 200}, true, 1);
+            draw_A((Vector2) {138, 200}, true, 2);
+            draw_P2((Vector2) {238, 200}, true, 2);
+            draw_Y((Vector2) {348, 200}, true, 1);
+            draw_H((Vector2) {48, 200}, true, 3);
+            draw_A((Vector2) {138, 200}, true, 3);
+            draw_P2((Vector2) {238, 200}, true, 3);
+            draw_Y((Vector2) {348, 200}, true, 3);
             al_stop_timer(happyTimer);
+        }
+        else if (event.timer.source == the2019Timer){
+            static int tick = 0;
+            tick++;
+            if (tick == 20){
+                draw_2((Vector2) {55, 450}, true, 3);
+            }
+            else if (tick == 30){
+                draw_0((Vector2) {155, 450}, true, 3);
+            }
+            else if (tick == 40){
+                draw_1((Vector2) {255, 450}, true, 3);
+            }
+            else if (tick == 50){
+                draw_9((Vector2) {340, 450}, true, 3);
+            }
+            if (tick == 105){
+                al_play_sample_instance(letoffInstance[0]);
+                printf("play 0\n");
+            }
+            else if (tick == 115){
+                al_play_sample_instance(letoffInstance[1]);
+            }
+            else if (tick == 125){
+                al_play_sample_instance(letoffInstance[0]);
+            }
+            else if (tick == 135){
+                al_play_sample_instance(letoffInstance[1]);
+            }
+            else if (tick == 150){
+                al_play_sample(letoff, 1.2, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                al_play_sample(letoff2, 1.5, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                tick = 0;
+                al_stop_timer(the2019Timer);
+            }
+
         }
     }
 
@@ -723,10 +780,14 @@ int process_event() {
             switch (event.keyboard.keycode){
                 case ALLEGRO_KEY_F:
                     printf("F\n");
-                    draw_H((Vector2) {50, 200}, false, 3);
-                    draw_A((Vector2) {140, 200}, false, 3);
-                    draw_P2((Vector2) {240, 200}, false, 3);
+                    draw_H((Vector2) {48, 200}, false, 3);
+                    draw_A((Vector2) {138, 200}, false, 3);
+                    draw_P2((Vector2) {238, 200}, false, 3);
+                    draw_Y((Vector2) {348, 200}, false, 3);
                     al_start_timer(happyTimer);
+                    al_start_timer(the2019Timer);
+                    normal_fireworks = false;
+                    al_stop_timer(generateFirework1Timer);
                     break;
                 default:
                     break;
@@ -786,11 +847,13 @@ int process_event() {
                 bulletUpdateTimer = al_create_timer(1.0 / 30.0);
                 fireworksTickTimer = al_create_timer(1.0 / 30.0);
                 generateFirework1Timer = al_create_timer(1.0 / 3.0);
-                happyTimer = al_create_timer(2.0 / 3.0);
+                happyTimer = al_create_timer(1.0 / 30.0);
+                the2019Timer = al_create_timer(1.0 / 30.0);
                 al_register_event_source(event_queue, al_get_timer_event_source(bulletUpdateTimer));
                 al_register_event_source(event_queue, al_get_timer_event_source(fireworksTickTimer));
                 al_register_event_source(event_queue, al_get_timer_event_source(generateFirework1Timer));
                 al_register_event_source(event_queue, al_get_timer_event_source(happyTimer));
+                al_register_event_source(event_queue, al_get_timer_event_source(the2019Timer));
                 al_start_timer(bulletUpdateTimer);
                 al_start_timer(fireworksTickTimer);
                 al_start_timer(generateFirework1Timer);

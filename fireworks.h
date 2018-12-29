@@ -15,4 +15,9 @@ void draw_A(Vector2 pt, bool standing, int speed);
 void draw_P2(Vector2 pt, bool standing, int speed);
 void draw_Y(Vector2 pt, bool standing, int speed);
 
+void draw_2(Vector2 pt, bool standing, int speed);
+void draw_0(Vector2 pt, bool standing, int speed);
+void draw_1(Vector2 pt, bool standing, int speed);
+void draw_9(Vector2 pt, bool standing, int speed);
+
 #endif //FINAL_CLION_FIREWORKS_H
