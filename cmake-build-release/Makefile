@@ -203,6 +203,33 @@ draw.c.s:
 	$(MAKE) -f CMakeFiles\Final_Clion.dir\build.make CMakeFiles/Final_Clion.dir/draw.c.s
 .PHONY : draw.c.s
 
+fireworks.obj: fireworks.c.obj
+
+.PHONY : fireworks.obj
+
+# target to build an object file
+fireworks.c.obj:
+	$(MAKE) -f CMakeFiles\Final_Clion.dir\build.make CMakeFiles/Final_Clion.dir/fireworks.c.obj
+.PHONY : fireworks.c.obj
+
+fireworks.i: fireworks.c.i
+
+.PHONY : fireworks.i
+
+# target to preprocess a source file
+fireworks.c.i:
+	$(MAKE) -f CMakeFiles\Final_Clion.dir\build.make CMakeFiles/Final_Clion.dir/fireworks.c.i
+.PHONY : fireworks.c.i
+
+fireworks.s: fireworks.c.s
+
+.PHONY : fireworks.s
+
+# target to generate assembly for a file
+fireworks.c.s:
+	$(MAKE) -f CMakeFiles\Final_Clion.dir\build.make CMakeFiles/Final_Clion.dir/fireworks.c.s
+.PHONY : fireworks.c.s
+
 levelSetting.obj: levelSetting.c.obj
 
 .PHONY : levelSetting.obj
@@ -275,6 +302,9 @@ help:
 	@echo ... draw.obj
 	@echo ... draw.i
 	@echo ... draw.s
+	@echo ... fireworks.obj
+	@echo ... fireworks.i
+	@echo ... fireworks.s
 	@echo ... levelSetting.obj
 	@echo ... levelSetting.i
 	@echo ... levelSetting.s

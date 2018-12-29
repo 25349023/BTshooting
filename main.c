@@ -14,7 +14,7 @@
 #include "general.h"
 #include "bullet.h"
 #include "character.h"
-#include "draw.h"
+#include "fireworks.h"
 #include "levelSetting.h"
 
 #define GAME_TERMINATE (-1)
@@ -37,8 +37,8 @@ ALLEGRO_TIMER *collisionDetectTimer = NULL;
 ALLEGRO_TIMER *generateEnemyBulletTimer = NULL;
 
 ALLEGRO_TIMER *fireworksTickTimer = NULL;
-ALLEGRO_TIMER *generate_firework1_Timer = NULL;
-ALLEGRO_TIMER *generate_firework2_Timer = NULL;
+ALLEGRO_TIMER *generateFirework1Timer = NULL;
+ALLEGRO_TIMER *happyTimer = NULL;
 
 ALLEGRO_SAMPLE *song = NULL;
 ALLEGRO_FONT *bigFont = NULL;
@@ -86,8 +86,6 @@ void draw_menu();
 void draw_about();
 void draw_game_scene();
 
-void draw_fireworks1(int size, Vector2 pt);
-void draw_fireworks2(int size, Vector2 pt);
 
 int main(int argc, char *argv[]) {
     int msg = 0;
@@ -210,7 +208,7 @@ int process_event() {
             }
             // TODO: Add more case into switch
             switch (current->mode){
-                case straight_forward:
+                case up:
                     current->pos.y -= 17;
                     al_draw_bitmap(current->bitmap, current->pos.x - current->size.x / 2, current->pos.y,
                                    current->flip);
@@ -303,7 +301,7 @@ int process_event() {
             }
             // TODO: Add more case into switch
             switch (current->mode){
-                case straight_forward:
+                case up:
                     current->pos.y -= 17;
                     al_draw_bitmap(current->bitmap, current->pos.x - current->size.x / 2, current->pos.y,
                                    current->flip);
@@ -383,48 +381,65 @@ int process_event() {
                 previous = previous->next;
             }
             // TODO: Add more case into switch
+            float mul = current->speed_multiplier;
             switch (current->mode){
-                case straight_forward:
-                    current->pos.y -= 8;
+                case up:
+                    if (!current->pause){
+                        current->pos.y -= 8 * mul;
+                    }
                     al_draw_bitmap(current->bitmap, current->pos.x - current->size.x / 2, current->pos.y,
                                    current->flip);
                     break;
                 case right_front:
-                    current->pos.x += 5.7;
-                    current->pos.y -= 5.7;
+                    if (!current->pause){
+                        current->pos.x += 5.7 * sqrtf(mul);
+                        current->pos.y -= 5.7 * sqrtf(mul);
+                    }
                     al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
                                            (float) (ALLEGRO_PI / 4), current->flip);
                     break;
                 case left_front:
-                    current->pos.x -= 5.7;
-                    current->pos.y -= 5.7;
+                    if (!current->pause){
+                        current->pos.x -= 5.7 * sqrtf(mul);
+                        current->pos.y -= 5.7 * sqrtf(mul);
+                    }
                     al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
                                            (float) (-ALLEGRO_PI / 4), current->flip);
                     break;
                 case right:
-                    current->pos.x += 8;
+                    if (!current->pause){
+                        current->pos.x += 8 * mul;
+                    }
                     al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
                                            (float) (ALLEGRO_PI / 2), current->flip);
                     break;
                 case left:
-                    current->pos.x -= 8;
+                    if (!current->pause){
+                        current->pos.x -= 8 * mul;
+                    }
                     al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
                                            (float) (-ALLEGRO_PI / 2), current->flip);
                     break;
                 case right_back:
-                    current->pos.x += 5.7;
-                    current->pos.y += 5.7;
+                    if (!current->pause){
+                        current->pos.x += 5.7 * sqrtf(mul);
+                        current->pos.y += 5.7 * sqrtf(mul);
+                    }
                     al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
                                            (float) (ALLEGRO_PI * 3 / 4), current->flip);
                     break;
                 case left_back:
-                    current->pos.x -= 5.7;
-                    current->pos.y += 5.7;
+                    if (!current->pause){
+                        current->pos.x -= 5.7 * sqrtf(mul);
+                        current->pos.y += 5.7 * sqrtf(mul);
+                    }
                     al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
                                            (float) (-ALLEGRO_PI * 3 / 4), current->flip);
                     break;
                 case down:
-                    current->pos.y += 8;
+                    if (!current->pause){
+                        current->pos.y += 8 * mul;
+                    }
                     al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
                                            (float) ALLEGRO_PI, current->flip);
                     break;
@@ -489,7 +504,6 @@ int process_event() {
                 if (fireworks_bullet_list == NULL){
                     break;
                 }
-                printf("NULL\n");
                 current = fireworks_bullet_list;
                 previous = fireworks_bullet_list;
                 continue;
@@ -610,38 +624,53 @@ int process_event() {
 
     if (window == 4){
         static Vector2 tmp;
-        static int tick = 0, tick_saved = -6;
+        static int size;
+        static int tick = 0, tick_saved = -100;
+        static bool random = true;
         if (event.timer.source == fireworksTickTimer){
             for (Bullet *curr = fireworks_bullet_list; curr != NULL; curr = curr->next){
                 curr->time--;
                 if (curr->time == 0){
                     curr->mode = stopped;
                 }
+                if (curr->time == 100){
+                    curr->pause = false;
+                }
+                if (curr->time == 6){
+                    curr->pause = false;
+                }
             }
             tick++;
-            if (tick % 10 == 0){
-                tmp = (Vector2) {rand() % 240 + 80, rand() % 400 + 100};
-                tick_saved = tick;
-                draw_fireworks1(rand() % 4 + 16, tmp);
-            }
-            if (tick == tick_saved + 5){
-                draw_fireworks2(rand() % 4 + 16, tmp);
+            if (random){
+                if (tick % 65 == 0){
+                    tmp = (Vector2) {rand() % 280 + 60, rand() % 250 + 350};
+                    tick_saved = 0;
+                    tick = 0;
+                    size = rand() % 5 + 16;
+                    Bullet *bt = make_firework_bullet(bulletImgs[3], up, tmp, 15, 2, NULL);
+                    register_bullet(bt, &fireworks_bullet_list);
+                    tmp.y -= 240;
+                }
+                if (tick == tick_saved + 15){
+                    draw_fireworks1(size, tmp);
+                }
+                if (tick == tick_saved + 20){
+                    draw_fireworks1(size, tmp);
+                }
+                if (tick == tick_saved + 25){
+                    draw_fireworks2(size, tmp);
+                }
             }
         }
-        else if (event.timer.source == generate_firework1_Timer){
-            tmp = (Vector2) {rand() % 240 + 80, rand() % 400 + 100};
-            draw_fireworks1(rand() % 4 + 16, tmp);
-            //al_set_timer_speed()
-            al_start_timer(generate_firework2_Timer);
-            // draw_fireworks2(rand() % 4 + 16, tmp);
-            // al_set_timer_speed(generate_firework1_Timer, 1.0 / (rand() % 3 + 2));
+        else if (event.timer.source == generateFirework1Timer){
+            draw_fireworks1(rand() % 4 + 16, (Vector2) {rand() % 240 + 80, rand() % 400 + 200});
+            al_set_timer_speed(generateFirework1Timer, 1.0 / (rand() % 3 + 1));
         }
-        else if (event.timer.source == generate_firework2_Timer){
-            // draw_fireworks1(rand() % 4 + 16, tmp);
-            // al_start_timer(generate_firework2_Timer);
-            draw_fireworks2(rand() % 4 + 16, tmp);
-            // al_set_timer_speed(generate_firework1_Timer, 1.0 / (rand() % 3 + 2));
-            al_stop_timer(generate_firework2_Timer);
+        else if (event.timer.source == happyTimer){
+            draw_H((Vector2) {50, 200}, true, 4);
+            draw_A((Vector2) {140, 200}, true, 4);
+            draw_P2((Vector2) {240, 200}, true, 4);
+            al_stop_timer(happyTimer);
         }
     }
 
@@ -694,7 +723,10 @@ int process_event() {
             switch (event.keyboard.keycode){
                 case ALLEGRO_KEY_F:
                     printf("F\n");
-                    draw_fireworks1(rand() % 5 + 6, (Vector2) {rand() % 240 + 80, rand() % 400 + 100});
+                    draw_H((Vector2) {50, 200}, false, 3);
+                    draw_A((Vector2) {140, 200}, false, 3);
+                    draw_P2((Vector2) {240, 200}, false, 3);
+                    al_start_timer(happyTimer);
                     break;
                 default:
                     break;
@@ -753,15 +785,15 @@ int process_event() {
                 printf("SPECIAL");
                 bulletUpdateTimer = al_create_timer(1.0 / 30.0);
                 fireworksTickTimer = al_create_timer(1.0 / 30.0);
-                generate_firework1_Timer = al_create_timer(1.0 / 3.0);
-                generate_firework2_Timer = al_create_timer(1.0 / 3.0);
+                generateFirework1Timer = al_create_timer(1.0 / 3.0);
+                happyTimer = al_create_timer(2.0 / 3.0);
                 al_register_event_source(event_queue, al_get_timer_event_source(bulletUpdateTimer));
                 al_register_event_source(event_queue, al_get_timer_event_source(fireworksTickTimer));
-                al_register_event_source(event_queue, al_get_timer_event_source(generate_firework1_Timer));
-                al_register_event_source(event_queue, al_get_timer_event_source(generate_firework2_Timer));
+                al_register_event_source(event_queue, al_get_timer_event_source(generateFirework1Timer));
+                al_register_event_source(event_queue, al_get_timer_event_source(happyTimer));
                 al_start_timer(bulletUpdateTimer);
                 al_start_timer(fireworksTickTimer);
-                // al_start_timer(generate_firework1_Timer);
+                al_start_timer(generateFirework1Timer);
             }
         }
         printf("\n");
@@ -788,7 +820,7 @@ int game_run() {
                 // background = al_load_bitmap("stage.jpg");
                 player.pos.x = 200;
                 player.pos.y = HEIGHT - 100;
-                set_character(airplaneImgs[0], 100, bulletImgs[0], (float) 1 / 4, straight_forward);
+                set_character(airplaneImgs[0], 100, bulletImgs[0], (float) 1 / 4, up);
 
                 // Initialize Timer
                 playerMovingTimer = al_create_timer(1.0 / 30.0);
@@ -928,19 +960,6 @@ void draw_game_scene() {
     al_draw_bitmap(player.image, player.pos.x, player.pos.y, 0);
 }
 
-void draw_fireworks1(int size, Vector2 pt) {
-    for (int i = 1; i <= 8; i++){  // eight direction
-        Bullet *bt = make_firework_bullet(bulletImgs[rand() % 3], i, pt, size);
-        register_bullet(bt, &fireworks_bullet_list);
-    }
-}
-
-void draw_fireworks2(int size, Vector2 pt) {
-    for (int i = 1; i <= 16; i++){  // eight direction
-        Bullet *bt = make_firework_bullet(bulletImgs[rand() % 3], i, pt, size);
-        register_bullet(bt, &fireworks_bullet_list);
-    }
-}
 
 
 

@@ -7,6 +7,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "D:/Program/C_And_C++/Final_Clion/bullet.c" "D:/Program/C_And_C++/Final_Clion/cmake-build-release/CMakeFiles/Final_Clion.dir/bullet.c.obj"
   "D:/Program/C_And_C++/Final_Clion/character.c" "D:/Program/C_And_C++/Final_Clion/cmake-build-release/CMakeFiles/Final_Clion.dir/character.c.obj"
   "D:/Program/C_And_C++/Final_Clion/draw.c" "D:/Program/C_And_C++/Final_Clion/cmake-build-release/CMakeFiles/Final_Clion.dir/draw.c.obj"
+  "D:/Program/C_And_C++/Final_Clion/fireworks.c" "D:/Program/C_And_C++/Final_Clion/cmake-build-release/CMakeFiles/Final_Clion.dir/fireworks.c.obj"
   "D:/Program/C_And_C++/Final_Clion/levelSetting.c" "D:/Program/C_And_C++/Final_Clion/cmake-build-release/CMakeFiles/Final_Clion.dir/levelSetting.c.obj"
   "D:/Program/C_And_C++/Final_Clion/main.c" "D:/Program/C_And_C++/Final_Clion/cmake-build-release/CMakeFiles/Final_Clion.dir/main.c.obj"
   )

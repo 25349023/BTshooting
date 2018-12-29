@@ -17,10 +17,12 @@ typedef struct bullet {
     enum flyMode mode;
     struct bullet *next;
     int time;  // for special use
+    float speed_multiplier;  // for special use
+    bool pause;  // for special use
 } Bullet;
 
 Bullet *make_bullet(ALLEGRO_BITMAP *img, enum flyMode mode, Vector2 pt);
-Bullet *make_firework_bullet(ALLEGRO_BITMAP *img, enum flyMode mode, Vector2 pt, int tm);
+Bullet *make_firework_bullet(ALLEGRO_BITMAP *img, enum flyMode mode, Vector2 pt, int tm, float spd, bool ps);
 void register_bullet(Bullet *bt, Bullet **list);
 void destroy_bullet(Bullet *curr, Bullet **prev, Bullet **list);
 

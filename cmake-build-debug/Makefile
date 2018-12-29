@@ -176,32 +176,32 @@ character.c.s:
 	$(MAKE) -f CMakeFiles\Final_Clion.dir\build.make CMakeFiles/Final_Clion.dir/character.c.s
 .PHONY : character.c.s
 
-draw.obj: draw.c.obj
+fireworks.obj: fireworks.c.obj
 
-.PHONY : draw.obj
+.PHONY : fireworks.obj
 
 # target to build an object file
-draw.c.obj:
-	$(MAKE) -f CMakeFiles\Final_Clion.dir\build.make CMakeFiles/Final_Clion.dir/draw.c.obj
-.PHONY : draw.c.obj
+fireworks.c.obj:
+	$(MAKE) -f CMakeFiles\Final_Clion.dir\build.make CMakeFiles/Final_Clion.dir/fireworks.c.obj
+.PHONY : fireworks.c.obj
 
-draw.i: draw.c.i
+fireworks.i: fireworks.c.i
 
-.PHONY : draw.i
+.PHONY : fireworks.i
 
 # target to preprocess a source file
-draw.c.i:
-	$(MAKE) -f CMakeFiles\Final_Clion.dir\build.make CMakeFiles/Final_Clion.dir/draw.c.i
-.PHONY : draw.c.i
+fireworks.c.i:
+	$(MAKE) -f CMakeFiles\Final_Clion.dir\build.make CMakeFiles/Final_Clion.dir/fireworks.c.i
+.PHONY : fireworks.c.i
 
-draw.s: draw.c.s
+fireworks.s: fireworks.c.s
 
-.PHONY : draw.s
+.PHONY : fireworks.s
 
 # target to generate assembly for a file
-draw.c.s:
-	$(MAKE) -f CMakeFiles\Final_Clion.dir\build.make CMakeFiles/Final_Clion.dir/draw.c.s
-.PHONY : draw.c.s
+fireworks.c.s:
+	$(MAKE) -f CMakeFiles\Final_Clion.dir\build.make CMakeFiles/Final_Clion.dir/fireworks.c.s
+.PHONY : fireworks.c.s
 
 levelSetting.obj: levelSetting.c.obj
 
@@ -272,9 +272,9 @@ help:
 	@echo ... character.obj
 	@echo ... character.i
 	@echo ... character.s
-	@echo ... draw.obj
-	@echo ... draw.i
-	@echo ... draw.s
+	@echo ... fireworks.obj
+	@echo ... fireworks.i
+	@echo ... fireworks.s
 	@echo ... levelSetting.obj
 	@echo ... levelSetting.i
 	@echo ... levelSetting.s

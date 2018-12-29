@@ -23,7 +23,7 @@ Bullet *make_bullet(ALLEGRO_BITMAP *img, enum flyMode mode, Vector2 pt) {
     return bt;
 }
 
-Bullet *make_firework_bullet(ALLEGRO_BITMAP *img, enum flyMode mode, Vector2 pt, int tm) {
+Bullet *make_firework_bullet(ALLEGRO_BITMAP *img, enum flyMode mode, Vector2 pt, int tm, float spd, bool ps) {
     Bullet *bt = malloc(sizeof(Bullet));
     bt->pos.x = pt.x < 0 ? (rand() % (WIDTH + 1)) : pt.x;
     bt->pos.y = pt.y < 0 ? (rand() % (HEIGHT + 1)) : pt.y;
@@ -36,6 +36,8 @@ Bullet *make_firework_bullet(ALLEGRO_BITMAP *img, enum flyMode mode, Vector2 pt,
     bt->mode = mode;
     bt->next = NULL;
     bt->time = tm;
+    bt->speed_multiplier = spd;
+    bt->pause = ps;
 
     return bt;
 }

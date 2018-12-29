@@ -112,19 +112,19 @@ CMakeFiles/Final_Clion.dir/levelSetting.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Final_Clion.dir/levelSetting.c.s"
 	"D:\Program Files (x86)\CodeBlocks\MinGW\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\Program\C_And_C++\Final_Clion\levelSetting.c -o CMakeFiles\Final_Clion.dir\levelSetting.c.s
 
-CMakeFiles/Final_Clion.dir/draw.c.obj: CMakeFiles/Final_Clion.dir/flags.make
-CMakeFiles/Final_Clion.dir/draw.c.obj: CMakeFiles/Final_Clion.dir/includes_C.rsp
-CMakeFiles/Final_Clion.dir/draw.c.obj: ../draw.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Program\C_And_C++\Final_Clion\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/Final_Clion.dir/draw.c.obj"
-	"D:\Program Files (x86)\CodeBlocks\MinGW\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Final_Clion.dir\draw.c.obj   -c D:\Program\C_And_C++\Final_Clion\draw.c
+CMakeFiles/Final_Clion.dir/fireworks.c.obj: CMakeFiles/Final_Clion.dir/flags.make
+CMakeFiles/Final_Clion.dir/fireworks.c.obj: CMakeFiles/Final_Clion.dir/includes_C.rsp
+CMakeFiles/Final_Clion.dir/fireworks.c.obj: ../fireworks.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Program\C_And_C++\Final_Clion\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/Final_Clion.dir/fireworks.c.obj"
+	"D:\Program Files (x86)\CodeBlocks\MinGW\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Final_Clion.dir\fireworks.c.obj   -c D:\Program\C_And_C++\Final_Clion\fireworks.c
 
-CMakeFiles/Final_Clion.dir/draw.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Final_Clion.dir/draw.c.i"
-	"D:\Program Files (x86)\CodeBlocks\MinGW\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:\Program\C_And_C++\Final_Clion\draw.c > CMakeFiles\Final_Clion.dir\draw.c.i
+CMakeFiles/Final_Clion.dir/fireworks.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Final_Clion.dir/fireworks.c.i"
+	"D:\Program Files (x86)\CodeBlocks\MinGW\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:\Program\C_And_C++\Final_Clion\fireworks.c > CMakeFiles\Final_Clion.dir\fireworks.c.i
 
-CMakeFiles/Final_Clion.dir/draw.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Final_Clion.dir/draw.c.s"
-	"D:\Program Files (x86)\CodeBlocks\MinGW\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\Program\C_And_C++\Final_Clion\draw.c -o CMakeFiles\Final_Clion.dir\draw.c.s
+CMakeFiles/Final_Clion.dir/fireworks.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Final_Clion.dir/fireworks.c.s"
+	"D:\Program Files (x86)\CodeBlocks\MinGW\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\Program\C_And_C++\Final_Clion\fireworks.c -o CMakeFiles\Final_Clion.dir\fireworks.c.s
 
 # Object files for target Final_Clion
 Final_Clion_OBJECTS = \
@@ -132,7 +132,7 @@ Final_Clion_OBJECTS = \
 "CMakeFiles/Final_Clion.dir/bullet.c.obj" \
 "CMakeFiles/Final_Clion.dir/character.c.obj" \
 "CMakeFiles/Final_Clion.dir/levelSetting.c.obj" \
-"CMakeFiles/Final_Clion.dir/draw.c.obj"
+"CMakeFiles/Final_Clion.dir/fireworks.c.obj"
 
 # External object files for target Final_Clion
 Final_Clion_EXTERNAL_OBJECTS =
@@ -141,7 +141,7 @@ Final_Clion.exe: CMakeFiles/Final_Clion.dir/main.c.obj
 Final_Clion.exe: CMakeFiles/Final_Clion.dir/bullet.c.obj
 Final_Clion.exe: CMakeFiles/Final_Clion.dir/character.c.obj
 Final_Clion.exe: CMakeFiles/Final_Clion.dir/levelSetting.c.obj
-Final_Clion.exe: CMakeFiles/Final_Clion.dir/draw.c.obj
+Final_Clion.exe: CMakeFiles/Final_Clion.dir/fireworks.c.obj
 Final_Clion.exe: CMakeFiles/Final_Clion.dir/build.make
 Final_Clion.exe: D:/Allegro/allegro-5.0.10-mingw-4.7.0/lib/liballegro-5.0.10-monolith-mt-debug.a
 Final_Clion.exe: CMakeFiles/Final_Clion.dir/linklibs.rsp
