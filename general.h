@@ -15,7 +15,8 @@ typedef struct circle {
 } Circle;
 
 enum flyMode {
-    stopped, straight_forward, right_front, left_front, right, left, down, rf_26, lf_26, rf_63, lf_63
+    stopped, up, right_front, left_front, right, left, right_back, left_back, down,
+    rf_f, lf_f, rf_r, lf_l, rb_r, lb_l, rb_b, lb_b
 };
 
 #endif //FINAL_CLION_GENERAL_H

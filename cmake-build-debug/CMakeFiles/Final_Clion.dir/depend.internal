@@ -105,6 +105,110 @@ CMakeFiles/Final_Clion.dir/character.c.obj
  D:/Program/C_And_C++/Final_Clion/character.c
  D:/Program/C_And_C++/Final_Clion/character.h
  D:/Program/C_And_C++/Final_Clion/general.h
+CMakeFiles/Final_Clion.dir/fireworks.c.obj
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/alcompat.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/allegro.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/altime.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/base.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/bitmap.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/bitmap_draw.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/bitmap_io.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/bitmap_lock.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/blender.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/color.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/config.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/debug.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/display.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/drawing.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/error.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/events.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/file.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/fixed.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/fmaths.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/fshook.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/fullscreen_mode.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/inline/fmaths.inl
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/internal/alconfig.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/joystick.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/keyboard.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/keycodes.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/memory.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/monitor.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/mouse.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/mouse_cursor.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/path.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/platform/albcc32.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/platform/aliphonecfg.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/platform/almngw32.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/platform/almsvc.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/platform/alosxcfg.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/platform/alplatf.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/platform/alucfg.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/platform/alunix.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/platform/alwatcom.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/platform/astdbool.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/platform/astdint.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/system.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/threads.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/timer.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/tls.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/transformations.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/utf8.h
+ D:/Program/C_And_C++/Final_Clion/bullet.h
+ D:/Program/C_And_C++/Final_Clion/fireworks.c
+ D:/Program/C_And_C++/Final_Clion/fireworks.h
+ D:/Program/C_And_C++/Final_Clion/general.h
+CMakeFiles/Final_Clion.dir/levelSetting.c.obj
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/alcompat.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/allegro.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/altime.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/base.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/bitmap.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/bitmap_draw.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/bitmap_io.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/bitmap_lock.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/blender.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/color.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/config.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/debug.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/display.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/drawing.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/error.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/events.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/file.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/fixed.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/fmaths.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/fshook.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/fullscreen_mode.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/inline/fmaths.inl
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/internal/alconfig.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/joystick.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/keyboard.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/keycodes.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/memory.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/monitor.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/mouse.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/mouse_cursor.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/path.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/platform/albcc32.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/platform/aliphonecfg.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/platform/almngw32.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/platform/almsvc.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/platform/alosxcfg.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/platform/alplatf.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/platform/alucfg.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/platform/alunix.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/platform/alwatcom.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/platform/astdbool.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/platform/astdint.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/system.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/threads.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/timer.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/tls.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/transformations.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/utf8.h
+ D:/Program/C_And_C++/Final_Clion/levelSetting.c
+ D:/Program/C_And_C++/Final_Clion/levelSetting.h
 CMakeFiles/Final_Clion.dir/main.c.obj
  D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/alcompat.h
  D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/allegro.h
@@ -162,5 +266,7 @@ CMakeFiles/Final_Clion.dir/main.c.obj
  D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/utf8.h
  D:/Program/C_And_C++/Final_Clion/bullet.h
  D:/Program/C_And_C++/Final_Clion/character.h
+ D:/Program/C_And_C++/Final_Clion/fireworks.h
  D:/Program/C_And_C++/Final_Clion/general.h
+ D:/Program/C_And_C++/Final_Clion/levelSetting.h
  D:/Program/C_And_C++/Final_Clion/main.c

@@ -3,7 +3,7 @@ project(Final_Clion C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(Final_Clion main.c bullet.h bullet.c general.h character.h character.c)
+add_executable(Final_Clion main.c bullet.h bullet.c general.h character.h character.c levelSetting.h levelSetting.c fireworks.c fireworks.h)
 include_directories(D:/Allegro/allegro-5.0.10-mingw-4.7.0/include)
 if (CMAKE_BUILD_TYPE MATCHES Debug)
     add_definitions(-DDEBUG)
