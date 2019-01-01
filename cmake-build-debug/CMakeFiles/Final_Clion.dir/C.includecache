@@ -386,33 +386,17 @@ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/utf8.h
 allegro5/base.h
 D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/allegro5/base.h
 
-D:/Program/C_And_C++/Final_Clion/bullet.c
-bullet.h
-D:/Program/C_And_C++/Final_Clion/bullet.h
-
 D:/Program/C_And_C++/Final_Clion/bullet.h
 allegro5/allegro.h
 -
 general.h
 D:/Program/C_And_C++/Final_Clion/general.h
 
-D:/Program/C_And_C++/Final_Clion/character.c
-math.h
--
-character.h
-D:/Program/C_And_C++/Final_Clion/character.h
-
 D:/Program/C_And_C++/Final_Clion/character.h
 allegro5/allegro.h
 -
 general.h
 D:/Program/C_And_C++/Final_Clion/general.h
-
-D:/Program/C_And_C++/Final_Clion/fireworks.c
-fireworks.h
-D:/Program/C_And_C++/Final_Clion/fireworks.h
-bullet.h
-D:/Program/C_And_C++/Final_Clion/bullet.h
 
 D:/Program/C_And_C++/Final_Clion/fireworks.h
 stdbool.h
@@ -422,13 +406,11 @@ D:/Program/C_And_C++/Final_Clion/general.h
 
 D:/Program/C_And_C++/Final_Clion/general.h
 
-D:/Program/C_And_C++/Final_Clion/levelSetting.c
-levelSetting.h
-D:/Program/C_And_C++/Final_Clion/levelSetting.h
-
 D:/Program/C_And_C++/Final_Clion/levelSetting.h
 allegro5/allegro.h
 D:/Program/C_And_C++/Final_Clion/allegro5/allegro.h
+general.h
+D:/Program/C_And_C++/Final_Clion/general.h
 
 D:/Program/C_And_C++/Final_Clion/main.c
 stdio.h

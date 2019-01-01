@@ -8,14 +8,15 @@
 #include <allegro5/allegro.h>
 #include "general.h"
 
+// TODO: make the bullet_mode an array or a pointer
 typedef struct character {
-    int health;
+    int health, default_damage;
     Vector2 pos;
     Vector2 speed;
     Vector2 size;
     Vector2 firing_point;
     Circle body;
-    float shooting_rate;
+    double shooting_rate;
     float e_speed;
     float dire_angle;  // in degree
     int CD, shoot_interval;
@@ -25,9 +26,9 @@ typedef struct character {
     struct character *next;
 } Character;
 
-void set_character(ALLEGRO_BITMAP *img, int hp, ALLEGRO_BITMAP *bt_img, float rate, enum flyMode md);
+void set_character(ALLEGRO_BITMAP *img, int hp, int dmg, ALLEGRO_BITMAP *bt_img, double rate, enum flyMode md);
 
-Character *create_enemy(ALLEGRO_BITMAP *img, int hp, Vector2 pos, float spd, float angle,
+Character *create_enemy(ALLEGRO_BITMAP *img, int hp, int dmg, Vector2 pos, float spd, float angle,
                         ALLEGRO_BITMAP *bt_img, int cd, enum flyMode md);
 void register_enemy(Character *enemy);
 void destroy_enemy(Character *curr, Character **prev);

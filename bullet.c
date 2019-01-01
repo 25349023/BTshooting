@@ -6,7 +6,7 @@
 extern int WIDTH;
 extern int HEIGHT;
 
-Bullet *make_bullet(ALLEGRO_BITMAP *img, enum flyMode mode, Vector2 pt) {
+Bullet *make_bullet(ALLEGRO_BITMAP *img, enum flyMode mode, Vector2 pt, int dmg) {
     Bullet *bt = malloc(sizeof(Bullet));
     bt->pos.x = pt.x < 0 ? (rand() % (WIDTH + 1)) : pt.x;
     bt->pos.y = pt.y < 0 ? (rand() % (HEIGHT + 1)) : pt.y;
@@ -14,6 +14,7 @@ Bullet *make_bullet(ALLEGRO_BITMAP *img, enum flyMode mode, Vector2 pt) {
     bt->size.y = al_get_bitmap_height(img);
     bt->hit_area.center = (Vector2) {0, 0};
     bt->hit_area.radius = bt->size.x / 3;
+    bt->damage = dmg;
     bt->flip = rand() % 2;
     bt->bitmap = img;
     bt->mode = mode;

@@ -14,9 +14,24 @@
   <component name="ChangeListManager">
     <list default="true" id="def17dde-3e6d-444b-925d-22175e2bd139" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bullet.c" beforeDir="false" afterPath="$PROJECT_DIR$/bullet.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bullet.h" beforeDir="false" afterPath="$PROJECT_DIR$/bullet.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/character.c" beforeDir="false" afterPath="$PROJECT_DIR$/character.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/character.h" beforeDir="false" afterPath="$PROJECT_DIR$/character.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/C.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/C.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/bullet.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/bullet.c.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/character.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/character.c.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/depend.internal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/fireworks.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/fireworks.c.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/levelSetting.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/levelSetting.c.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/main.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/main.c.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/objects.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/objects.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Final_Clion.exe" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/allegro.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/allegro.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/levelSetting.c" beforeDir="false" afterPath="$PROJECT_DIR$/levelSetting.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/levelSetting.h" beforeDir="false" afterPath="$PROJECT_DIR$/levelSetting.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/cmake-build-release/" />
@@ -45,11 +60,44 @@
     <favorites_list name="Final_Clion" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.7162017">
+    <splitter split-orientation="horizontal" split-proportion="0.9">
       <split-first>
-        <splitter split-orientation="horizontal" split-proportion="0.34032983">
+        <splitter split-orientation="horizontal" split-proportion="0.28281623">
           <split-first>
             <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+              <file pinned="false" current-in-tab="true">
+                <entry file="file://$PROJECT_DIR$/main.c">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state relative-caret-position="554">
+                      <caret line="1163" column="28" selection-start-line="1163" selection-start-column="28" selection-end-line="1163" selection-end-column="28" />
+                      <folding>
+                        <marker date="1546314648392" expanded="true" signature="6156:22286" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="6258:10901" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="11000:14937" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="15072:22258" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="22340:22874" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="22937:23783" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="23840:26880" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="26941:27092" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="27145:28353" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="28413:28835" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="29419:30154" ph="{...}" />
+                        <marker date="1546314648392" expanded="true" signature="30205:31480" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="31563:34901" ph="{...}" />
+                        <marker date="1546314648392" expanded="true" signature="31615:32284" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="32314:33384" ph="{...}" />
+                        <marker date="1546314648392" expanded="true" signature="33414:34873" ph="{...}" />
+                        <marker date="1546314648392" expanded="true" signature="34923:40407" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="35014:37212" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="37275:37572" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="37623:38242" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="38295:39516" ph="{...}" />
+                        <marker date="1546314648392" expanded="true" signature="39586:40401" ph="{...}" />
+                      </folding>
+                    </state>
+                  </provider>
+                </entry>
+              </file>
               <file pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
                   <provider selected="true" editor-type-id="text-editor">
@@ -59,11 +107,23 @@
                   </provider>
                 </entry>
               </file>
-              <file pinned="false" current-in-tab="true">
-                <entry file="file://$PROJECT_DIR$/main.c">
+              <file pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/levelSetting.c">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="149">
-                      <caret line="1009" column="15" selection-start-line="1009" selection-start-column="15" selection-end-line="1009" selection-end-column="15" />
+                    <state relative-caret-position="513">
+                      <caret line="19" column="28" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+              <file pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/fireworks.c">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state relative-caret-position="675">
+                      <caret line="25" column="27" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
+                      <folding>
+                        <element signature="e#41#63#0" expanded="true" />
+                      </folding>
                     </state>
                   </provider>
                 </entry>
@@ -75,8 +135,41 @@
               <file pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/main.c">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="788">
-                      <caret line="1028" selection-start-line="1028" selection-end-line="1028" />
+                    <state relative-caret-position="543">
+                      <caret line="759" column="38" lean-forward="true" selection-start-line="759" selection-start-column="38" selection-end-line="759" selection-end-column="38" />
+                      <folding>
+                        <marker date="1546314648392" expanded="true" signature="6156:22286" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="6258:10901" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="11000:14937" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="15072:22258" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="22340:22874" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="22937:23783" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="23840:26880" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="26941:27092" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="27145:28353" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="28413:28835" ph="{...}" />
+                        <marker date="1546314648392" expanded="true" signature="29419:30154" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="30205:31480" ph="{...}" />
+                        <marker date="1546314648392" expanded="true" signature="31563:34901" ph="{...}" />
+                        <marker date="1546314648392" expanded="true" signature="31615:32284" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="32314:33384" ph="{...}" />
+                        <marker date="1546314648392" expanded="true" signature="33414:34873" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="34923:40407" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="35014:37212" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="37275:37572" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="37623:38242" ph="{...}" />
+                        <marker date="1546314648392" expanded="false" signature="38295:39516" ph="{...}" />
+                        <marker date="1546314648392" expanded="true" signature="39586:40401" ph="{...}" />
+                      </folding>
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+              <file pinned="false" current-in-tab="false">
+                <entry file="file://D:/Program Files (x86)/CodeBlocks/MinGW/include/stdlib.h">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state relative-caret-position="729">
+                      <caret line="27" column="24" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
                     </state>
                   </provider>
                 </entry>
@@ -84,8 +177,8 @@
               <file pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/bullet.c">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="1485">
-                      <caret line="55" selection-start-line="55" selection-end-line="55" />
+                    <state relative-caret-position="432">
+                      <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
                     </state>
                   </provider>
                 </entry>
@@ -93,8 +186,8 @@
               <file pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/character.c">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="783">
-                      <caret line="29" column="56" selection-start-line="29" selection-start-column="56" selection-end-line="29" selection-end-column="56" />
+                    <state relative-caret-position="999">
+                      <caret line="37" column="31" selection-start-line="37" selection-start-column="31" selection-end-line="37" selection-end-column="31" />
                       <folding>
                         <element signature="e#41#58#0" expanded="true" />
                       </folding>
@@ -111,8 +204,44 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/main.c">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="27">
-                  <caret line="50" column="20" selection-start-line="50" selection-start-column="20" selection-end-line="50" selection-end-column="20" />
+                <state relative-caret-position="197">
+                  <caret line="72" column="10" selection-start-line="72" selection-start-column="10" selection-end-line="72" selection-end-column="10" />
+                  <folding>
+                    <marker date="1546314648392" expanded="true" signature="6156:22286" ph="{...}" />
+                    <marker date="1546314648392" expanded="false" signature="6258:10901" ph="{...}" />
+                    <marker date="1546314648392" expanded="false" signature="11000:14937" ph="{...}" />
+                    <marker date="1546314648392" expanded="false" signature="15072:22258" ph="{...}" />
+                    <marker date="1546314648392" expanded="false" signature="22340:22874" ph="{...}" />
+                    <marker date="1546314648392" expanded="false" signature="22937:23783" ph="{...}" />
+                    <marker date="1546314648392" expanded="false" signature="23840:26880" ph="{...}" />
+                    <marker date="1546314648392" expanded="false" signature="26941:27092" ph="{...}" />
+                    <marker date="1546314648392" expanded="false" signature="27145:28353" ph="{...}" />
+                    <marker date="1546314648392" expanded="false" signature="28413:28835" ph="{...}" />
+                    <marker date="1546314648392" expanded="false" signature="29419:30154" ph="{...}" />
+                    <marker date="1546314648392" expanded="true" signature="30205:31480" ph="{...}" />
+                    <marker date="1546314648392" expanded="false" signature="31563:34901" ph="{...}" />
+                    <marker date="1546314648392" expanded="true" signature="31615:32284" ph="{...}" />
+                    <marker date="1546314648392" expanded="false" signature="32314:33384" ph="{...}" />
+                    <marker date="1546314648392" expanded="true" signature="33414:34873" ph="{...}" />
+                    <marker date="1546314648392" expanded="true" signature="34923:40407" ph="{...}" />
+                    <marker date="1546314648392" expanded="false" signature="35014:37212" ph="{...}" />
+                    <marker date="1546314648392" expanded="false" signature="37275:37572" ph="{...}" />
+                    <marker date="1546314648392" expanded="false" signature="37623:38242" ph="{...}" />
+                    <marker date="1546314648392" expanded="false" signature="38295:39516" ph="{...}" />
+                    <marker date="1546314648392" expanded="true" signature="39586:40401" ph="{...}" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/levelSetting.h">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="783">
+                  <caret line="29" selection-start-line="29" selection-end-line="29" />
+                  <folding>
+                    <element signature="e#110#139#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -120,8 +249,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/character.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="54">
-                  <caret line="2" column="2" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
+                <state relative-caret-position="540">
+                  <caret line="20" column="35" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
                   <folding>
                     <element signature="e#106#135#0" expanded="true" />
                   </folding>
@@ -141,8 +270,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/bullet.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="702">
-                  <caret line="26" column="64" selection-start-line="26" selection-start-column="64" selection-end-line="26" selection-end-column="64" />
+                <state relative-caret-position="648">
+                  <caret line="24" column="12" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
                   <folding>
                     <element signature="e#100#129#0" expanded="true" />
                   </folding>
@@ -166,6 +295,9 @@
       <find>al_flip_display</find>
       <find>draw_fireworks1</find>
       <find>draw_count</find>
+      <find>make_bullet</find>
+      <find>create_enemy</find>
+      <find>set_cha</find>
       <find>&quot;NULL</find>
     </findStrings>
     <replaceStrings>
@@ -186,18 +318,18 @@
         <option value="$PROJECT_DIR$/main.cpp" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/character.cpp" />
-        <option value="$PROJECT_DIR$/character.c" />
-        <option value="$PROJECT_DIR$/character.h" />
         <option value="$PROJECT_DIR$/levelOption.h" />
-        <option value="$PROJECT_DIR$/levelSetting.h" />
-        <option value="$PROJECT_DIR$/levelSetting.c" />
         <option value="$PROJECT_DIR$/draw.c" />
         <option value="$PROJECT_DIR$/draw.h" />
         <option value="$PROJECT_DIR$/general.h" />
-        <option value="$PROJECT_DIR$/bullet.h" />
-        <option value="$PROJECT_DIR$/bullet.c" />
         <option value="$PROJECT_DIR$/fireworks.h" />
         <option value="$PROJECT_DIR$/fireworks.c" />
+        <option value="$PROJECT_DIR$/bullet.h" />
+        <option value="$PROJECT_DIR$/bullet.c" />
+        <option value="$PROJECT_DIR$/character.c" />
+        <option value="$PROJECT_DIR$/character.h" />
+        <option value="$PROJECT_DIR$/levelSetting.h" />
+        <option value="$PROJECT_DIR$/levelSetting.c" />
         <option value="$PROJECT_DIR$/main.c" />
       </list>
     </option>
@@ -215,7 +347,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -232,6 +363,31 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Non-Source Files'; set:Project Non-Source Files; class com.jetbrains.cidr.lang.search.scopes.ProjectSourcesScopeProvider$NonSourceFilesScope">
+          <expand>
+            <path>
+              <item name="Final_Clion" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+            <path>
+              <item name="Final_Clion" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name=".idea" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+        <subPane subId="Scope 'Project Source Files'; set:Project Source Files; class com.jetbrains.cidr.lang.search.scopes.ProjectSourcesScopeProvider$SourceFilesScope">
+          <expand>
+            <path>
+              <item name="Final_Clion" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -242,13 +398,13 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Program\C_And_C++\Final_Clion\cmake-build-release" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Program\C_And_C++\Final_Clion\cmake-build-debug" />
       <recent name="D:\Program\C_And_C++\Final_Clion\cmake-build-release" />
       <recent name="D:\Program\C_And_C++\Final_Clion" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Program\C_And_C++\Final_Clion\cmake-build-release" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -330,6 +486,9 @@
       <workItem from="1545988903075" duration="14562000" />
       <workItem from="1546085016982" duration="14152000" />
       <workItem from="1546138734371" duration="64000" />
+      <workItem from="1546158116394" duration="4053000" />
+      <workItem from="1546232112961" duration="11613000" />
+      <workItem from="1546312639340" duration="1455000" />
     </task>
     <task id="LOCAL-00001" summary="make enemy shoot bullets">
       <created>1545925863420</created>
@@ -352,21 +511,29 @@
       <option name="project" value="LOCAL" />
       <updated>1546074181023</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="add some UI">
+      <created>1546167070800</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1546167070800</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="164167000" />
+    <option name="totallyTimeSpent" value="181288000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="1" sideWeight="0.50080776" side_tool="true" weight="0.09710301" />
-      <window_info active="true" content_ui="combo" id="Project" order="2" sideWeight="0.49919224" visible="true" weight="0.098175965" />
+      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.49919224" weight="0.115879826" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3288889" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.31666666" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.31666666" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.33222222" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -374,7 +541,7 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50160944" side_tool="true" weight="0.3122222" />
-      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49839056" weight="0.3122222" />
+      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49839056" weight="0.5233333" />
       <window_info anchor="bottom" id="CMake" order="11" weight="0.32962137" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.20333333" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -403,6 +570,7 @@
         <entry key="MAIN">
           <value>
             <State>
+              <option name="SHOW_DETAILS_IN_CHANGES" value="false" />
               <option name="RECENTLY_FILTERED_USER_GROUPS">
                 <collection />
               </option>
@@ -442,15 +610,26 @@
     <MESSAGE value="make enemy shoot bullets" />
     <MESSAGE value="add fireworks1" />
     <MESSAGE value="add the Alpha H, A, P&#10;fix the special fireworks" />
-    <option name="LAST_COMMIT_MESSAGE" value="add the Alpha H, A, P&#10;fix the special fireworks" />
+    <MESSAGE value="add some UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="add some UI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/main.c</url>
-          <line>586</line>
-          <option name="timeStamp" value="1" />
+          <line>1146</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/main.c</url>
+          <line>658</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/main.c</url>
+          <line>556</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -458,11 +637,23 @@
       <configuration name="CMakeRunConfiguration">
         <watch expression="player_bullet_list" language="ObjectiveC" />
         <watch expression="letoffInstance" language="ObjectiveC" />
+        <watch expression="player" language="ObjectiveC" />
+        <watch expression="settings[level]" language="ObjectiveC" />
       </configuration>
     </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
+      <expression>
+        <expression-string>settings[level]</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>player</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>letoffInstance</expression-string>
         <language-id>ObjectiveC</language-id>
@@ -537,13 +728,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="182">
           <caret line="57" column="105" selection-start-line="57" selection-start-column="105" selection-end-line="57" selection-end-column="105" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/Program Files (x86)/CodeBlocks/MinGW/include/stdlib.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="351" column="36" selection-start-line="351" selection-start-column="36" selection-end-line="351" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -642,20 +826,6 @@
     <entry file="file://$PROJECT_DIR$/cmake-build-debug/bullet0.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/levelSetting.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/levelSetting.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="18" column="29" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/fireworks.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="513">
@@ -670,15 +840,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fireworks.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4612">
-          <caret line="25" column="27" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
-          <folding>
-            <element signature="e#41#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/airplane1.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/airplane0.png">
+      <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
@@ -687,27 +853,61 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/levelSetting.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="19" column="28" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fireworks.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="25" column="27" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
+          <folding>
+            <element signature="e#41#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Program Files (x86)/CodeBlocks/MinGW/include/stdlib.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="729">
+          <caret line="27" column="24" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/bullet.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1485">
-          <caret line="55" selection-start-line="55" selection-end-line="55" />
+        <state relative-caret-position="432">
+          <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/character.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="783">
-          <caret line="29" column="56" selection-start-line="29" selection-start-column="56" selection-end-line="29" selection-end-column="56" />
+        <state relative-caret-position="999">
+          <caret line="37" column="31" selection-start-line="37" selection-start-column="31" selection-end-line="37" selection-end-column="31" />
           <folding>
             <element signature="e#41#58#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/levelSetting.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="783">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+          <folding>
+            <element signature="e#110#139#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/character.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="2" column="2" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
+        <state relative-caret-position="540">
+          <caret line="20" column="35" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
           <folding>
             <element signature="e#106#135#0" expanded="true" />
           </folding>
@@ -723,8 +923,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bullet.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="702">
-          <caret line="26" column="64" selection-start-line="26" selection-start-column="64" selection-end-line="26" selection-end-column="64" />
+        <state relative-caret-position="648">
+          <caret line="24" column="12" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
           <folding>
             <element signature="e#100#129#0" expanded="true" />
           </folding>
@@ -733,8 +933,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="1009" column="15" selection-start-line="1009" selection-start-column="15" selection-end-line="1009" selection-end-column="15" />
+        <state relative-caret-position="554">
+          <caret line="1163" column="28" selection-start-line="1163" selection-start-column="28" selection-end-line="1163" selection-end-column="28" />
+          <folding>
+            <marker date="1546314648392" expanded="true" signature="6156:22286" ph="{...}" />
+            <marker date="1546314648392" expanded="false" signature="6258:10901" ph="{...}" />
+            <marker date="1546314648392" expanded="false" signature="11000:14937" ph="{...}" />
+            <marker date="1546314648392" expanded="false" signature="15072:22258" ph="{...}" />
+            <marker date="1546314648392" expanded="false" signature="22340:22874" ph="{...}" />
+            <marker date="1546314648392" expanded="false" signature="22937:23783" ph="{...}" />
+            <marker date="1546314648392" expanded="false" signature="23840:26880" ph="{...}" />
+            <marker date="1546314648392" expanded="false" signature="26941:27092" ph="{...}" />
+            <marker date="1546314648392" expanded="false" signature="27145:28353" ph="{...}" />
+            <marker date="1546314648392" expanded="false" signature="28413:28835" ph="{...}" />
+            <marker date="1546314648392" expanded="false" signature="29419:30154" ph="{...}" />
+            <marker date="1546314648392" expanded="true" signature="30205:31480" ph="{...}" />
+            <marker date="1546314648392" expanded="false" signature="31563:34901" ph="{...}" />
+            <marker date="1546314648392" expanded="true" signature="31615:32284" ph="{...}" />
+            <marker date="1546314648392" expanded="false" signature="32314:33384" ph="{...}" />
+            <marker date="1546314648392" expanded="true" signature="33414:34873" ph="{...}" />
+            <marker date="1546314648392" expanded="true" signature="34923:40407" ph="{...}" />
+            <marker date="1546314648392" expanded="false" signature="35014:37212" ph="{...}" />
+            <marker date="1546314648392" expanded="false" signature="37275:37572" ph="{...}" />
+            <marker date="1546314648392" expanded="false" signature="37623:38242" ph="{...}" />
+            <marker date="1546314648392" expanded="false" signature="38295:39516" ph="{...}" />
+            <marker date="1546314648392" expanded="true" signature="39586:40401" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>

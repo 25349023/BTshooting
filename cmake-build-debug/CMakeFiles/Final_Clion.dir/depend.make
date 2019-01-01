@@ -206,6 +206,7 @@ CMakeFiles/Final_Clion.dir/levelSetting.c.obj: D:/Allegro/allegro-5.0.10-mingw-4
 CMakeFiles/Final_Clion.dir/levelSetting.c.obj: D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/tls.h
 CMakeFiles/Final_Clion.dir/levelSetting.c.obj: D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/transformations.h
 CMakeFiles/Final_Clion.dir/levelSetting.c.obj: D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/utf8.h
+CMakeFiles/Final_Clion.dir/levelSetting.c.obj: ../general.h
 CMakeFiles/Final_Clion.dir/levelSetting.c.obj: ../levelSetting.c
 CMakeFiles/Final_Clion.dir/levelSetting.c.obj: ../levelSetting.h
 

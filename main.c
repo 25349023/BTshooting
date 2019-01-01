@@ -35,6 +35,7 @@ ALLEGRO_TIMER *playerMovingTimer = NULL;
 ALLEGRO_TIMER *enemyMovingTimer = NULL;
 ALLEGRO_TIMER *collisionDetectTimer = NULL;
 ALLEGRO_TIMER *generateEnemyBulletTimer = NULL;
+ALLEGRO_TIMER *generateEnemyTimer = NULL;
 
 ALLEGRO_TIMER *fireworksTickTimer = NULL;
 ALLEGRO_TIMER *generateFirework1Timer = NULL;
@@ -64,10 +65,12 @@ Character player;
 Character boss;
 Character *enemy_list = NULL;
 
+LevelSetting settings[6];  // 0 for tutorial
+
 int window = 1;
 int draw_count = 0;
-int level;
-int enemy_count[5] = {5, 6, 7, 10, 15};
+int level = 1;
+int score;
 
 bool enter_game_window = false;
 bool appear = true; //true: appear, false: disappear
@@ -88,7 +91,7 @@ bool collide_with(Circle a, Circle b);
 void draw_menu();
 void draw_about();
 void draw_game_scene();
-
+void draw_stage_choosing();
 
 int main(int argc, char *argv[]) {
     int msg = 0;
@@ -170,6 +173,7 @@ void load_images() {
     }
     cursorImg = al_load_bitmap("cursor2.png");
     enemyImgs[0] = al_load_bitmap("enemy0.png");
+    enemyImgs[10] = al_load_bitmap("boss0.png");
 }
 
 void game_begin() {
@@ -204,7 +208,8 @@ void game_begin() {
     al_set_mouse_cursor(display, cursor);
 
     // TODO: set level settings
-
+    set_level(&settings[0], 0, 100, 5, 10, 3, 3, 5, enemyImgs[0], enemyImgs[10], bulletImgs[1], 1.0 / 3.0, 5);
+    set_level(&settings[1], 1, 100, 12, 30, 5, 8, 12, enemyImgs[0], enemyImgs[10], bulletImgs[1], 1.0 / 3.0, 3);
 }
 
 
@@ -289,7 +294,7 @@ int process_event() {
                 if (player_bullet_list == NULL){
                     break;
                 }
-                printf("NULL\n");
+                //printf("NULL\n");
                 current = player_bullet_list;
                 previous = player_bullet_list;
                 continue;
@@ -370,7 +375,7 @@ int process_event() {
                 if (enemy_bullet_list == NULL){
                     break;
                 }
-                printf("NULL\n");
+                //printf("NULL\n");
                 current = enemy_bullet_list;
                 previous = enemy_bullet_list;
                 continue;
@@ -393,7 +398,6 @@ int process_event() {
             if (current != fireworks_bullet_list && previous->next != current){
                 previous = previous->next;
             }
-            // TODO: Add more case into switch
             float mul = current->speed_multiplier;
             switch (current->mode){
                 case up:
@@ -552,7 +556,7 @@ int process_event() {
     else if (event.timer.source == shootingDefaultBulletTimer){
         Bullet *bt = make_bullet(player.default_bullet, player.bullet_mode,
                                  (Vector2) {player.pos.x + player.firing_point.x,
-                                            player.pos.y + player.firing_point.y});
+                                            player.pos.y + player.firing_point.y}, player.default_damage);
         register_bullet(bt, &player_bullet_list);
         /**bt = make_bullet(player.default_bullet, lf_26,
                          (Vector2) {player.pos.x + player.firing_point.x,
@@ -573,9 +577,11 @@ int process_event() {
                                  (Circle) {(Vector2) {ene_curr->pos.x + ene_curr->hit_area.center.x,
                                                       ene_curr->pos.y + ene_curr->hit_area.center.y},
                                            ene_curr->hit_area.radius})){
-                    printf("Collide\n");
                     pla_curr->mode = stopped;
                     ene_curr->mode = stopped;
+                    if (player.health > 0){
+                        score += rand() % 31 + 30;
+                    }
                 }
             }
         }
@@ -585,14 +591,40 @@ int process_event() {
                                                       pla_curr->pos.y + pla_curr->hit_area.center.y},
                                            pla_curr->hit_area.radius},
                                  (Circle) {(Vector2) {enemy->pos.x, enemy->pos.y}, enemy->body.radius})){
-                    pla_curr->mode = stopped;
-                    enemy->health -= 4;
+                    if (pla_curr->mode != stopped){
+                        pla_curr->mode = stopped;
+                        enemy->health -= pla_curr->damage;
+                        if (player.health > 0){
+                            score += rand() % 300 + 300;
+                            if (enemy->health <= 0){
+                                score += rand() % 600 + 1500;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        for (Bullet *ene_curr = enemy_bullet_list; ene_curr != NULL && player.health > 0; ene_curr = ene_curr->next){
+            if (collide_with((Circle) {(Vector2) {ene_curr->pos.x + ene_curr->hit_area.center.x,
+                                                  ene_curr->pos.y + ene_curr->hit_area.center.y},
+                                       ene_curr->hit_area.radius},
+                             (Circle) {(Vector2) {player.pos.x + player.body.center.x,
+                                                  player.pos.y + player.body.center.y}, player.body.radius})){
+                if (ene_curr->mode == stopped){
+                    continue;
+                }
+                player.health -= ene_curr->damage;
+                ene_curr->mode = stopped;
+                printf("HURT\n");
+                if (player.health <= 0){
+                    printf("DEAD\n");
+                    player.default_damage = 0;
                 }
             }
         }
     }
     else if (event.timer.source == generateEnemyBulletTimer){
-        Bullet *bt = make_bullet(bulletImgs[1], down, (Vector2) {-1, 0});
+        Bullet *bt = make_bullet(settings[level].dropping_bullet, down, (Vector2) {-1, 0}, 5);
         register_bullet(bt, &enemy_bullet_list);
     }
     else if (event.timer.source == enemyMovingTimer){
@@ -629,17 +661,25 @@ int process_event() {
             enemy->shoot_interval++;
             if (enemy->shoot_interval == enemy->CD){
                 enemy->shoot_interval = 0;
-                Bullet *bt = make_bullet(enemy->default_bullet, enemy->bullet_mode, enemy->pos);
+                Bullet *bt = make_bullet(enemy->default_bullet, enemy->bullet_mode, enemy->pos, enemy->default_damage);
                 register_bullet(bt, &enemy_bullet_list);
             }
         }
     }
+    else if (event.timer.source == generateEnemyTimer){
+        // TODO: change this function call with settings
+        Character *ene = create_enemy(settings[level].enemy_img, settings[level].enemy_hp,
+                                      settings[level].enemy_damage,
+                                      (Vector2) {-1, 0}, 5, 180, bulletImgs[3], 30, down);
+        register_enemy(ene);
+        al_set_timer_speed(generateEnemyTimer, settings[level].enemy_rate_base + rand() % 3 - 1);
+    }
+
 
     static bool normal_fireworks = true;
 
-    // Keyboard
     if (event.type == ALLEGRO_EVENT_KEY_UP){
-        if (window == 1 && event.keyboard.keycode == ALLEGRO_KEY_ENTER){
+        if (window == 5 && event.keyboard.keycode == ALLEGRO_KEY_ENTER){
             enter_game_window = true;
         }
         if (window == 2){
@@ -704,7 +744,9 @@ int process_event() {
         printf("press ");
         if (window == 1){
             if (within(event.mouse.x, event.mouse.y, WIDTH / 2 - 150, 225, WIDTH / 2 + 150, 285)){
-                enter_game_window = true;
+                //enter_game_window = true;
+                draw_stage_choosing();
+                window = 5;
                 printf("START");
             }
 
@@ -729,12 +771,12 @@ int process_event() {
             }
             else if (within(event.mouse.x, event.mouse.y, 201, HEIGHT - 55, 300, HEIGHT)){
                 printf("FIRE3");
-                Bullet *bt_tmp = make_bullet(bulletImgs[0], down, (Vector2) {-1, 0});
+                Bullet *bt_tmp = make_bullet(bulletImgs[0], down, (Vector2) {-1, 0}, player.default_damage);
                 register_bullet(bt_tmp, &enemy_bullet_list);
             }
             else if (within(event.mouse.x, event.mouse.y, 301, HEIGHT - 55, 400, HEIGHT)){
                 printf("Enemy");
-                Character *ene = create_enemy(enemyImgs[0], 10, (Vector2) {-1, 0}, 5, 180,
+                Character *ene = create_enemy(enemyImgs[0], 10, 8, (Vector2) {-1, 0}, 5, 180,
                                               bulletImgs[3], 30, down);
                 register_enemy(ene);
             }
@@ -914,13 +956,12 @@ int game_run() {
     if (window == 1){
         if (!al_is_event_queue_empty(event_queue)){
             error = process_event();
-            if (enter_game_window){
+            /**if (enter_game_window){
                 window = 2;
                 // Setting Character
-                // background = al_load_bitmap("stage.jpg");
                 player.pos.x = 200;
                 player.pos.y = HEIGHT - 100;
-                set_character(airplaneImgs[0], 100, bulletImgs[0], (float) 1 / 4, up);
+                set_character(airplaneImgs[0], settings[level].player_hp, 5, bulletImgs[0], 1.0 / 7.0, up);
 
                 // Initialize Timer
                 playerMovingTimer = al_create_timer(1.0 / 30.0);
@@ -929,7 +970,8 @@ int game_run() {
                 shootingDefaultBulletTimer = al_create_timer(player.shooting_rate);
                 enemyDefaultBulletTimer = al_create_timer(1.0 / 60.0);
                 collisionDetectTimer = al_create_timer(1.0 / 60.0);
-                generateEnemyBulletTimer = al_create_timer(1.0 / 5.0);
+                generateEnemyBulletTimer = al_create_timer(settings[level].bullet_rate);
+                generateEnemyTimer = al_create_timer(rand() % 3 + 4);
                 al_register_event_source(event_queue, al_get_timer_event_source(playerMovingTimer));
                 al_register_event_source(event_queue, al_get_timer_event_source(enemyMovingTimer));
                 al_register_event_source(event_queue, al_get_timer_event_source(bulletUpdateTimer));
@@ -937,6 +979,7 @@ int game_run() {
                 al_register_event_source(event_queue, al_get_timer_event_source(enemyDefaultBulletTimer));
                 al_register_event_source(event_queue, al_get_timer_event_source(collisionDetectTimer));
                 al_register_event_source(event_queue, al_get_timer_event_source(generateEnemyBulletTimer));
+                al_register_event_source(event_queue, al_get_timer_event_source(generateEnemyTimer));
                 al_start_timer(playerMovingTimer);
                 al_start_timer(enemyMovingTimer);
                 al_start_timer(bulletUpdateTimer);
@@ -944,7 +987,9 @@ int game_run() {
                 al_start_timer(enemyDefaultBulletTimer);
                 al_start_timer(collisionDetectTimer);
                 al_start_timer(generateEnemyBulletTimer);
+                al_start_timer(generateEnemyTimer);
             }
+            */
         }
     }
         // Second window(Main Game)
@@ -979,6 +1024,44 @@ int game_run() {
 
         if (!al_is_event_queue_empty(event_queue)){
             error = process_event();
+        }
+    }
+    else if (window == 5){  // choose stage
+        if (!al_is_event_queue_empty(event_queue)){
+            error = process_event();
+            if (enter_game_window){
+                window = 2;
+                // Setting Character
+                player.pos.x = 200;
+                player.pos.y = HEIGHT - 100;
+                set_character(airplaneImgs[0], settings[level].player_hp, 5, bulletImgs[0], 1.0 / 7.0, up);
+
+                // Initialize Timer
+                playerMovingTimer = al_create_timer(1.0 / 30.0);
+                enemyMovingTimer = al_create_timer(1.0 / 30.0);
+                bulletUpdateTimer = al_create_timer(1.0 / 30.0);
+                shootingDefaultBulletTimer = al_create_timer(player.shooting_rate);
+                enemyDefaultBulletTimer = al_create_timer(1.0 / 60.0);
+                collisionDetectTimer = al_create_timer(1.0 / 60.0);
+                generateEnemyBulletTimer = al_create_timer(settings[level].bullet_rate);
+                generateEnemyTimer = al_create_timer(rand() % 3 + 4);
+                al_register_event_source(event_queue, al_get_timer_event_source(playerMovingTimer));
+                al_register_event_source(event_queue, al_get_timer_event_source(enemyMovingTimer));
+                al_register_event_source(event_queue, al_get_timer_event_source(bulletUpdateTimer));
+                al_register_event_source(event_queue, al_get_timer_event_source(shootingDefaultBulletTimer));
+                al_register_event_source(event_queue, al_get_timer_event_source(enemyDefaultBulletTimer));
+                al_register_event_source(event_queue, al_get_timer_event_source(collisionDetectTimer));
+                al_register_event_source(event_queue, al_get_timer_event_source(generateEnemyBulletTimer));
+                al_register_event_source(event_queue, al_get_timer_event_source(generateEnemyTimer));
+                al_start_timer(playerMovingTimer);
+                al_start_timer(enemyMovingTimer);
+                al_start_timer(bulletUpdateTimer);
+                al_start_timer(shootingDefaultBulletTimer);
+                al_start_timer(enemyDefaultBulletTimer);
+                al_start_timer(collisionDetectTimer);
+                al_start_timer(generateEnemyBulletTimer);
+                al_start_timer(generateEnemyTimer);
+            }
         }
     }
     return error;
@@ -1051,12 +1134,35 @@ void draw_game_scene() {
     al_draw_rectangle(1, HEIGHT - 55, 100, HEIGHT, white, 0);
     al_draw_text(smallFont, white, 150, HEIGHT - 50 + 15, ALLEGRO_ALIGN_CENTER, "Slow");
     al_draw_rectangle(100, HEIGHT - 55, 200, HEIGHT, white, 0);
-    */
+
     al_draw_text(smallFont, white, 250, HEIGHT - 50 + 15, ALLEGRO_ALIGN_CENTER, "FIRE3");
     al_draw_rectangle(200, HEIGHT - 55, 300, HEIGHT, white, 0);
     al_draw_text(smallFont, white, 350, HEIGHT - 50 + 15, ALLEGRO_ALIGN_CENTER, "FIRE4");
     al_draw_rectangle(300, HEIGHT - 55, 400, HEIGHT, white, 0);
+    */
+    char score_text[10];
+    sprintf(score_text, "%08d", score);
+    al_draw_text(bigFont, white, WIDTH - 5, 5, ALLEGRO_ALIGN_RIGHT, score_text);
+    if (player.health > 0){
+        double ratio = (double) player.health / settings[level].player_hp;
+        ALLEGRO_COLOR hp_bar = al_map_rgb((unsigned char) (150 + 50 * (1 - ratio)),
+                                          (unsigned char) (50 + 150 * ratio), 0);
+        al_draw_filled_rectangle(10, HEIGHT - 40, (float) (10 + 150 * ratio), HEIGHT - 10, hp_bar);
+        al_draw_rectangle(10, HEIGHT - 40, 160, HEIGHT - 10, white, 0);
+        al_draw_bitmap(player.image, player.pos.x, player.pos.y, 0);
+        al_draw_circle(player.pos.x + player.body.center.x, player.pos.y + player.body.center.y,
+                       player.body.radius, white, 0);
+    }
+    else {
+        al_draw_rectangle(WIDTH / 2 - 150, HEIGHT / 2 - 20, WIDTH / 2 + 150, HEIGHT / 2 + 50, white, 0);
+        al_draw_text(bigFont, white, WIDTH / 2, HEIGHT / 2, ALLEGRO_ALIGN_CENTER, "GAME OVER");
+        al_draw_rectangle(WIDTH / 2 - 90, HEIGHT / 2 + 60, WIDTH / 2 + 150, HEIGHT / 2 + 100, white, 0);
+        al_draw_text(smallFont, white, WIDTH / 2 + 30, HEIGHT / 2 + 70, ALLEGRO_ALIGN_CENTER, "RESTART");
+    }
+}
 
-    al_draw_bitmap(player.image, player.pos.x, player.pos.y, 0);
+void draw_stage_choosing() {
+    al_clear_to_color(al_map_rgb(126, 46, 41));
+    al_flip_display();
 }
 
