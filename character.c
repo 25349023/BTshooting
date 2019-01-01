@@ -9,7 +9,8 @@ extern int WIDTH, HEIGHT;
 extern Character player;
 extern Character *enemy_list;
 
-void set_character(ALLEGRO_BITMAP *img, int hp, int dmg, ALLEGRO_BITMAP *bt_img, double rate, enum flyMode md) {
+void set_character(ALLEGRO_BITMAP *img, int hp, int dmg, ALLEGRO_BITMAP *bt_img, double rate, enum flyMode md[],
+                   int cnt_of_mode) {
     player.image = img;
     player.size.x = al_get_bitmap_width(img);
     player.size.y = al_get_bitmap_height(img);
@@ -21,11 +22,16 @@ void set_character(ALLEGRO_BITMAP *img, int hp, int dmg, ALLEGRO_BITMAP *bt_img,
     player.default_damage = dmg;
     player.default_bullet = bt_img;
     player.shooting_rate = rate;
-    player.bullet_mode = md;
+    for (int i = 0; i < cnt_of_mode; i++){
+        player.bullet_mode[i] = md[i];
+    }
+    for (int i = cnt_of_mode; i < 20; i++){
+        player.bullet_mode[i] = stopped;
+    }
 }
 
 Character *create_enemy(ALLEGRO_BITMAP *img, int hp, int dmg, Vector2 pos, float spd, float angle,
-                        ALLEGRO_BITMAP *bt_img, int cd, enum flyMode md) {
+                        ALLEGRO_BITMAP *bt_img, int cd, enum flyMode md[], int cnt_of_mode) {
     Character *enemy = malloc(sizeof(Character));
     enemy->image = img;
     enemy->pos.x = pos.x < 0 ? ((rand() % 18 + 1) * 20 + 10) : pos.x;
@@ -45,7 +51,12 @@ Character *create_enemy(ALLEGRO_BITMAP *img, int hp, int dmg, Vector2 pos, float
     enemy->default_bullet = bt_img;
     enemy->CD = cd;
     enemy->shoot_interval = 0;
-    enemy->bullet_mode = md;
+    for (int i = 0; i < cnt_of_mode; i++){
+        enemy->bullet_mode[i] = md[i];
+    }
+    for (int i = cnt_of_mode; i < 20; i++){
+        enemy->bullet_mode[i] = stopped;
+    }
 
     return enemy;
 }

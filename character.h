@@ -22,14 +22,15 @@ typedef struct character {
     int CD, shoot_interval;
     ALLEGRO_BITMAP *image;
     ALLEGRO_BITMAP *default_bullet;
-    enum flyMode bullet_mode;
+    enum flyMode bullet_mode[20];
     struct character *next;
 } Character;
 
-void set_character(ALLEGRO_BITMAP *img, int hp, int dmg, ALLEGRO_BITMAP *bt_img, double rate, enum flyMode md);
+void set_character(ALLEGRO_BITMAP *img, int hp, int dmg, ALLEGRO_BITMAP *bt_img, double rate, enum flyMode md[],
+                   int cnt_of_mode);
 
 Character *create_enemy(ALLEGRO_BITMAP *img, int hp, int dmg, Vector2 pos, float spd, float angle,
-                        ALLEGRO_BITMAP *bt_img, int cd, enum flyMode md);
+                        ALLEGRO_BITMAP *bt_img, int cd, enum flyMode md[], int cnt_of_mode);
 void register_enemy(Character *enemy);
 void destroy_enemy(Character *curr, Character **prev);
 
