@@ -8,8 +8,8 @@ extern int HEIGHT;
 
 Bullet *make_bullet(ALLEGRO_BITMAP *img, enum flyMode mode, Vector2 pt, int dmg) {
     Bullet *bt = malloc(sizeof(Bullet));
-    bt->pos.x = pt.x < 0 ? (rand() % (WIDTH + 1)) : pt.x;
-    bt->pos.y = pt.y < 0 ? (rand() % (HEIGHT + 1)) : pt.y;
+    bt->pos.x = pt.x < -200 ? (rand() % (WIDTH + 1)) : pt.x;
+    bt->pos.y = pt.y < -200 ? (rand() % (HEIGHT + 1)) : pt.y;
     bt->size.x = al_get_bitmap_width(img);
     bt->size.y = al_get_bitmap_height(img);
     bt->hit_area.center = (Vector2) {0, 0};
@@ -58,4 +58,14 @@ void destroy_bullet(Bullet *curr, Bullet **prev, Bullet **list) {
         (*prev)->next = curr->next;
         free(curr);
     }
+}
+
+void free_bullet_list(Bullet **list) {
+    for (Bullet *bt = *list; bt != NULL;){
+        Bullet *temp = bt;
+        bt = bt->next;
+        free(temp);
+    }
+
+    *list = NULL;
 }

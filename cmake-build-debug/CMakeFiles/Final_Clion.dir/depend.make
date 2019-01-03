@@ -104,6 +104,7 @@ CMakeFiles/Final_Clion.dir/character.c.obj: D:/Allegro/allegro-5.0.10-mingw-4.7.
 CMakeFiles/Final_Clion.dir/character.c.obj: ../character.c
 CMakeFiles/Final_Clion.dir/character.c.obj: ../character.h
 CMakeFiles/Final_Clion.dir/character.c.obj: ../general.h
+CMakeFiles/Final_Clion.dir/character.c.obj: ../levelSetting.h
 
 CMakeFiles/Final_Clion.dir/fireworks.c.obj: D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/alcompat.h
 CMakeFiles/Final_Clion.dir/fireworks.c.obj: D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/allegro.h

@@ -26,5 +26,6 @@ Bullet *make_bullet(ALLEGRO_BITMAP *img, enum flyMode mode, Vector2 pt, int dmg)
 Bullet *make_firework_bullet(ALLEGRO_BITMAP *img, enum flyMode mode, Vector2 pt, int tm, float spd, bool ps);
 void register_bullet(Bullet *bt, Bullet **list);
 void destroy_bullet(Bullet *curr, Bullet **prev, Bullet **list);
+void free_bullet_list(Bullet **list);
 
 #endif //FINAL_CLION_BULLET_H

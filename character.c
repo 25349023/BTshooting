@@ -9,8 +9,8 @@ extern int WIDTH, HEIGHT;
 extern Character player;
 extern Character *enemy_list;
 
-void set_character(ALLEGRO_BITMAP *img, int hp, int dmg, ALLEGRO_BITMAP *bt_img, double rate, enum flyMode md[],
-                   int cnt_of_mode) {
+void set_player(ALLEGRO_BITMAP *img, int hp, int dmg, ALLEGRO_BITMAP *bt_img, double rate, enum flyMode *md,
+                int cnt_of_mode) {
     player.image = img;
     player.size.x = al_get_bitmap_width(img);
     player.size.y = al_get_bitmap_height(img);
@@ -30,31 +30,31 @@ void set_character(ALLEGRO_BITMAP *img, int hp, int dmg, ALLEGRO_BITMAP *bt_img,
     }
 }
 
-Character *create_enemy(ALLEGRO_BITMAP *img, int hp, int dmg, Vector2 pos, float spd, float angle,
-                        ALLEGRO_BITMAP *bt_img, int cd, enum flyMode md[], int cnt_of_mode) {
+Character *create_enemy(const EnemySetting *prefab) {
     Character *enemy = malloc(sizeof(Character));
-    enemy->image = img;
+    enemy->image = prefab->image;
+    Vector2 pos = prefab->pos;
     enemy->pos.x = pos.x < 0 ? ((rand() % 18 + 1) * 20 + 10) : pos.x;
     enemy->pos.y = pos.y < 0 ? (rand() % (HEIGHT + 1)) : pos.y;
-    enemy->size.x = al_get_bitmap_width(img);
-    enemy->size.y = al_get_bitmap_height(img);
+    enemy->size.x = al_get_bitmap_width(prefab->image);
+    enemy->size.y = al_get_bitmap_height(prefab->image);
     enemy->firing_point.x = enemy->size.x / 2;
     enemy->firing_point.y = enemy->size.y / 2;
-    enemy->health = hp;
-    enemy->default_damage = dmg;
+    enemy->health = prefab->hp;
+    enemy->default_damage = prefab->damage;
     enemy->body.center = (Vector2) {enemy->size.x / 2, enemy->size.y / 2};
     enemy->body.radius = enemy->size.x < enemy->size.y ? (enemy->size.x / 3) : (enemy->size.y / 3);
-    enemy->e_speed = spd;
-    enemy->speed.x = enemy->e_speed * sinf((float) (ALLEGRO_PI / 180 * angle));
-    enemy->speed.y = enemy->e_speed * -cosf((float) (ALLEGRO_PI / 180 * angle));
-    enemy->dire_angle = angle;
-    enemy->default_bullet = bt_img;
-    enemy->CD = cd;
+    enemy->e_speed = prefab->speed_base;
+    enemy->speed.x = enemy->e_speed * sinf((float) (ALLEGRO_PI / 180 * prefab->angle));
+    enemy->speed.y = enemy->e_speed * -cosf((float) (ALLEGRO_PI / 180 * prefab->angle));
+    enemy->dire_angle = prefab->angle;
+    enemy->default_bullet = prefab->bullet;
+    enemy->CD = prefab->cd;
     enemy->shoot_interval = 0;
-    for (int i = 0; i < cnt_of_mode; i++){
-        enemy->bullet_mode[i] = md[i];
+    for (int i = 0; i < prefab->count_of_mode; i++){
+        enemy->bullet_mode[i] = prefab->modes[i];
     }
-    for (int i = cnt_of_mode; i < 20; i++){
+    for (int i = prefab->count_of_mode; i < 20; i++){
         enemy->bullet_mode[i] = stopped;
     }
 

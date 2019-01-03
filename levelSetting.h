@@ -8,26 +8,35 @@
 #include "allegro5/allegro.h"
 #include "general.h"
 
-// TODO: complete this struct, add a set_enemy func,
-//       and go to rewrite create_enemy func
+// TODO: edit this struct if necessary
 typedef struct enemySetting {
     ALLEGRO_BITMAP *image, *bullet;
-    int hp, damage;
-    enum flyMode *modes;
+    int hp, damage, cd;
+    Vector2 pos;
+    float speed_base, angle;
+    enum flyMode modes[20];
+    int count_of_mode;
 } EnemySetting;
 
 typedef struct levelSetting {
     int level;
-    int player_hp, enemy_hp, boss_hp;
+    int player_hp, boss_hp;
     int enemy_count;
-    int enemy_damage, boss_damage;
-    ALLEGRO_BITMAP *enemy_img;
+    int boss_damage;
     ALLEGRO_BITMAP *boss_img;
     ALLEGRO_BITMAP *dropping_bullet;
-    double enemy_rate_base, bullet_rate;
+    double dropping_rate;
+
+    int kind_of_enemy;
+    int generate_enemy_cd[5];
+    EnemySetting *enemy_prefab[5];
 } LevelSetting;
 
-void set_level(LevelSetting *setting, int lv, int p_hp, int e_hp, int b_hp, int ene_cnt, int ene_dmg, int boss_dmg,
-               ALLEGRO_BITMAP *enemy, ALLEGRO_BITMAP *boss, ALLEGRO_BITMAP *drop, double blt_rate, double ene_rate);
+
+void
+set_enemy(EnemySetting *ene_set, ALLEGRO_BITMAP *img, ALLEGRO_BITMAP *blt_img, int hp, int dmg, int cd, Vector2 pos,
+          float spd, float agl, enum flyMode mds[], int cnt);
+void set_level(LevelSetting *setting, int lv, int p_hp, int b_hp, int ene_cnt, int boss_dmg, ALLEGRO_BITMAP *boss,
+               ALLEGRO_BITMAP *drop, double drp_rate, int knd_of_ene, int gen_cd[]);
 
 #endif //FINAL_CLION_LEVELOPTION_H
