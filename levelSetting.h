@@ -14,7 +14,7 @@ typedef struct enemySetting {
     int hp, damage, cd;
     Vector2 pos;
     float speed_base, angle;
-    enum flyMode modes[20];
+    enum flyMode modes[MODE_COUNT];
     int count_of_mode;
 } EnemySetting;
 

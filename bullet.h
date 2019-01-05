@@ -8,6 +8,7 @@
 #include <allegro5/allegro.h>
 #include "general.h"
 
+/// maybe we can add the field "penetrate"
 typedef struct bullet {
     Vector2 pos;
     Vector2 size;

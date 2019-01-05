@@ -5,6 +5,8 @@
 #ifndef FINAL_CLION_GENERAL_H
 #define FINAL_CLION_GENERAL_H
 
+#define MODE_COUNT 20
+
 typedef struct point {
     float x, y;
 } Vector2;

@@ -35,7 +35,7 @@ set_enemy(EnemySetting *ene_set, ALLEGRO_BITMAP *img, ALLEGRO_BITMAP *blt_img, i
     for (int i = 0; i < cnt; i++){
         ene_set->modes[i] = mds[i];
     }
-    for (int i = cnt; i < 20; i++){
+    for (int i = cnt; i < MODE_COUNT; i++){
         ene_set->modes[i] = stopped;
     }
     ene_set->count_of_mode = cnt;
