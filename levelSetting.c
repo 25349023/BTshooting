@@ -5,7 +5,7 @@
 #include "levelSetting.h"
 
 void set_level(LevelSetting *setting, int lv, int p_hp, int b_hp, int ene_cnt, int boss_dmg, ALLEGRO_BITMAP *boss,
-               ALLEGRO_BITMAP *drop, double drp_rate, int knd_of_ene, int gen_cd[]) {
+               ALLEGRO_BITMAP *drop, double drp_rate, float bt_spd, int knd_of_ene, int gen_cd[]) {
     setting->level = lv;
     setting->player_hp = p_hp;
     setting->boss_hp = b_hp;
@@ -14,16 +14,16 @@ void set_level(LevelSetting *setting, int lv, int p_hp, int b_hp, int ene_cnt, i
     setting->boss_img = boss;
     setting->dropping_bullet = drop;
     setting->dropping_rate = drp_rate;
+    setting->dropping_bullet_speed = bt_spd;
     setting->kind_of_enemy = knd_of_ene;
     for (int i = 0; i < knd_of_ene; i++){
         setting->generate_enemy_cd[i] = gen_cd[i];
     }
-    // TODO: complete this function
 }
 
 void
 set_enemy(EnemySetting *ene_set, ALLEGRO_BITMAP *img, ALLEGRO_BITMAP *blt_img, int hp, int dmg, int cd, Vector2 pos,
-          float spd, float agl, enum flyMode mds[], int cnt) {
+          float spd, float agl, float bt_spd, enum flyMode mds[], int cnt) {
     ene_set->image = img;
     ene_set->bullet = blt_img;
     ene_set->hp = hp;
@@ -32,6 +32,7 @@ set_enemy(EnemySetting *ene_set, ALLEGRO_BITMAP *img, ALLEGRO_BITMAP *blt_img, i
     ene_set->pos = pos;
     ene_set->speed_base = spd;
     ene_set->angle = agl;
+    ene_set->bullet_speed = bt_spd;
     for (int i = 0; i < cnt; i++){
         ene_set->modes[i] = mds[i];
     }

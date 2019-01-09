@@ -9,7 +9,7 @@ extern int WIDTH, HEIGHT;
 extern Character player, boss;
 extern Character *enemy_list;
 
-void set_player(ALLEGRO_BITMAP *img, int hp, int dmg, ALLEGRO_BITMAP *bt_img, double rate, enum flyMode *md,
+void set_player(ALLEGRO_BITMAP *img, int hp, int dmg, ALLEGRO_BITMAP *bt_img, double rate, float bt_spd, enum flyMode *md,
                 int cnt_of_mode) {
     player.image = img;
     player.size.x = al_get_bitmap_width(img);
@@ -22,6 +22,7 @@ void set_player(ALLEGRO_BITMAP *img, int hp, int dmg, ALLEGRO_BITMAP *bt_img, do
     player.damage = dmg;
     player.default_bullet = bt_img;
     player.shooting_rate = rate;
+    player.bullet_speed = bt_spd;
     for (int i = 0; i < cnt_of_mode; i++){
         player.bullet_mode[i] = md[i];
     }
@@ -50,6 +51,7 @@ Character *create_enemy(const EnemySetting *prefab) {
     enemy->default_bullet = prefab->bullet;
     enemy->CD = prefab->cd;
     enemy->shoot_interval = 0;
+    enemy->bullet_speed = prefab->bullet_speed;
     for (int i = 0; i < prefab->count_of_mode; i++){
         enemy->bullet_mode[i] = prefab->modes[i];
     }
@@ -77,8 +79,8 @@ void destroy_enemy(Character *curr, Character **prev) {
     }
 }
 
-void set_boss(ALLEGRO_BITMAP *img, int hp, int dmg, ALLEGRO_BITMAP *bt_img, double rate,
-              enum flyMode *md, int cnt_of_mode) {
+void set_boss(ALLEGRO_BITMAP *img, int hp, int dmg, ALLEGRO_BITMAP *bt_img, double rate, float bt_spd, enum flyMode *md,
+              int cnt_of_mode) {
     boss.image = img;
     boss.size.x = al_get_bitmap_width(img);
     boss.size.y = al_get_bitmap_height(img);
@@ -90,6 +92,7 @@ void set_boss(ALLEGRO_BITMAP *img, int hp, int dmg, ALLEGRO_BITMAP *bt_img, doub
     boss.damage = dmg;
     boss.default_bullet = bt_img;
     boss.shooting_rate = rate;
+    boss.bullet_speed = bt_spd;
     for (int i = 0; i < cnt_of_mode; i++){
         boss.bullet_mode[i] = md[i];
     }

@@ -50,6 +50,7 @@ ALLEGRO_SAMPLE *letoff, *letoff2;
 ALLEGRO_SAMPLE_INSTANCE *letoffInstance[2];
 ALLEGRO_FONT *bigFont = NULL;
 ALLEGRO_FONT *smallFont = NULL;
+ALLEGRO_FONT *warningFont = NULL;
 ALLEGRO_MOUSE_CURSOR *cursor = NULL;
 
 ALLEGRO_COLOR white;
@@ -106,7 +107,7 @@ void show_message(char *msg);
 
 void reset_level();
 
-void launch_big_fire(Vector2 pos, enum flyMode mode, Bullet **list, int dmg);
+void launch_big_fire(Vector2 pos, enum flyMode mode, Bullet **list, int dmg, float mul);
 
 int main(int argc, char *argv[]) {
     int msg = 0;
@@ -212,6 +213,9 @@ void game_begin() {
     // load font
     bigFont = al_load_ttf_font("pirulen.ttf", 25, 0);
     smallFont = al_load_ttf_font("pirulen.ttf", 15, 0);
+    warningFont = al_load_font("bauhs93.ttf", 36, 0);
+
+    // load Timer
 
     // load images
     load_images();
@@ -223,12 +227,12 @@ void game_begin() {
     al_set_mouse_cursor(display, cursor);
 
     // TODO: set enemyPrefabs
-    set_enemy(&enemyPrefabs[0], enemyImgs[0], bulletImgs[3], 12, 8, 30, (Vector2) {-1, 0}, 5, 180,
+    set_enemy(&enemyPrefabs[0], enemyImgs[0], bulletImgs[3], 12, 8, 30, (Vector2) {-1, 0}, 5, 180, 1.8,
               (enum flyMode[]) {down}, 1);
 
     // TODO: set level settings
-    set_level(&settings[0], 0, 100, 15, 3, 5, enemyImgs[10], bulletImgs[1], 1.0 / 3.0, 1, (int[]) {150});
-    set_level(&settings[1], 1, 100, 120, 5, 12, enemyImgs[10], bulletImgs[1], 1.0 / 3.0, 1, (int[]) {90});
+    set_level(&settings[0], 0, 100, 15, 3, 5, enemyImgs[10], bulletImgs[1], 1.0 / 3.0, 1, 1, (int[]) {150});
+    set_level(&settings[1], 1, 100, 120, 5, 12, enemyImgs[10], bulletImgs[1], 1.0 / 3.0, 1, 1, (int[]) {90});
     settings[1].enemy_prefab[0] = &enemyPrefabs[0];
 }
 
@@ -237,8 +241,6 @@ int process_event() {
     // Request the event
     ALLEGRO_EVENT event;
     al_wait_for_event(event_queue, &event);
-
-    // TODO: make the boss come out at proper time
 
     if (event.timer.source == bulletUpdateTimer){
         process_bullets(&player_bullet_list);
@@ -259,16 +261,16 @@ int process_event() {
                     break;
                 case right_front:
                     if (!current->pause){
-                        current->pos.x += 5.7 * sqrtf(mul);
-                        current->pos.y -= 5.7 * sqrtf(mul);
+                        current->pos.x += 5.7 * mul;
+                        current->pos.y -= 5.7 * mul;
                     }
                     al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
                                            (float) (ALLEGRO_PI / 4), current->flip);
                     break;
                 case left_front:
                     if (!current->pause){
-                        current->pos.x -= 5.7 * sqrtf(mul);
-                        current->pos.y -= 5.7 * sqrtf(mul);
+                        current->pos.x -= 5.7 * mul;
+                        current->pos.y -= 5.7 * mul;
                     }
                     al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
                                            (float) (-ALLEGRO_PI / 4), current->flip);
@@ -289,16 +291,16 @@ int process_event() {
                     break;
                 case right_back:
                     if (!current->pause){
-                        current->pos.x += 5.7 * sqrtf(mul);
-                        current->pos.y += 5.7 * sqrtf(mul);
+                        current->pos.x += 5.7 * mul;
+                        current->pos.y += 5.7 * mul;
                     }
                     al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
                                            (float) (ALLEGRO_PI * 3 / 4), current->flip);
                     break;
                 case left_back:
                     if (!current->pause){
-                        current->pos.x -= 5.7 * sqrtf(mul);
-                        current->pos.y += 5.7 * sqrtf(mul);
+                        current->pos.x -= 5.7 * mul;
+                        current->pos.y += 5.7 * mul;
                     }
                     al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
                                            (float) (-ALLEGRO_PI * 3 / 4), current->flip);
@@ -407,7 +409,8 @@ int process_event() {
         for (int i = 0; player.bullet_mode[i]; i++){
             Bullet *bt = make_bullet(player.default_bullet, player.bullet_mode[i],
                                      (Vector2) {player.pos.x + player.firing_point.x,
-                                                player.pos.y + player.firing_point.y}, player.damage);
+                                                player.pos.y + player.firing_point.y},
+                                     player.damage, player.bullet_speed);
             register_bullet(bt, &player_bullet_list);
         }
     }
@@ -442,7 +445,6 @@ int process_event() {
                                 killed_enemies++;
                                 score += rand() % 600 + 1500;
                                 if (killed_enemies == settings[level].enemy_count && !draw_boss){
-                                    // TODO: let boss come out
                                     printf("BOSS\n");
                                     al_start_timer(bossComingOutTimer);
                                     draw_boss = true;
@@ -497,7 +499,8 @@ int process_event() {
         }
     }
     else if (event.timer.source == generateDroppingBulletTimer){
-        Bullet *bt = make_bullet(settings[level].dropping_bullet, down, (Vector2) {-201, 0}, 5);
+        Bullet *bt = make_bullet(settings[level].dropping_bullet, down, (Vector2) {-201, 0},
+                                 5, settings[level].dropping_bullet_speed);
         register_bullet(bt, &enemy_bullet_list);
     }
     else if (event.timer.source == enemyMovingTimer){
@@ -552,7 +555,7 @@ int process_event() {
                 enemy->shoot_interval = 0;
                 for (int i = 0; enemy->bullet_mode[i]; i++){
                     Bullet *bt = make_bullet(enemy->default_bullet, enemy->bullet_mode[i], enemy->pos,
-                                             enemy->damage);
+                                             enemy->damage, enemy->bullet_speed);
                     register_bullet(bt, &enemy_bullet_list);
 
                 }
@@ -623,11 +626,12 @@ int process_event() {
     else if (event.timer.source == bossShootingTimer){
         static int skill = 1;
         for (int i = 0; boss.bullet_mode[i]; i++){
-            Bullet *bt = make_bullet(boss.default_bullet, boss.bullet_mode[i], boss.pos, boss.damage);
+            Bullet *bt = make_bullet(boss.default_bullet, boss.bullet_mode[i], boss.pos,
+                                     boss.damage, boss.bullet_speed);
             register_bullet(bt, &enemy_bullet_list);
         }
         if (skill && boss.health < 0.5 * settings[level].boss_hp){
-            launch_big_fire(boss.pos, down, &enemy_bullet_list, 5);
+            launch_big_fire(boss.pos, down, &enemy_bullet_list, 5, 1);
             skill--;
         }
     }
@@ -731,7 +735,7 @@ int process_event() {
                 printf("Fire4");
                 launch_big_fire((Vector2) {player.pos.x + player.firing_point.x,
                                            player.pos.y + player.firing_point.y},
-                                up, &player_bullet_list, player.damage);
+                                up, &player_bullet_list, player.damage, player.bullet_speed);
             }
             else if (player.health > 0 && !pass && within(event.mouse.x, event.mouse.y, 10, 10, 31, 30)){
                 printf("Pause / Resume");
@@ -958,41 +962,6 @@ int game_run() {
     if (window == 1){
         if (!al_is_event_queue_empty(event_queue)){
             error = process_event();
-            /**if (enter_game_window){
-                window = 2;
-                // Setting Character
-                player.pos.x = 200;
-                player.pos.y = HEIGHT - 100;
-                set_character(airplaneImgs[0], settings[level].player_hp, 5, bulletImgs[0], 1.0 / 7.0,
-                              (enum flyMode[]) {up}, 1);
-
-                // Initialize Timer
-                playerMovingTimer = al_create_timer(1.0 / 30.0);
-                enemyMovingTimer = al_create_timer(1.0 / 30.0);
-                bulletUpdateTimer = al_create_timer(1.0 / 30.0);
-                shootingDefaultBulletTimer = al_create_timer(player.shooting_rate);
-                enemyDefaultBulletTimer = al_create_timer(1.0 / 60.0);
-                collisionDetectTimer = al_create_timer(1.0 / 60.0);
-                generateEnemyBulletTimer = al_create_timer(settings[level].bullet_rate);
-                generateEnemyTimer = al_create_timer(rand() % 3 + 4);
-                al_register_event_source(event_queue, al_get_timer_event_source(playerMovingTimer));
-                al_register_event_source(event_queue, al_get_timer_event_source(enemyMovingTimer));
-                al_register_event_source(event_queue, al_get_timer_event_source(bulletUpdateTimer));
-                al_register_event_source(event_queue, al_get_timer_event_source(shootingDefaultBulletTimer));
-                al_register_event_source(event_queue, al_get_timer_event_source(enemyDefaultBulletTimer));
-                al_register_event_source(event_queue, al_get_timer_event_source(collisionDetectTimer));
-                al_register_event_source(event_queue, al_get_timer_event_source(generateEnemyBulletTimer));
-                al_register_event_source(event_queue, al_get_timer_event_source(generateEnemyTimer));
-                al_start_timer(playerMovingTimer);
-                al_start_timer(enemyMovingTimer);
-                al_start_timer(bulletUpdateTimer);
-                al_start_timer(shootingDefaultBulletTimer);
-                al_start_timer(enemyDefaultBulletTimer);
-                al_start_timer(collisionDetectTimer);
-                al_start_timer(generateEnemyBulletTimer);
-                al_start_timer(generateEnemyTimer);
-            }
-            */
         }
     }
         // Second window(Main Game)
@@ -1042,10 +1011,10 @@ int game_run() {
                 // Setting Character
                 player.pos.x = 200;
                 player.pos.y = HEIGHT - 100;
-                set_player(airplaneImgs[0], settings[level].player_hp, 5, bulletImgs[0], 1.0 / 7.0,
+                set_player(airplaneImgs[0], settings[level].player_hp, 5, bulletImgs[0], 1.0 / 7.0, 2,
                            (enum flyMode[]) {up}, 1);
                 set_boss(settings[level].boss_img, settings[level].boss_hp, settings[level].boss_damage, bulletImgs[4],
-                         1.0 / 4.0, (enum flyMode[]) {down, rb_b, lb_b}, 3);
+                         1.0 / 4.0, 1, (enum flyMode[]) {down, rb_b, lb_b}, 3);
 
                 // Initialize Timer
                 playerMovingTimer = al_create_timer(1.0 / 30.0);
@@ -1132,6 +1101,8 @@ void draw_menu() {
     al_draw_text(smallFont, al_map_rgb(255, 100, 100), WIDTH / 2, HEIGHT / 2 + 120, ALLEGRO_ALIGN_CENTRE, "EXIT");
     al_draw_rectangle(WIDTH / 2 - 120, 410, WIDTH / 2 + 120, 450, al_map_rgb(255, 100, 100), 0);
 
+    show_warning();
+
     al_flip_display();
 }
 
@@ -1210,6 +1181,7 @@ void draw_stage_choosing() {
     al_draw_text(bigFont, white, 200, 450, ALLEGRO_ALIGN_CENTER, "ENDLESS");
 
     al_flip_display();
+    al_destroy_font(fnt);
 }
 
 void process_bullets(Bullet **list) {
@@ -1217,127 +1189,128 @@ void process_bullets(Bullet **list) {
         if (current != *list && previous->next != current){
             previous = previous->next;
         }
+        float mul = current->speed_multiplier;
         switch (current->mode){
             case up:
                 if (!game_pause){
-                    current->pos.y -= 17;
+                    current->pos.y -= 8 * mul;
                 }
                 al_draw_bitmap(current->bitmap, current->pos.x - current->size.x / 2, current->pos.y,
                                current->flip);
                 break;
             case right_front:
                 if (!game_pause){
-                    current->pos.x += 12;
-                    current->pos.y -= 12;
+                    current->pos.x += 5.7 * mul;
+                    current->pos.y -= 5.7 * mul;
                 }
                 al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
                                        (float) (ALLEGRO_PI / 4), current->flip);
                 break;
             case left_front:
                 if (!game_pause){
-                    current->pos.x -= 12;
-                    current->pos.y -= 12;
+                    current->pos.x -= 5.7 * mul;
+                    current->pos.y -= 5.7 * mul;
                 }
                 al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
                                        (float) (-ALLEGRO_PI / 4), current->flip);
                 break;
             case right:
                 if (!game_pause){
-                    current->pos.x += 17;
+                    current->pos.x += 8 * mul;
                 }
                 al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
                                        (float) (ALLEGRO_PI / 2), current->flip);
                 break;
             case left:
                 if (!game_pause){
-                    current->pos.x -= 17;
+                    current->pos.x -= 8 * mul;
                 }
                 al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
                                        (float) (-ALLEGRO_PI / 2), current->flip);
                 break;
             case right_back:
                 if (!game_pause){
-                    current->pos.x += 12;
-                    current->pos.y += 12;
+                    current->pos.x += 5.7 * mul;
+                    current->pos.y += 5.7 * mul;
                 }
                 al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
                                        (float) (ALLEGRO_PI * 3 / 4), current->flip);
                 break;
             case left_back:
                 if (!game_pause){
-                    current->pos.x -= 12;
-                    current->pos.y += 12;
+                    current->pos.x -= 5.7 * mul;
+                    current->pos.y += 5.7 * mul;
                 }
                 al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
                                        (float) (-ALLEGRO_PI * 3 / 4), current->flip);
                 break;
             case down:
                 if (!game_pause){
-                    current->pos.y += 17;
+                    current->pos.y += 8 * mul;
                 }
                 al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
                                        (float) ALLEGRO_PI, current->flip);
                 break;
             case rf_f:
                 if (!game_pause){
-                    current->pos.x += 6;
-                    current->pos.y -= 16;
+                    current->pos.x += 3 * mul;
+                    current->pos.y -= 7.4 * mul;
                 }
                 al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
                                        (float) (ALLEGRO_PI / 180 * 22.5), current->flip);
                 break;
             case lf_f:
                 if (!game_pause){
-                    current->pos.x -= 6;
-                    current->pos.y -= 16;
+                    current->pos.x -= 3 * mul;
+                    current->pos.y -= 16 * mul;
                 }
                 al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
                                        (float) (-ALLEGRO_PI / 180 * 22.5), current->flip);
                 break;
             case rf_r:
                 if (!game_pause){
-                    current->pos.x += 16;
-                    current->pos.y -= 6;
+                    current->pos.x += 7.4 * mul;
+                    current->pos.y -= 3 * mul;
                 }
                 al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
                                        (float) (ALLEGRO_PI / 180 * 67.5), current->flip);
                 break;
             case lf_l:
                 if (!game_pause){
-                    current->pos.x -= 16;
-                    current->pos.y -= 6;
+                    current->pos.x -= 7.4 * mul;
+                    current->pos.y -= 3 * mul;
                 }
                 al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
                                        (float) (-ALLEGRO_PI / 180 * 67.5), current->flip);
                 break;
             case rb_r:
                 if (!game_pause){
-                    current->pos.x += 16;
-                    current->pos.y += 6;
+                    current->pos.x += 7.4 * mul;
+                    current->pos.y += 3 * mul;
                 }
                 al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
                                        (float) (ALLEGRO_PI / 180 * 112.5), current->flip);
                 break;
             case lb_l:
                 if (!game_pause){
-                    current->pos.x -= 16;
-                    current->pos.y += 6;
+                    current->pos.x -= 7.4 * mul;
+                    current->pos.y += 3 * mul;
                 }
                 al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
                                        (float) (-ALLEGRO_PI / 180 * 112.5), current->flip);
                 break;
             case rb_b:
                 if (!game_pause){
-                    current->pos.x += 6;
-                    current->pos.y += 16;
+                    current->pos.x += 3 * mul;
+                    current->pos.y += 7.4 * mul;
                 }
                 al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
                                        (float) (ALLEGRO_PI / 180 * 157.5), current->flip);
                 break;
             case lb_b:
                 if (!game_pause){
-                    current->pos.x -= 6;
-                    current->pos.y += 16;
+                    current->pos.x -= 3 * mul;
+                    current->pos.y += 7.4 * mul;
                 }
                 al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
                                        (float) (-ALLEGRO_PI / 180 * 157.5), current->flip);
@@ -1390,7 +1363,7 @@ void reset_level() {
     al_stop_timer(bossShootingTimer);
     player.pos.x = 200;
     player.pos.y = HEIGHT - 100;
-    set_player(airplaneImgs[0], settings[level].player_hp, 5, bulletImgs[0], 1.0 / 7.0,
+    set_player(airplaneImgs[0], settings[level].player_hp, 5, bulletImgs[0], 1.0 / 7.0, 2,
                (enum flyMode[]) {up}, 1);
     free_bullet_list(&player_bullet_list);
     free_bullet_list(&enemy_bullet_list);
@@ -1405,7 +1378,7 @@ void reset_level() {
     pass = false;
     draw_boss = false;
     set_boss(settings[level].boss_img, settings[level].boss_hp, settings[level].boss_damage, bulletImgs[4],
-             1.0 / 4.0, (enum flyMode[]) {down, rb_b, lb_b}, 3);
+             1.0 / 4.0, 1, (enum flyMode[]) {down, rb_b, lb_b}, 3);
     al_start_timer(playerMovingTimer);
     al_start_timer(enemyMovingTimer);
     al_start_timer(bulletUpdateTimer);
@@ -1416,35 +1389,37 @@ void reset_level() {
     al_start_timer(generateEnemyTimer);
 }
 
-void launch_big_fire(Vector2 pos, enum flyMode mode, Bullet **list, int dmg) {
+void launch_big_fire(Vector2 pos, enum flyMode mode, Bullet **list, int dmg, float mul) {
     Bullet *bt;
     int dir = (mode == up ? 1 : -1);
     for (int i = -1; i <= 1; i++){
-        bt = make_bullet(bulletImgs[rand() % 3], mode, (Vector2) {pos.x + i * 10, pos.y - 20 * dir}, dmg);
+        bt = make_bullet(bulletImgs[rand() % 3], mode, (Vector2) {pos.x + i * 10, pos.y - 20 * dir}, dmg, mul);
         register_bullet(bt, list);
     }
     for (int i = -1; i <= 2; i++){
         for (int j = -2; j <= 2; j++){
-            bt = make_bullet(bulletImgs[rand() % 3], mode, (Vector2) {pos.x + j * 10, pos.y + i * 10 * dir}, dmg);
+            bt = make_bullet(bulletImgs[rand() % 3], mode, (Vector2) {pos.x + j * 10, pos.y + i * 10 * dir}, dmg, mul);
             register_bullet(bt, list);
         }
     }
     for (int i = 0; i <= 2; i++){
-        bt = make_bullet(bulletImgs[rand() % 3], mode, (Vector2) {pos.x + i * 10, pos.y + 30 * dir}, dmg);
+        bt = make_bullet(bulletImgs[rand() % 3], mode, (Vector2) {pos.x + i * 10, pos.y + 30 * dir}, dmg, mul);
         register_bullet(bt, list);
     }
-    bt = make_bullet(bulletImgs[rand() % 3], mode, (Vector2) {pos.x - 20, pos.y + 30 * dir}, dmg);
+    bt = make_bullet(bulletImgs[rand() % 3], mode, (Vector2) {pos.x - 20, pos.y + 30 * dir}, dmg, mul);
     register_bullet(bt, list);
-    bt = make_bullet(bulletImgs[rand() % 3], mode, (Vector2) {pos.x + 20, pos.y + 40 * dir}, dmg);
+    bt = make_bullet(bulletImgs[rand() % 3], mode, (Vector2) {pos.x + 20, pos.y + 40 * dir}, dmg, mul);
     register_bullet(bt, list);
-    bt = make_bullet(bulletImgs[rand() % 3], mode, (Vector2) {pos.x, pos.y + 40 * dir}, dmg);
+    bt = make_bullet(bulletImgs[rand() % 3], mode, (Vector2) {pos.x, pos.y + 40 * dir}, dmg, mul);
     register_bullet(bt, list);
-    bt = make_bullet(bulletImgs[rand() % 3], mode, (Vector2) {pos.x, pos.y + 45 * dir}, dmg);
+    bt = make_bullet(bulletImgs[rand() % 3], mode, (Vector2) {pos.x, pos.y + 45 * dir}, dmg, mul);
     register_bullet(bt, list);
 }
 
 void show_warning() {
-    al_draw_triangle(WIDTH / 2, HEIGHT / 2 - 16, WIDTH / 2 - 13.85f, HEIGHT / 2 + 8,
-                     WIDTH / 2 + 13.85f, HEIGHT / 2 + 8, white, 1);
+    // TODO: finish and test this func
+    al_draw_triangle(WIDTH / 2, HEIGHT / 2 - 32, WIDTH / 2 - 27.7f, HEIGHT / 2 + 16,
+                     WIDTH / 2 + 27.7f, HEIGHT / 2 + 16, al_map_rgb(255, 0, 0), 3);
+    al_draw_text(warningFont, al_map_rgb(255, 0, 0), WIDTH / 2, HEIGHT / 2 - 24, ALLEGRO_ALIGN_CENTER, "!");
 }
 
