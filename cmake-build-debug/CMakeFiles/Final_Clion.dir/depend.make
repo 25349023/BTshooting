@@ -101,6 +101,7 @@ CMakeFiles/Final_Clion.dir/character.c.obj: D:/Allegro/allegro-5.0.10-mingw-4.7.
 CMakeFiles/Final_Clion.dir/character.c.obj: D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/tls.h
 CMakeFiles/Final_Clion.dir/character.c.obj: D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/transformations.h
 CMakeFiles/Final_Clion.dir/character.c.obj: D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/utf8.h
+CMakeFiles/Final_Clion.dir/character.c.obj: ../bullet.h
 CMakeFiles/Final_Clion.dir/character.c.obj: ../character.c
 CMakeFiles/Final_Clion.dir/character.c.obj: ../character.h
 CMakeFiles/Final_Clion.dir/character.c.obj: ../general.h

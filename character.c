@@ -10,14 +10,14 @@ extern Character player, boss;
 extern Character *enemy_list;
 
 void set_player(ALLEGRO_BITMAP *img, int hp, int dmg, ALLEGRO_BITMAP *bt_img, double rate, float bt_spd, enum flyMode *md,
-                int cnt_of_mode) {
+                int cnt_of_mode, Skill sk_q) {
     player.image = img;
     player.size.x = al_get_bitmap_width(img);
     player.size.y = al_get_bitmap_height(img);
     player.firing_point.x = player.size.x / 2;
     player.firing_point.y = player.size.y / 3;
     player.body.center = (Vector2) {player.size.x / 2, player.size.y / 2};
-    player.body.radius = player.size.x < player.size.y ? (player.size.x / 3) : (player.size.y / 3);
+    player.body.radius = player.size.x < player.size.y ? (player.size.x / 4) : (player.size.y / 4);
     player.health = hp;
     player.damage = dmg;
     player.default_bullet = bt_img;
@@ -29,6 +29,8 @@ void set_player(ALLEGRO_BITMAP *img, int hp, int dmg, ALLEGRO_BITMAP *bt_img, do
     for (int i = cnt_of_mode; i < MODE_COUNT; i++){
         player.bullet_mode[i] = stopped;
     }
+
+    player.skill_Q = sk_q;
 }
 
 Character *create_enemy(const EnemySetting *prefab) {

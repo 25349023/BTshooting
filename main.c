@@ -27,8 +27,8 @@ ALLEGRO_BITMAP *airplaneImgs[20];
 ALLEGRO_BITMAP *enemyImgs[20];
 ALLEGRO_BITMAP *bulletImgs[20];
 ALLEGRO_BITMAP *background = NULL;
-ALLEGRO_KEYBOARD_STATE keyState;
 ALLEGRO_TIMER *bulletUpdateTimer = NULL;
+ALLEGRO_TIMER *drawingTimer = NULL;
 ALLEGRO_TIMER *playerShootingTimer = NULL;
 ALLEGRO_TIMER *enemyShootingTimer = NULL;
 ALLEGRO_TIMER *playerMovingTimer = NULL;
@@ -39,6 +39,8 @@ ALLEGRO_TIMER *generateEnemyTimer = NULL;
 ALLEGRO_TIMER *bossComingOutTimer = NULL;
 ALLEGRO_TIMER *bossMovingTimer = NULL;
 ALLEGRO_TIMER *bossShootingTimer = NULL;
+ALLEGRO_TIMER *warningTimer = NULL;
+ALLEGRO_TIMER *hintTimer = NULL;
 
 ALLEGRO_TIMER *fireworksTickTimer = NULL;
 ALLEGRO_TIMER *generateFirework1Timer = NULL;
@@ -51,13 +53,14 @@ ALLEGRO_SAMPLE_INSTANCE *letoffInstance[2];
 ALLEGRO_FONT *bigFont = NULL;
 ALLEGRO_FONT *smallFont = NULL;
 ALLEGRO_FONT *warningFont = NULL;
+ALLEGRO_FONT *hintFont = NULL;
 ALLEGRO_MOUSE_CURSOR *cursor = NULL;
 
 ALLEGRO_COLOR white;
 
 //Custom Definition
 const char *title = "Final Project 107062303";
-const float FPS = 60;
+const double FPS = 60;
 const int WIDTH = 400;
 const int HEIGHT = 600;
 
@@ -79,6 +82,8 @@ int level = 1;
 int score;
 int killed_enemies = 0;
 
+char hint[48] = "hello world";
+
 bool enter_game_window = false;
 bool game_pause = false;
 bool draw_boss = false;
@@ -95,6 +100,7 @@ void load_images();
 bool within(float x, float y, float x1, float y1, float x2, float y2);
 bool collide_with(Circle a, Circle b);
 void process_bullets(Bullet **list);
+void draw_bullets(Bullet *list);
 
 void draw_menu();
 void draw_about();
@@ -102,7 +108,7 @@ void draw_game_scene();
 void draw_stage_choosing();
 
 void show_warning();
-void show_hint(char *msg);
+void show_hint();
 void show_message(char *msg);
 
 void reset_level();
@@ -214,8 +220,7 @@ void game_begin() {
     bigFont = al_load_ttf_font("pirulen.ttf", 25, 0);
     smallFont = al_load_ttf_font("pirulen.ttf", 15, 0);
     warningFont = al_load_font("bauhs93.ttf", 36, 0);
-
-    // load Timer
+    hintFont = al_load_font("geometria.otf", 24, 0);
 
     // load images
     load_images();
@@ -242,151 +247,183 @@ int process_event() {
     ALLEGRO_EVENT event;
     al_wait_for_event(event_queue, &event);
 
+    static bool warning_appear = false, hint_appear = false;
     if (event.timer.source == bulletUpdateTimer){
         process_bullets(&player_bullet_list);
         process_bullets(&enemy_bullet_list);
-        for (Bullet *current = fireworks_bullet_list, *previous = fireworks_bullet_list;
-             window == 4 && current != NULL;){
-            if (current != fireworks_bullet_list && previous->next != current){
-                previous = previous->next;
-            }
-            float mul = current->speed_multiplier;
-            switch (current->mode){
-                case up:
-                    if (!current->pause){
-                        current->pos.y -= 8 * mul;
-                    }
-                    al_draw_bitmap(current->bitmap, current->pos.x - current->size.x / 2, current->pos.y,
-                                   current->flip);
-                    break;
-                case right_front:
-                    if (!current->pause){
-                        current->pos.x += 5.7 * mul;
-                        current->pos.y -= 5.7 * mul;
-                    }
-                    al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
-                                           (float) (ALLEGRO_PI / 4), current->flip);
-                    break;
-                case left_front:
-                    if (!current->pause){
-                        current->pos.x -= 5.7 * mul;
-                        current->pos.y -= 5.7 * mul;
-                    }
-                    al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
-                                           (float) (-ALLEGRO_PI / 4), current->flip);
-                    break;
-                case right:
-                    if (!current->pause){
-                        current->pos.x += 8 * mul;
-                    }
-                    al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
-                                           (float) (ALLEGRO_PI / 2), current->flip);
-                    break;
-                case left:
-                    if (!current->pause){
-                        current->pos.x -= 8 * mul;
-                    }
-                    al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
-                                           (float) (-ALLEGRO_PI / 2), current->flip);
-                    break;
-                case right_back:
-                    if (!current->pause){
-                        current->pos.x += 5.7 * mul;
-                        current->pos.y += 5.7 * mul;
-                    }
-                    al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
-                                           (float) (ALLEGRO_PI * 3 / 4), current->flip);
-                    break;
-                case left_back:
-                    if (!current->pause){
-                        current->pos.x -= 5.7 * mul;
-                        current->pos.y += 5.7 * mul;
-                    }
-                    al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
-                                           (float) (-ALLEGRO_PI * 3 / 4), current->flip);
-                    break;
-                case down:
-                    if (!current->pause){
-                        current->pos.y += 8 * mul;
-                    }
-                    al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
-                                           (float) ALLEGRO_PI, current->flip);
-                    break;
-                case rf_f:
-                    current->pos.x += 3;
-                    current->pos.y -= 7.4;
-                    al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
-                                           (float) (ALLEGRO_PI / 180 * 22.5), current->flip);
-                    break;
-                case lf_f:
-                    current->pos.x -= 3;
-                    current->pos.y -= 7.4;
-                    al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
-                                           (float) (-ALLEGRO_PI / 180 * 22.5), current->flip);
-                    break;
-                case rf_r:
-                    current->pos.x += 7.4;
-                    current->pos.y -= 3;
-                    al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
-                                           (float) (ALLEGRO_PI / 180 * 67.5), current->flip);
-                    break;
-                case lf_l:
-                    current->pos.x -= 7.4;
-                    current->pos.y -= 3;
-                    al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
-                                           (float) (-ALLEGRO_PI / 180 * 67.5), current->flip);
-                    break;
-                case rb_r:
-                    current->pos.x += 7.4;
-                    current->pos.y += 3;
-                    al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
-                                           (float) (ALLEGRO_PI / 180 * 112.5), current->flip);
-                    break;
-                case lb_l:
-                    current->pos.x -= 7.4;
-                    current->pos.y += 3;
-                    al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
-                                           (float) (-ALLEGRO_PI / 180 * 112.5), current->flip);
-                    break;
-                case rb_b:
-                    current->pos.x += 3;
-                    current->pos.y += 7.4;
-                    al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
-                                           (float) (ALLEGRO_PI / 180 * 157.5), current->flip);
-                    break;
-                case lb_b:
-                    current->pos.x -= 3;
-                    current->pos.y += 7.4;
-                    al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
-                                           (float) (-ALLEGRO_PI / 180 * 157.5), current->flip);
-                    break;
-                case stopped:
-                    destroy_bullet(current, &previous, &fireworks_bullet_list);
-                    current = previous;
-                    break;
-                default:
-                    printf("unknown fly mode\n");
-                    show_err_msg(1);
-                    break;
-            }
-            if (current == NULL){
-                if (fireworks_bullet_list == NULL){
-                    break;
+        if (window == 4){
+            for (Bullet *current = fireworks_bullet_list, *previous = fireworks_bullet_list; current != NULL;){
+                if (current != fireworks_bullet_list && previous->next != current){
+                    previous = previous->next;
                 }
-                current = fireworks_bullet_list;
-                previous = fireworks_bullet_list;
-                continue;
+                float mul = current->speed_multiplier;
+                switch (current->mode){
+                    case up:
+                        if (!current->pause){
+                            current->pos.y -= 8 * mul;
+                        }
+                        al_draw_bitmap(current->bitmap, current->pos.x - current->size.x / 2, current->pos.y,
+                                       current->flip);
+                        break;
+                    case right_front:
+                        if (!current->pause){
+                            current->pos.x += 5.7 * mul;
+                            current->pos.y -= 5.7 * mul;
+                        }
+                        al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
+                                               (float) (ALLEGRO_PI / 4), current->flip);
+                        break;
+                    case left_front:
+                        if (!current->pause){
+                            current->pos.x -= 5.7 * mul;
+                            current->pos.y -= 5.7 * mul;
+                        }
+                        al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
+                                               (float) (-ALLEGRO_PI / 4), current->flip);
+                        break;
+                    case right:
+                        if (!current->pause){
+                            current->pos.x += 8 * mul;
+                        }
+                        al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
+                                               (float) (ALLEGRO_PI / 2), current->flip);
+                        break;
+                    case left:
+                        if (!current->pause){
+                            current->pos.x -= 8 * mul;
+                        }
+                        al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
+                                               (float) (-ALLEGRO_PI / 2), current->flip);
+                        break;
+                    case right_back:
+                        if (!current->pause){
+                            current->pos.x += 5.7 * mul;
+                            current->pos.y += 5.7 * mul;
+                        }
+                        al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
+                                               (float) (ALLEGRO_PI * 3 / 4), current->flip);
+                        break;
+                    case left_back:
+                        if (!current->pause){
+                            current->pos.x -= 5.7 * mul;
+                            current->pos.y += 5.7 * mul;
+                        }
+                        al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
+                                               (float) (-ALLEGRO_PI * 3 / 4), current->flip);
+                        break;
+                    case down:
+                        if (!current->pause){
+                            current->pos.y += 8 * mul;
+                        }
+                        al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
+                                               (float) ALLEGRO_PI, current->flip);
+                        break;
+                    case rf_f:
+                        current->pos.x += 3;
+                        current->pos.y -= 7.4;
+                        al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
+                                               (float) (ALLEGRO_PI / 180 * 22.5), current->flip);
+                        break;
+                    case lf_f:
+                        current->pos.x -= 3;
+                        current->pos.y -= 7.4;
+                        al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
+                                               (float) (-ALLEGRO_PI / 180 * 22.5), current->flip);
+                        break;
+                    case rf_r:
+                        current->pos.x += 7.4;
+                        current->pos.y -= 3;
+                        al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
+                                               (float) (ALLEGRO_PI / 180 * 67.5), current->flip);
+                        break;
+                    case lf_l:
+                        current->pos.x -= 7.4;
+                        current->pos.y -= 3;
+                        al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
+                                               (float) (-ALLEGRO_PI / 180 * 67.5), current->flip);
+                        break;
+                    case rb_r:
+                        current->pos.x += 7.4;
+                        current->pos.y += 3;
+                        al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
+                                               (float) (ALLEGRO_PI / 180 * 112.5), current->flip);
+                        break;
+                    case lb_l:
+                        current->pos.x -= 7.4;
+                        current->pos.y += 3;
+                        al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
+                                               (float) (-ALLEGRO_PI / 180 * 112.5), current->flip);
+                        break;
+                    case rb_b:
+                        current->pos.x += 3;
+                        current->pos.y += 7.4;
+                        al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
+                                               (float) (ALLEGRO_PI / 180 * 157.5), current->flip);
+                        break;
+                    case lb_b:
+                        current->pos.x -= 3;
+                        current->pos.y += 7.4;
+                        al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
+                                               (float) (-ALLEGRO_PI / 180 * 157.5), current->flip);
+                        break;
+                    case stopped:
+                        destroy_bullet(current, &previous, &fireworks_bullet_list);
+                        current = previous;
+                        break;
+                    default:
+                        printf("unknown fly mode\n");
+                        show_err_msg(1);
+                        break;
+                }
+                if (current == NULL){
+                    if (fireworks_bullet_list == NULL){
+                        break;
+                    }
+                    current = fireworks_bullet_list;
+                    previous = fireworks_bullet_list;
+                    continue;
+                }
+                // set the outside bullet stopped
+                if (current->pos.y < -40 || current->pos.y > HEIGHT + 40){
+                    current->mode = stopped;
+                }
+                else if (current->pos.x < -40 || current->pos.x > WIDTH + 40){
+                    current->mode = stopped;
+                }
+                current = current->next;
             }
-            // set the outside bullet stopped
-            if (current->pos.y < -40 || current->pos.y > HEIGHT + 40){
-                current->mode = stopped;
-            }
-            else if (current->pos.x < -40 || current->pos.x > WIDTH + 40){
-                current->mode = stopped;
-            }
-            current = current->next;
+            draw_count++;
         }
-        draw_count++;
+    }
+    else if (event.timer.source == drawingTimer){
+        // TODO: handle drawing process
+        draw_bullets(player_bullet_list);
+        draw_bullets(enemy_bullet_list);
+        for (Character *current = enemy_list; current != NULL; current = current->next){
+            al_draw_rotated_bitmap(current->image, current->body.center.x, current->body.center.y,
+                                   current->pos.x, current->pos.y,
+                                   (float) (ALLEGRO_PI / 180 * current->dire_angle), 0);
+            al_draw_circle(current->pos.x, current->pos.y, current->body.radius, white, 0);
+        }
+        if (draw_boss){
+            al_draw_rotated_bitmap(boss.image, boss.body.center.x, boss.body.center.y, boss.pos.x, boss.pos.y,
+                                   (float) ALLEGRO_PI, 0);
+            al_draw_circle(boss.pos.x, boss.pos.y, boss.body.radius, white, 0);
+            if (boss.health >= 0){
+                al_draw_filled_rectangle(boss.pos.x - 20, boss.pos.y - 60,
+                                         boss.pos.x - 20 + 40 * ((float) boss.health / settings[level].boss_hp),
+                                         boss.pos.y - 50, al_map_rgb(255, 0, 0));
+            }
+            al_draw_rectangle(boss.pos.x - 20, boss.pos.y - 60, boss.pos.x + 20, boss.pos.y - 50, white, 0);
+        }
+
+        if (warning_appear){
+            show_warning();
+        }
+        if (hint_appear){
+            show_hint();
+        }
+        al_flip_display();
     }
     else if (event.timer.source == playerMovingTimer){
         player.pos.x += player.speed.x;
@@ -447,6 +484,7 @@ int process_event() {
                                 if (killed_enemies == settings[level].enemy_count && !draw_boss){
                                     printf("BOSS\n");
                                     al_start_timer(bossComingOutTimer);
+                                    al_start_timer(warningTimer);
                                     draw_boss = true;
                                 }
                             }
@@ -512,10 +550,6 @@ int process_event() {
                 current->pos.x += current->speed.x;
                 current->pos.y += current->speed.y;
             }
-            al_draw_rotated_bitmap(current->image, current->body.center.x, current->body.center.y,
-                                   current->pos.x, current->pos.y,
-                                   (float) (ALLEGRO_PI / 180 * current->dire_angle), 0);
-            al_draw_circle(current->pos.x, current->pos.y, current->body.radius, white, 0);
 
             // TODO: change the enemy's direction if necessary
 
@@ -546,7 +580,6 @@ int process_event() {
 
             current = current->next;
         }
-        draw_count++;
     }
     else if (event.timer.source == enemyShootingTimer){
         for (Character *enemy = enemy_list; enemy != NULL; enemy = enemy->next){
@@ -585,14 +618,6 @@ int process_event() {
             boss.pos.y += boss.speed.y;
         }
 
-        al_draw_rotated_bitmap(boss.image, boss.body.center.x, boss.body.center.y, boss.pos.x, boss.pos.y,
-                               (float) ALLEGRO_PI, 0);
-        al_draw_circle(boss.pos.x, boss.pos.y, boss.body.radius, white, 0);
-        al_draw_filled_rectangle(boss.pos.x - 20, boss.pos.y - 60, boss.pos.x + 20, boss.pos.y - 50,
-                                 al_map_rgb(255, 0, 0));
-        al_draw_rectangle(boss.pos.x - 20, boss.pos.y - 60, boss.pos.x + 20, boss.pos.y - 50, white, 0);
-        draw_count++;
-
         if (boss.pos.y >= 90){
             boss.e_speed = 2;
             boss.speed = (Vector2) {boss.e_speed * (rand() % 2 ? 1 : -1), 0};
@@ -607,16 +632,6 @@ int process_event() {
             boss.pos.y += boss.speed.y;
         }
 
-        al_draw_rotated_bitmap(boss.image, boss.body.center.x, boss.body.center.y, boss.pos.x, boss.pos.y,
-                               (float) ALLEGRO_PI, 0);
-        al_draw_circle(boss.pos.x, boss.pos.y, boss.body.radius, white, 0);
-        if (boss.health >= 0){
-            al_draw_filled_rectangle(boss.pos.x - 20, boss.pos.y - 60,
-                                     boss.pos.x - 20 + 40 * ((float) boss.health / settings[level].boss_hp),
-                                     boss.pos.y - 50, al_map_rgb(255, 0, 0));
-        }
-        al_draw_rectangle(boss.pos.x - 20, boss.pos.y - 60, boss.pos.x + 20, boss.pos.y - 50, white, 0);
-
         if (boss.pos.x < boss.size.x / 6 || boss.pos.x > WIDTH - boss.size.x / 6){
             boss.speed.x *= -1;
         }
@@ -625,14 +640,38 @@ int process_event() {
     }
     else if (event.timer.source == bossShootingTimer){
         static int skill = 1;
+        static bool hintOut = true;
         for (int i = 0; boss.bullet_mode[i]; i++){
             Bullet *bt = make_bullet(boss.default_bullet, boss.bullet_mode[i], boss.pos,
                                      boss.damage, boss.bullet_speed);
             register_bullet(bt, &enemy_bullet_list);
         }
+        if (boss.health < 0.7 * settings[level].boss_hp && hintOut){
+            hintOut = false;
+            strncpy(hint, "Press 'Q' to launch skill.", 47);
+            al_start_timer(hintTimer);
+        }
         if (skill && boss.health < 0.5 * settings[level].boss_hp){
             launch_big_fire(boss.pos, down, &enemy_bullet_list, 5, 1);
             skill--;
+        }
+    }
+    else if (event.timer.source == warningTimer){
+        static int times = 0;
+        warning_appear = !warning_appear;
+        times++;
+        if (times == 6){
+            times = 0;
+            al_stop_timer(warningTimer);
+        }
+    }
+    else if (event.timer.source == hintTimer){
+        static int times = 0;
+        hint_appear = !hint_appear;
+        times++;
+        if (times == 6){
+            times = 0;
+            al_stop_timer(hintTimer);
         }
     }
 
@@ -677,6 +716,11 @@ int process_event() {
                     break;
                 case ALLEGRO_KEY_RIGHT:
                     player.speed.x += 10;
+                    break;
+                case ALLEGRO_KEY_Q:
+                    player.skill_Q((Vector2) {player.pos.x + player.firing_point.x,
+                                              player.pos.y + player.firing_point.y},
+                                   up, &player_bullet_list, player.damage, player.bullet_speed);
                     break;
                 default:
                     break;
@@ -723,6 +767,7 @@ int process_event() {
         }
         else if (window == 2){
             if (within(event.mouse.x, event.mouse.y, 1, HEIGHT - 55, 100, HEIGHT)){
+                al_start_timer(warningTimer);
                 printf("Fire 1");
             }
             else if (within(event.mouse.x, event.mouse.y, 101, HEIGHT - 55, 200, HEIGHT)){
@@ -967,17 +1012,8 @@ int game_run() {
         // Second window(Main Game)
     else if (window == 2){
         // TODO: handle level clear
-        if (pass){
-            //pass = false;
-        }
 
-        if (draw_count >= (draw_boss ? 3 : 2)){
-            draw_count = 0;
-            al_flip_display();
-        }
-        if (draw_count == 0){
-            draw_game_scene();
-        }
+        draw_game_scene();
 
         // Listening for new event
         if (!al_is_event_queue_empty(event_queue)){
@@ -1012,7 +1048,8 @@ int game_run() {
                 player.pos.x = 200;
                 player.pos.y = HEIGHT - 100;
                 set_player(airplaneImgs[0], settings[level].player_hp, 5, bulletImgs[0], 1.0 / 7.0, 2,
-                           (enum flyMode[]) {up}, 1);
+                           (enum flyMode[]) {up}, 1, launch_big_fire);
+
                 set_boss(settings[level].boss_img, settings[level].boss_hp, settings[level].boss_damage, bulletImgs[4],
                          1.0 / 4.0, 1, (enum flyMode[]) {down, rb_b, lb_b}, 3);
 
@@ -1020,6 +1057,7 @@ int game_run() {
                 playerMovingTimer = al_create_timer(1.0 / 30.0);
                 enemyMovingTimer = al_create_timer(1.0 / 30.0);
                 bulletUpdateTimer = al_create_timer(1.0 / 30.0);
+                drawingTimer = al_create_timer(1.0 / 60.0);
                 playerShootingTimer = al_create_timer(player.shooting_rate);
                 enemyShootingTimer = al_create_timer(1.0 / 60.0);
                 collisionDetectTimer = al_create_timer(1.0 / 60.0);
@@ -1028,9 +1066,12 @@ int game_run() {
                 bossComingOutTimer = al_create_timer(1.0 / 30.0);
                 bossMovingTimer = al_create_timer(1.0 / 30.0);
                 bossShootingTimer = al_create_timer(boss.shooting_rate);
+                warningTimer = al_create_timer(0.5);
+                hintTimer = al_create_timer(0.5);
                 al_register_event_source(event_queue, al_get_timer_event_source(playerMovingTimer));
                 al_register_event_source(event_queue, al_get_timer_event_source(enemyMovingTimer));
                 al_register_event_source(event_queue, al_get_timer_event_source(bulletUpdateTimer));
+                al_register_event_source(event_queue, al_get_timer_event_source(drawingTimer));
                 al_register_event_source(event_queue, al_get_timer_event_source(playerShootingTimer));
                 al_register_event_source(event_queue, al_get_timer_event_source(enemyShootingTimer));
                 al_register_event_source(event_queue, al_get_timer_event_source(collisionDetectTimer));
@@ -1039,9 +1080,12 @@ int game_run() {
                 al_register_event_source(event_queue, al_get_timer_event_source(bossComingOutTimer));
                 al_register_event_source(event_queue, al_get_timer_event_source(bossMovingTimer));
                 al_register_event_source(event_queue, al_get_timer_event_source(bossShootingTimer));
+                al_register_event_source(event_queue, al_get_timer_event_source(warningTimer));
+                al_register_event_source(event_queue, al_get_timer_event_source(hintTimer));
                 al_start_timer(playerMovingTimer);
                 al_start_timer(enemyMovingTimer);
                 al_start_timer(bulletUpdateTimer);
+                al_start_timer(drawingTimer);
                 al_start_timer(playerShootingTimer);
                 al_start_timer(enemyShootingTimer);
                 al_start_timer(collisionDetectTimer);
@@ -1101,7 +1145,7 @@ void draw_menu() {
     al_draw_text(smallFont, al_map_rgb(255, 100, 100), WIDTH / 2, HEIGHT / 2 + 120, ALLEGRO_ALIGN_CENTRE, "EXIT");
     al_draw_rectangle(WIDTH / 2 - 120, 410, WIDTH / 2 + 120, 450, al_map_rgb(255, 100, 100), 0);
 
-    show_warning();
+    show_hint();
 
     al_flip_display();
 }
@@ -1195,125 +1239,93 @@ void process_bullets(Bullet **list) {
                 if (!game_pause){
                     current->pos.y -= 8 * mul;
                 }
-                al_draw_bitmap(current->bitmap, current->pos.x - current->size.x / 2, current->pos.y,
-                               current->flip);
                 break;
             case right_front:
                 if (!game_pause){
                     current->pos.x += 5.7 * mul;
                     current->pos.y -= 5.7 * mul;
                 }
-                al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
-                                       (float) (ALLEGRO_PI / 4), current->flip);
                 break;
             case left_front:
                 if (!game_pause){
                     current->pos.x -= 5.7 * mul;
                     current->pos.y -= 5.7 * mul;
                 }
-                al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
-                                       (float) (-ALLEGRO_PI / 4), current->flip);
                 break;
             case right:
                 if (!game_pause){
                     current->pos.x += 8 * mul;
                 }
-                al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
-                                       (float) (ALLEGRO_PI / 2), current->flip);
                 break;
             case left:
                 if (!game_pause){
                     current->pos.x -= 8 * mul;
                 }
-                al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
-                                       (float) (-ALLEGRO_PI / 2), current->flip);
                 break;
             case right_back:
                 if (!game_pause){
                     current->pos.x += 5.7 * mul;
                     current->pos.y += 5.7 * mul;
                 }
-                al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
-                                       (float) (ALLEGRO_PI * 3 / 4), current->flip);
                 break;
             case left_back:
                 if (!game_pause){
                     current->pos.x -= 5.7 * mul;
                     current->pos.y += 5.7 * mul;
                 }
-                al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
-                                       (float) (-ALLEGRO_PI * 3 / 4), current->flip);
                 break;
             case down:
                 if (!game_pause){
                     current->pos.y += 8 * mul;
                 }
-                al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
-                                       (float) ALLEGRO_PI, current->flip);
                 break;
             case rf_f:
                 if (!game_pause){
                     current->pos.x += 3 * mul;
                     current->pos.y -= 7.4 * mul;
                 }
-                al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
-                                       (float) (ALLEGRO_PI / 180 * 22.5), current->flip);
                 break;
             case lf_f:
                 if (!game_pause){
                     current->pos.x -= 3 * mul;
                     current->pos.y -= 16 * mul;
                 }
-                al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
-                                       (float) (-ALLEGRO_PI / 180 * 22.5), current->flip);
                 break;
             case rf_r:
                 if (!game_pause){
                     current->pos.x += 7.4 * mul;
                     current->pos.y -= 3 * mul;
                 }
-                al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
-                                       (float) (ALLEGRO_PI / 180 * 67.5), current->flip);
                 break;
             case lf_l:
                 if (!game_pause){
                     current->pos.x -= 7.4 * mul;
                     current->pos.y -= 3 * mul;
                 }
-                al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
-                                       (float) (-ALLEGRO_PI / 180 * 67.5), current->flip);
                 break;
             case rb_r:
                 if (!game_pause){
                     current->pos.x += 7.4 * mul;
                     current->pos.y += 3 * mul;
                 }
-                al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
-                                       (float) (ALLEGRO_PI / 180 * 112.5), current->flip);
                 break;
             case lb_l:
                 if (!game_pause){
                     current->pos.x -= 7.4 * mul;
                     current->pos.y += 3 * mul;
                 }
-                al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
-                                       (float) (-ALLEGRO_PI / 180 * 112.5), current->flip);
                 break;
             case rb_b:
                 if (!game_pause){
                     current->pos.x += 3 * mul;
                     current->pos.y += 7.4 * mul;
                 }
-                al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
-                                       (float) (ALLEGRO_PI / 180 * 157.5), current->flip);
                 break;
             case lb_b:
                 if (!game_pause){
                     current->pos.x -= 3 * mul;
                     current->pos.y += 7.4 * mul;
                 }
-                al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
-                                       (float) (-ALLEGRO_PI / 180 * 157.5), current->flip);
                 break;
             case stopped:
                 destroy_bullet(current, &previous, list);
@@ -1333,9 +1345,6 @@ void process_bullets(Bullet **list) {
             previous = *list;
             continue;
         }
-        al_draw_circle(current->pos.x + current->hit_area.center.x,
-                       current->pos.y + current->hit_area.center.y,
-                       current->hit_area.radius, al_map_rgb(255, 220, 188), 0);
 
         // set the outside bullet stopped
         if (current->pos.y < -40 || current->pos.y > HEIGHT + 40){
@@ -1345,6 +1354,87 @@ void process_bullets(Bullet **list) {
             current->mode = stopped;
         }
         current = current->next;
+    }
+
+}
+
+void draw_bullets(Bullet *list) {
+    for (Bullet *current = list; current != NULL; current = current->next){
+        switch (current->mode){
+            case up:
+                al_draw_bitmap(current->bitmap, current->pos.x - current->size.x / 2, current->pos.y,
+                               current->flip);
+                break;
+            case right_front:
+                al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
+                                       (float) (ALLEGRO_PI / 4), current->flip);
+                break;
+            case left_front:
+                al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
+                                       (float) (-ALLEGRO_PI / 4), current->flip);
+                break;
+            case right:
+                al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
+                                       (float) (ALLEGRO_PI / 2), current->flip);
+                break;
+            case left:
+                al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
+                                       (float) (-ALLEGRO_PI / 2), current->flip);
+                break;
+            case right_back:
+                al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
+                                       (float) (ALLEGRO_PI * 3 / 4), current->flip);
+                break;
+            case left_back:
+                al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
+                                       (float) (-ALLEGRO_PI * 3 / 4), current->flip);
+                break;
+            case down:
+                al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
+                                       (float) ALLEGRO_PI, current->flip);
+                break;
+            case rf_f:
+                al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
+                                       (float) (ALLEGRO_PI / 180 * 22.5), current->flip);
+                break;
+            case lf_f:
+                al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
+                                       (float) (-ALLEGRO_PI / 180 * 22.5), current->flip);
+                break;
+            case rf_r:
+                al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
+                                       (float) (ALLEGRO_PI / 180 * 67.5), current->flip);
+                break;
+            case lf_l:
+                al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
+                                       (float) (-ALLEGRO_PI / 180 * 67.5), current->flip);
+                break;
+            case rb_r:
+                al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
+                                       (float) (ALLEGRO_PI / 180 * 112.5), current->flip);
+                break;
+            case lb_l:
+                al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
+                                       (float) (-ALLEGRO_PI / 180 * 112.5), current->flip);
+                break;
+            case rb_b:
+                al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
+                                       (float) (ALLEGRO_PI / 180 * 157.5), current->flip);
+                break;
+            case lb_b:
+                al_draw_rotated_bitmap(current->bitmap, current->size.x / 2, 0, current->pos.x, current->pos.y,
+                                       (float) (-ALLEGRO_PI / 180 * 157.5), current->flip);
+                break;
+            case stopped:
+                break;
+            default:
+                printf("unknown fly mode\n");
+                show_err_msg(1);
+                break;
+        }
+        al_draw_circle(current->pos.x + current->hit_area.center.x,
+                       current->pos.y + current->hit_area.center.y,
+                       current->hit_area.radius, al_map_rgb(255, 220, 188), 0);
     }
 
 }
@@ -1364,7 +1454,7 @@ void reset_level() {
     player.pos.x = 200;
     player.pos.y = HEIGHT - 100;
     set_player(airplaneImgs[0], settings[level].player_hp, 5, bulletImgs[0], 1.0 / 7.0, 2,
-               (enum flyMode[]) {up}, 1);
+               (enum flyMode[]) {up}, 1, launch_big_fire);
     free_bullet_list(&player_bullet_list);
     free_bullet_list(&enemy_bullet_list);
     for (Character *ct = enemy_list; ct != NULL;){
@@ -1419,7 +1509,12 @@ void launch_big_fire(Vector2 pos, enum flyMode mode, Bullet **list, int dmg, flo
 void show_warning() {
     // TODO: finish and test this func
     al_draw_triangle(WIDTH / 2, HEIGHT / 2 - 32, WIDTH / 2 - 27.7f, HEIGHT / 2 + 16,
-                     WIDTH / 2 + 27.7f, HEIGHT / 2 + 16, al_map_rgb(255, 0, 0), 3);
-    al_draw_text(warningFont, al_map_rgb(255, 0, 0), WIDTH / 2, HEIGHT / 2 - 24, ALLEGRO_ALIGN_CENTER, "!");
+                     WIDTH / 2 + 27.7f, HEIGHT / 2 + 16, al_map_rgb(230, 40, 0), 3);
+    al_draw_text(warningFont, al_map_rgb(230, 40, 0), WIDTH / 2, HEIGHT / 2 - 24, ALLEGRO_ALIGN_CENTER, "!");
+}
+
+void show_hint() {
+    al_draw_text(hintFont, al_map_rgb(255, 255, 230), WIDTH / 2, HEIGHT / 2 - 12, ALLEGRO_ALIGN_CENTER, hint);
+    al_draw_rectangle(WIDTH / 2 - 150, HEIGHT / 2 - 25, WIDTH / 2 + 150, HEIGHT / 2 + 30, al_map_rgb(255, 255, 230), 1);
 }
 
