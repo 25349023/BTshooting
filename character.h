@@ -23,20 +23,19 @@ typedef struct character {
     float bullet_speed;
     float e_speed;
     float dire_angle;  // in degree
-    int CD, shoot_interval;
+    int CD, shoot_interval;  // for enemy
     ALLEGRO_BITMAP *image;
     ALLEGRO_BITMAP *default_bullet;
     enum flyMode bullet_mode[MODE_COUNT];
-    Skill skill_Q;
-    Skill skill_W;
-    Skill skill_E;
-    Skill skill_R;
+    Skill skill_Q, skill_W, skill_E, skill_R;
+    bool can_Q, can_W, can_E, can_R;
+    int cd_Q, cd_W, cd_E, cd_R;
 
     struct character *next;
 } Character;
 
-void set_player(ALLEGRO_BITMAP *img, int hp, int dmg, ALLEGRO_BITMAP *bt_img, double rate, float bt_spd,
-                enum flyMode *md, int cnt_of_mode, Skill sk_q);
+void set_player(ALLEGRO_BITMAP *img, int hp, int dmg, ALLEGRO_BITMAP *bt_img, double rate, float bt_spd, enum flyMode *md,
+                int cnt_of_mode, Skill sk_q, int sk_cd[4], int sk_lv);
 void set_boss(ALLEGRO_BITMAP *img, int hp, int dmg, ALLEGRO_BITMAP *bt_img, double rate, float bt_spd,
               enum flyMode *md, int cnt_of_mode);
 

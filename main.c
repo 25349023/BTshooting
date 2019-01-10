@@ -42,6 +42,8 @@ ALLEGRO_TIMER *bossShootingTimer = NULL;
 ALLEGRO_TIMER *warningTimer = NULL;
 ALLEGRO_TIMER *hintTimer = NULL;
 
+ALLEGRO_TIMER *skillQTimer = NULL;
+
 ALLEGRO_TIMER *fireworksTickTimer = NULL;
 ALLEGRO_TIMER *generateFirework1Timer = NULL;
 ALLEGRO_TIMER *happyTimer = NULL;
@@ -112,6 +114,7 @@ void show_hint();
 void show_message(char *msg);
 
 void reset_level();
+void next_level();
 
 void launch_big_fire(Vector2 pos, enum flyMode mode, Bullet **list, int dmg, float mul);
 
@@ -646,8 +649,9 @@ int process_event() {
                                      boss.damage, boss.bullet_speed);
             register_bullet(bt, &enemy_bullet_list);
         }
-        if (boss.health < 0.7 * settings[level].boss_hp && hintOut){
+        if (boss.health < 0.8 * settings[level].boss_hp && hintOut){
             hintOut = false;
+            player.can_Q = true;
             strncpy(hint, "Press 'Q' to launch skill.", 47);
             al_start_timer(hintTimer);
         }
@@ -673,6 +677,10 @@ int process_event() {
             times = 0;
             al_stop_timer(hintTimer);
         }
+    }
+    else if (event.timer.source == skillQTimer){
+        player.can_Q = true;
+        al_stop_timer(skillQTimer);
     }
 
 
@@ -718,9 +726,13 @@ int process_event() {
                     player.speed.x += 10;
                     break;
                 case ALLEGRO_KEY_Q:
-                    player.skill_Q((Vector2) {player.pos.x + player.firing_point.x,
-                                              player.pos.y + player.firing_point.y},
-                                   up, &player_bullet_list, player.damage, player.bullet_speed);
+                    if (player.can_Q){
+                        player.skill_Q((Vector2) {player.pos.x + player.firing_point.x,
+                                                  player.pos.y + player.firing_point.y},
+                                       up, &player_bullet_list, player.damage, player.bullet_speed);
+                        player.can_Q = false;
+                        al_start_timer(skillQTimer);
+                    }
                     break;
                 default:
                     break;
@@ -1048,10 +1060,10 @@ int game_run() {
                 player.pos.x = 200;
                 player.pos.y = HEIGHT - 100;
                 set_player(airplaneImgs[0], settings[level].player_hp, 5, bulletImgs[0], 1.0 / 7.0, 2,
-                           (enum flyMode[]) {up}, 1, launch_big_fire);
+                           (enum flyMode[]) {up}, 1, launch_big_fire, (int[]) {5, 5, 5, 5}, 0);
 
                 set_boss(settings[level].boss_img, settings[level].boss_hp, settings[level].boss_damage, bulletImgs[4],
-                         1.0 / 4.0, 1, (enum flyMode[]) {down, rb_b, lb_b}, 3);
+                         1.0 / 3.0, 1, (enum flyMode[]) {down, rb_b, lb_b}, 3);
 
                 // Initialize Timer
                 playerMovingTimer = al_create_timer(1.0 / 30.0);
@@ -1068,6 +1080,7 @@ int game_run() {
                 bossShootingTimer = al_create_timer(boss.shooting_rate);
                 warningTimer = al_create_timer(0.5);
                 hintTimer = al_create_timer(0.5);
+                skillQTimer = al_create_timer(player.cd_Q);
                 al_register_event_source(event_queue, al_get_timer_event_source(playerMovingTimer));
                 al_register_event_source(event_queue, al_get_timer_event_source(enemyMovingTimer));
                 al_register_event_source(event_queue, al_get_timer_event_source(bulletUpdateTimer));
@@ -1082,6 +1095,7 @@ int game_run() {
                 al_register_event_source(event_queue, al_get_timer_event_source(bossShootingTimer));
                 al_register_event_source(event_queue, al_get_timer_event_source(warningTimer));
                 al_register_event_source(event_queue, al_get_timer_event_source(hintTimer));
+                al_register_event_source(event_queue, al_get_timer_event_source(skillQTimer));
                 al_start_timer(playerMovingTimer);
                 al_start_timer(enemyMovingTimer);
                 al_start_timer(bulletUpdateTimer);
@@ -1184,6 +1198,9 @@ void draw_game_scene() {
         al_draw_bitmap(player.image, player.pos.x, player.pos.y, 0);
         al_draw_circle(player.pos.x + player.body.center.x, player.pos.y + player.body.center.y,
                        player.body.radius, white, 0);
+        if (player.can_Q){
+            al_draw_text(bigFont, white, 180, HEIGHT - 44, ALLEGRO_ALIGN_LEFT, "Q");
+        }
         if (pass){
             al_draw_rectangle(WIDTH / 2 - 150, HEIGHT / 2 - 20, WIDTH / 2 + 150, HEIGHT / 2 + 50, white, 0);
             al_draw_text(bigFont, white, WIDTH / 2, HEIGHT / 2, ALLEGRO_ALIGN_CENTER, "LEVEL CLEAR");
@@ -1453,8 +1470,8 @@ void reset_level() {
     al_stop_timer(bossShootingTimer);
     player.pos.x = 200;
     player.pos.y = HEIGHT - 100;
-    set_player(airplaneImgs[0], settings[level].player_hp, 5, bulletImgs[0], 1.0 / 7.0, 2,
-               (enum flyMode[]) {up}, 1, launch_big_fire);
+    set_player(player.image, settings[level].player_hp, 5, bulletImgs[0], 1.0 / 7.0, 2,
+               (enum flyMode[]) {up}, 1, launch_big_fire, (int[]) {5, 5, 5, 5}, (draw_boss ? level : level - 1));
     free_bullet_list(&player_bullet_list);
     free_bullet_list(&enemy_bullet_list);
     for (Character *ct = enemy_list; ct != NULL;){
@@ -1468,7 +1485,7 @@ void reset_level() {
     pass = false;
     draw_boss = false;
     set_boss(settings[level].boss_img, settings[level].boss_hp, settings[level].boss_damage, bulletImgs[4],
-             1.0 / 4.0, 1, (enum flyMode[]) {down, rb_b, lb_b}, 3);
+             1.0 / 3.0, 1, (enum flyMode[]) {down, rb_b, lb_b}, 3);
     al_start_timer(playerMovingTimer);
     al_start_timer(enemyMovingTimer);
     al_start_timer(bulletUpdateTimer);
@@ -1516,5 +1533,21 @@ void show_warning() {
 void show_hint() {
     al_draw_text(hintFont, al_map_rgb(255, 255, 230), WIDTH / 2, HEIGHT / 2 - 12, ALLEGRO_ALIGN_CENTER, hint);
     al_draw_rectangle(WIDTH / 2 - 150, HEIGHT / 2 - 25, WIDTH / 2 + 150, HEIGHT / 2 + 30, al_map_rgb(255, 255, 230), 1);
+}
+
+void next_level() {
+    free_bullet_list(&player_bullet_list);
+    free_bullet_list(&enemy_bullet_list);
+    for (Character *ct = enemy_list; ct != NULL;){
+        Character *temp = ct;
+        ct = ct->next;
+        free(temp);
+    }
+
+    level++;
+    // TODO: set player in new level
+    // set_player(player.image, settings[level].player_hp, )
+
+    pass = 0;
 }
 

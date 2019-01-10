@@ -10,7 +10,7 @@ extern Character player, boss;
 extern Character *enemy_list;
 
 void set_player(ALLEGRO_BITMAP *img, int hp, int dmg, ALLEGRO_BITMAP *bt_img, double rate, float bt_spd, enum flyMode *md,
-                int cnt_of_mode, Skill sk_q) {
+                int cnt_of_mode, Skill sk_q, int sk_cd[4], int sk_lv) {
     player.image = img;
     player.size.x = al_get_bitmap_width(img);
     player.size.y = al_get_bitmap_height(img);
@@ -31,6 +31,28 @@ void set_player(ALLEGRO_BITMAP *img, int hp, int dmg, ALLEGRO_BITMAP *bt_img, do
     }
 
     player.skill_Q = sk_q;
+    player.can_Q = false;
+    player.can_W = false;
+    player.can_E = false;
+    player.can_R = false;
+    switch (sk_lv){
+        case 4:
+            player.can_R = true;
+        case 3:
+            player.can_E = true;
+        case 2:
+            player.can_W = true;
+        case 1:
+            player.can_Q = true;
+            break;
+        default:
+            break;
+    }
+    player.cd_Q = sk_cd[0];
+    player.cd_W = sk_cd[1];
+    player.cd_E = sk_cd[2];
+    player.cd_R = sk_cd[3];
+
 }
 
 Character *create_enemy(const EnemySetting *prefab) {
