@@ -399,8 +399,6 @@ general.h
 D:/Program/C_And_C++/Final_Clion/general.h
 bullet.h
 D:/Program/C_And_C++/Final_Clion/bullet.h
-levelSetting.h
-D:/Program/C_And_C++/Final_Clion/levelSetting.h
 
 D:/Program/C_And_C++/Final_Clion/fireworks.h
 stdbool.h
@@ -415,6 +413,8 @@ allegro5/allegro.h
 D:/Program/C_And_C++/Final_Clion/allegro5/allegro.h
 general.h
 D:/Program/C_And_C++/Final_Clion/general.h
+character.h
+D:/Program/C_And_C++/Final_Clion/character.h
 
 D:/Program/C_And_C++/Final_Clion/main.c
 stdio.h
@@ -451,4 +451,12 @@ fireworks.h
 D:/Program/C_And_C++/Final_Clion/fireworks.h
 levelSetting.h
 D:/Program/C_And_C++/Final_Clion/levelSetting.h
+skill.h
+D:/Program/C_And_C++/Final_Clion/skill.h
+
+D:/Program/C_And_C++/Final_Clion/skill.h
+general.h
+D:/Program/C_And_C++/Final_Clion/general.h
+bullet.h
+D:/Program/C_And_C++/Final_Clion/bullet.h
 

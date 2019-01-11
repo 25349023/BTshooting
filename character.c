@@ -8,51 +8,36 @@
 extern int WIDTH, HEIGHT;
 extern Character player, boss;
 extern Character *enemy_list;
+extern bool hintOut[4];
 
-void set_player(ALLEGRO_BITMAP *img, int hp, int dmg, ALLEGRO_BITMAP *bt_img, double rate, float bt_spd, enum flyMode *md,
-                int cnt_of_mode, Skill sk_q, int sk_cd[4], int sk_lv) {
-    player.image = img;
-    player.size.x = al_get_bitmap_width(img);
-    player.size.y = al_get_bitmap_height(img);
+void set_player(const PlayerSetting *prefab) {
+    player.image = prefab->image;
+    player.size.x = al_get_bitmap_width(prefab->image);
+    player.size.y = al_get_bitmap_height(prefab->image);
     player.firing_point.x = player.size.x / 2;
     player.firing_point.y = player.size.y / 3;
     player.body.center = (Vector2) {player.size.x / 2, player.size.y / 2};
     player.body.radius = player.size.x < player.size.y ? (player.size.x / 4) : (player.size.y / 4);
-    player.health = hp;
-    player.damage = dmg;
-    player.default_bullet = bt_img;
-    player.shooting_rate = rate;
-    player.bullet_speed = bt_spd;
-    for (int i = 0; i < cnt_of_mode; i++){
-        player.bullet_mode[i] = md[i];
+    player.health = prefab->hp;
+    player.damage = prefab->damage;
+    player.default_bullet = prefab->bullet;
+    player.shooting_rate = prefab->shooting_rate;
+    player.bullet_speed = prefab->bullet_speed;
+    for (int i = 0; i < prefab->count_of_mode; i++){
+        player.bullet_mode[i] = prefab->modes[i];
     }
-    for (int i = cnt_of_mode; i < MODE_COUNT; i++){
+    for (int i = prefab->count_of_mode; i < MODE_COUNT; i++){
         player.bullet_mode[i] = stopped;
     }
 
-    player.skill_Q = sk_q;
-    player.can_Q = false;
-    player.can_W = false;
-    player.can_E = false;
-    player.can_R = false;
-    switch (sk_lv){
-        case 4:
-            player.can_R = true;
-        case 3:
-            player.can_E = true;
-        case 2:
-            player.can_W = true;
-        case 1:
-            player.can_Q = true;
-            break;
-        default:
-            break;
+    player.skill[Q] = prefab->skill[Q];
+    for (int i = Q; i < R; i++){
+        player.can[i] = false;
+        player.show[i] = false;
+        player.skill_CD[i] = prefab->skill_CD[i];
+            player.can[i] = hintOut[i];
+            player.show[i] = hintOut[i];
     }
-    player.cd_Q = sk_cd[0];
-    player.cd_W = sk_cd[1];
-    player.cd_E = sk_cd[2];
-    player.cd_R = sk_cd[3];
-
 }
 
 Character *create_enemy(const EnemySetting *prefab) {
@@ -73,7 +58,7 @@ Character *create_enemy(const EnemySetting *prefab) {
     enemy->speed.y = enemy->e_speed * -cosf((float) (ALLEGRO_PI / 180 * prefab->angle));
     enemy->dire_angle = prefab->angle;
     enemy->default_bullet = prefab->bullet;
-    enemy->CD = prefab->cd;
+    enemy->shoot_CD = prefab->cd;
     enemy->shoot_interval = 0;
     enemy->bullet_speed = prefab->bullet_speed;
     for (int i = 0; i < prefab->count_of_mode; i++){
@@ -125,4 +110,29 @@ void set_boss(ALLEGRO_BITMAP *img, int hp, int dmg, ALLEGRO_BITMAP *bt_img, doub
     }
     boss.e_speed = 1;
     boss.speed = (Vector2) {0, boss.e_speed};
+}
+
+void change_player(const PlayerSetting *prefab) {
+    player.image = prefab->image;
+    player.size.x = al_get_bitmap_width(prefab->image);
+    player.size.y = al_get_bitmap_height(prefab->image);
+    player.firing_point.x = player.size.x / 2;
+    player.firing_point.y = player.size.y / 3;
+    player.body.center = (Vector2) {player.size.x / 2, player.size.y / 2};
+    player.body.radius = player.size.x < player.size.y ? (player.size.x / 4) : (player.size.y / 4);
+    player.damage = prefab->damage;
+    player.default_bullet = prefab->bullet;
+    player.shooting_rate = prefab->shooting_rate;
+    player.bullet_speed = prefab->bullet_speed;
+    for (int i = 0; i < prefab->count_of_mode; i++){
+        player.bullet_mode[i] = prefab->modes[i];
+    }
+    for (int i = prefab->count_of_mode; i < MODE_COUNT; i++){
+        player.bullet_mode[i] = stopped;
+    }
+
+    player.skill[Q] = prefab->skill[Q];
+    for (int i = Q; i < R; i++){
+        player.skill_CD[i] = prefab->skill_CD[i];
+    }
 }

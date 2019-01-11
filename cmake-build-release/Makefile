@@ -257,6 +257,33 @@ main.c.s:
 	$(MAKE) -f CMakeFiles\Final_Clion.dir\build.make CMakeFiles/Final_Clion.dir/main.c.s
 .PHONY : main.c.s
 
+skill.obj: skill.c.obj
+
+.PHONY : skill.obj
+
+# target to build an object file
+skill.c.obj:
+	$(MAKE) -f CMakeFiles\Final_Clion.dir\build.make CMakeFiles/Final_Clion.dir/skill.c.obj
+.PHONY : skill.c.obj
+
+skill.i: skill.c.i
+
+.PHONY : skill.i
+
+# target to preprocess a source file
+skill.c.i:
+	$(MAKE) -f CMakeFiles\Final_Clion.dir\build.make CMakeFiles/Final_Clion.dir/skill.c.i
+.PHONY : skill.c.i
+
+skill.s: skill.c.s
+
+.PHONY : skill.s
+
+# target to generate assembly for a file
+skill.c.s:
+	$(MAKE) -f CMakeFiles\Final_Clion.dir\build.make CMakeFiles/Final_Clion.dir/skill.c.s
+.PHONY : skill.c.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -281,6 +308,9 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... skill.obj
+	@echo ... skill.i
+	@echo ... skill.s
 .PHONY : help
 
 

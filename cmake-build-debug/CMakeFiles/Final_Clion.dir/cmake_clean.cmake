@@ -4,6 +4,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/Final_Clion.dir/character.c.obj"
   "CMakeFiles/Final_Clion.dir/levelSetting.c.obj"
   "CMakeFiles/Final_Clion.dir/fireworks.c.obj"
+  "CMakeFiles/Final_Clion.dir/skill.c.obj"
   "Final_Clion.pdb"
   "Final_Clion.exe"
   "Final_Clion.exe.manifest"
