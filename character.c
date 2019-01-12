@@ -31,6 +31,7 @@ void set_player(const PlayerSetting *prefab) {
     }
 
     player.skill[Q] = prefab->skill[Q];
+    player.skill[W] = prefab->skill[W];
     for (int i = Q; i < R; i++){
         player.can[i] = false;
         player.show[i] = false;
@@ -38,6 +39,8 @@ void set_player(const PlayerSetting *prefab) {
             player.can[i] = hintOut[i];
             player.show[i] = hintOut[i];
     }
+    player.invincible = false;
+    player.show_shield = false;
 }
 
 Character *create_enemy(const EnemySetting *prefab) {
@@ -114,13 +117,14 @@ void set_boss(ALLEGRO_BITMAP *img, int hp, int dmg, ALLEGRO_BITMAP *bt_img, doub
 
 void change_player(const PlayerSetting *prefab) {
     player.image = prefab->image;
+    player.health = (player.health < prefab->hp ? player.health : prefab->hp);
     player.size.x = al_get_bitmap_width(prefab->image);
     player.size.y = al_get_bitmap_height(prefab->image);
     player.firing_point.x = player.size.x / 2;
     player.firing_point.y = player.size.y / 3;
     player.body.center = (Vector2) {player.size.x / 2, player.size.y / 2};
     player.body.radius = player.size.x < player.size.y ? (player.size.x / 4) : (player.size.y / 4);
-    player.damage = prefab->damage;
+    player.damage = (player.health < 0 ? 0 : prefab->damage);
     player.default_bullet = prefab->bullet;
     player.shooting_rate = prefab->shooting_rate;
     player.bullet_speed = prefab->bullet_speed;
@@ -132,6 +136,7 @@ void change_player(const PlayerSetting *prefab) {
     }
 
     player.skill[Q] = prefab->skill[Q];
+    player.skill[W] = prefab->skill[W];
     for (int i = Q; i < R; i++){
         player.skill_CD[i] = prefab->skill_CD[i];
     }

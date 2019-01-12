@@ -25,12 +25,14 @@ typedef struct character {
     float e_speed;
     float dire_angle;  // in degree
     int shoot_CD, shoot_interval;  // for enemy
+    bool skills[6];  // for boss
     ALLEGRO_BITMAP *image;
     ALLEGRO_BITMAP *default_bullet;
     enum flyMode bullet_mode[MODE_COUNT];
     Skill skill[4];
     bool can[4], show[4];
     int skill_CD[4];
+    bool invincible, show_shield;
 
     struct character *next;
 } Character;

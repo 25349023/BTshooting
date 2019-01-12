@@ -324,6 +324,7 @@ CMakeFiles/Final_Clion.dir/skill.c.obj: D:/Allegro/allegro-5.0.10-mingw-4.7.0/in
 CMakeFiles/Final_Clion.dir/skill.c.obj: D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/transformations.h
 CMakeFiles/Final_Clion.dir/skill.c.obj: D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/utf8.h
 CMakeFiles/Final_Clion.dir/skill.c.obj: ../bullet.h
+CMakeFiles/Final_Clion.dir/skill.c.obj: ../character.h
 CMakeFiles/Final_Clion.dir/skill.c.obj: ../general.h
 CMakeFiles/Final_Clion.dir/skill.c.obj: ../skill.c
 CMakeFiles/Final_Clion.dir/skill.c.obj: ../skill.h
