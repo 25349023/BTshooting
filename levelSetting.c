@@ -68,7 +68,7 @@ set_airplane(PlayerSetting *pla_set, ALLEGRO_BITMAP *img, int hp, int dmg, ALLEG
         pla_set->modes[i] = stopped;
     }
     pla_set->count_of_mode = cnt_of_mode;
-    for (int i = 0; i < 4; i++){
+    for (int i = Q; i <= W; i++){
         pla_set->skill_CD[i] = sk_cd[i];
         pla_set->skill[i] = sk[i];
     }

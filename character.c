@@ -9,6 +9,8 @@ extern int WIDTH, HEIGHT;
 extern Character player, boss;
 extern Character *enemy_list;
 extern bool hintOut[4];
+extern ALLEGRO_TIMER *defendTimer, *thickCircleTimer, *thousandsArrowTimer, *cureTimer;
+extern int defend_sparkle_times, thick_circle_times, thousand_arrow_times, cure_times;
 
 void set_player(const PlayerSetting *prefab) {
     player.image = prefab->image;
@@ -32,15 +34,29 @@ void set_player(const PlayerSetting *prefab) {
 
     player.skill[Q] = prefab->skill[Q];
     player.skill[W] = prefab->skill[W];
-    for (int i = Q; i < R; i++){
-        player.can[i] = false;
-        player.show[i] = false;
+    for (int i = Q; i <= W; i++){
         player.skill_CD[i] = prefab->skill_CD[i];
-            player.can[i] = hintOut[i];
-            player.show[i] = hintOut[i];
+        player.can[i] = hintOut[i];
+        player.show[i] = hintOut[i];
     }
     player.invincible = false;
     player.show_shield = false;
+    if (defendTimer && al_get_timer_started(defendTimer)){
+        al_stop_timer(defendTimer);
+        defend_sparkle_times = 0;
+    }
+    if (thickCircleTimer && al_get_timer_started(thickCircleTimer)){
+        al_stop_timer(thickCircleTimer);
+        thick_circle_times = 0;
+    }
+    if (thousandsArrowTimer && al_get_timer_started(thousandsArrowTimer)){
+        al_stop_timer(thousandsArrowTimer);
+        thousand_arrow_times = 0;
+    }
+    if (cureTimer && al_get_timer_started(cureTimer)){
+        al_stop_timer(cureTimer);
+        cure_times = 0;
+    }
 }
 
 Character *create_enemy(const EnemySetting *prefab) {
@@ -137,7 +153,23 @@ void change_player(const PlayerSetting *prefab) {
 
     player.skill[Q] = prefab->skill[Q];
     player.skill[W] = prefab->skill[W];
-    for (int i = Q; i < R; i++){
+    for (int i = Q; i <= W; i++){
         player.skill_CD[i] = prefab->skill_CD[i];
+    }
+    if (defendTimer && al_get_timer_started(defendTimer)){
+        al_stop_timer(defendTimer);
+        defend_sparkle_times = 0;
+    }
+    if (thickCircleTimer && al_get_timer_started(thickCircleTimer)){
+        al_stop_timer(thickCircleTimer);
+        thick_circle_times = 0;
+    }
+    if (thousandsArrowTimer && al_get_timer_started(thousandsArrowTimer)){
+        al_stop_timer(thousandsArrowTimer);
+        thousand_arrow_times = 0;
+    }
+    if (cureTimer && al_get_timer_started(cureTimer)){
+        al_stop_timer(cureTimer);
+        cure_times = 0;
     }
 }

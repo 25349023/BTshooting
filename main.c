@@ -31,7 +31,8 @@ ALLEGRO_BITMAP *enemyImgs[20];
 ALLEGRO_BITMAP *bulletImgs[20];
 ALLEGRO_BITMAP *messageImg = NULL;
 ALLEGRO_BITMAP *optionsImg = NULL;
-ALLEGRO_BITMAP *background = NULL;
+ALLEGRO_BITMAP *leafImg = NULL;
+ALLEGRO_BITMAP *cureImg = NULL;
 ALLEGRO_TIMER *bulletUpdateTimer = NULL;
 ALLEGRO_TIMER *drawingTimer = NULL;
 ALLEGRO_TIMER *playerShootingTimer = NULL;
@@ -50,6 +51,10 @@ ALLEGRO_TIMER *hintTimer = NULL;
 ALLEGRO_TIMER *skillQTimer = NULL;
 ALLEGRO_TIMER *skillWTimer = NULL;
 ALLEGRO_TIMER *defendTimer = NULL;
+ALLEGRO_TIMER *thickCircleTimer = NULL;
+ALLEGRO_TIMER *landMineTimer = NULL;
+ALLEGRO_TIMER *thousandsArrowTimer = NULL;
+ALLEGRO_TIMER *cureTimer = NULL;
 
 ALLEGRO_TIMER *fireworksTickTimer = NULL;
 ALLEGRO_TIMER *generateFirework1Timer = NULL;
@@ -58,6 +63,8 @@ ALLEGRO_TIMER *the2019Timer = NULL;
 
 ALLEGRO_SAMPLE *menuMusic = NULL;
 ALLEGRO_SAMPLE *gameMusic = NULL;
+ALLEGRO_SAMPLE *productRuleSound = NULL;
+ALLEGRO_SAMPLE *point2Sound = NULL;
 ALLEGRO_SAMPLE *letoff, *letoff2;
 ALLEGRO_SAMPLE_INSTANCE *letoffInstance[2];
 ALLEGRO_FONT *bigFont = NULL;
@@ -77,7 +84,7 @@ const int HEIGHT = 600;
 
 enum windows {
     none, menu, main_game, about, special, stage_choosing,
-    message_box, options, airplane_choosing
+    message_box, options, airplane_choosing, highscores
 };
 
 Bullet *player_bullet_list = NULL;
@@ -96,26 +103,38 @@ LevelSetting settings[6];  // 0 for tutorial
 int window = menu;
 int draw_count = 0;
 int level = 1;
-int score;
+unsigned int score;
 int killed_enemies = 0;
 int chosenPlayer = 0;
 int message_count = 0;
 int reading = 0;
+int messagePage = 0;
 int airplanePage = 0;
+int defend_sparkle_times = 0;
+int thick_circle_times = 0;
+int landmine_times = 0;
+int thousand_arrow_times = 0;
+int cure_times = 0;
+
+Vector2 landminePos;
 
 char hint[48] = "hello world";
 char messageTitle[50][24];
-char messageContent[50][64];
+char messageContent[50][256];
 
 bool enter_game_window = false;
 bool game_pause = false;
 bool draw_boss = false;
 bool pass = false;
-bool unlock_airplane[10] = {true, [4]=true, [5]=true};
-bool hintOut[4] = {false};
+bool win = false;
+bool unlock_airplane[10] = {true};
+bool hintOut[2] = {false};
 bool has_read[50] = {false};
 bool musicOn = false;
 bool soundOn = true;
+bool have_enter_level3 = false;
+bool detonate = false;
+bool explode = false;
 
 
 void show_err_msg(int msg);
@@ -128,8 +147,10 @@ void load_images();
 
 bool within(float x, float y, float x1, float y1, float x2, float y2);
 bool collide_with(Circle a, Circle b);
+int cmp(const void *pa, const void *pb);
 void process_bullets(Bullet **list);
 void draw_bullets(Bullet *list);
+void write_highscore();
 
 void draw_menu();
 void draw_about();
@@ -138,6 +159,7 @@ void draw_stage_choosing();
 void draw_message_box();
 void draw_options();
 void draw_character_choosing();
+void draw_highscore();
 
 void show_warning();
 void show_hint();
@@ -213,23 +235,25 @@ void game_init() {
 
     // initialize variables
     white = al_map_rgb(255, 255, 255);
+    FILE *tmp = fopen("highscores", "a");
+    fclose(tmp);
 }
 
 void load_images() {
     char filename[20];
-    for (int i = 0; i < 10; i++){
+    for (int i = 0; i < 14; i++){
         sprintf(filename, "bullet%d.png", i);
         bulletImgs[i] = al_load_bitmap(filename);
     }
-    for (int i = 0; i < 6; i++){
+    for (int i = 0; i < 9; i++){
         sprintf(filename, "airplane%d.png", i);
         airplaneImgs[i] = al_load_bitmap(filename);
     }
-    for (int i = 0; i < 6; i++){
+    for (int i = 0; i < 9; i++){
         sprintf(filename, "airLarge%d.png", i);
         airLargeImgs[i] = al_load_bitmap(filename);
     }
-    for (int i = 0; i < 6; i++){
+    for (int i = 0; i < 9; i++){
         sprintf(filename, "airGray%d.png", i);
         airGrayImgs[i] = al_load_bitmap(filename);
     }
@@ -240,6 +264,8 @@ void load_images() {
     cursorImg = al_load_bitmap("cursor2.png");
     messageImg = al_load_bitmap("message.png");
     optionsImg = al_load_bitmap("settings.png");
+    leafImg = al_load_bitmap("leafSmall.png");
+    cureImg = al_load_bitmap("cure.png");
     enemyImgs[10] = al_load_bitmap("boss0.png");
 }
 
@@ -247,6 +273,8 @@ void game_begin() {
     // Load sound
     menuMusic = al_load_sample("Long_Stream.wav");
     gameMusic = al_load_sample("game.wav");
+    productRuleSound = al_load_sample("productRule.wav");
+    point2Sound = al_load_sample("plusPoint2.wav");
     letoff = al_load_sample("fireworks.wav");
     letoff2 = al_load_sample("fireworks2.wav");
     al_reserve_samples(5);
@@ -261,7 +289,9 @@ void game_begin() {
         show_err_msg(-6);
     }
     // Loop the menuMusic until the display closes
-    al_play_sample(menuMusic, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
+    if (musicOn){
+        al_play_sample(menuMusic, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
+    }
     // load font
     bigFont = al_load_ttf_font("pirulen.ttf", 25, 0);
     midFont = al_load_ttf_font("pirulen.ttf", 20, 0);
@@ -281,22 +311,32 @@ void game_begin() {
     // TODO: set playerPrefabs
     set_airplane(&playerPrefabs[0], airplaneImgs[0], 100, 5, bulletImgs[0], 1.0 / 7.0, 2,
                  (enum flyMode[]) {up}, 1,
-                 (Skill[4]) {launch_big_fire, launch_big_arrow}, (int[]) {5, 3, 5, 5});
+                 (Skill[2]) {launch_big_fire, launch_big_arrow}, (int[]) {5, 3});
     set_airplane(&playerPrefabs[1], airplaneImgs[1], 120, 6, bulletImgs[8], 1.0 / 6.0, 2,
                  (enum flyMode[]) {up, right_back, left_back}, 3,
-                 (Skill[4]) {launch_big_arrow, shoot_triangle}, (int[]) {3, 1, 5, 5});
+                 (Skill[2]) {launch_big_arrow, shoot_triangle}, (int[]) {3, 1});
     set_airplane(&playerPrefabs[2], airplaneImgs[2], 60, 8, bulletImgs[5], 1.0 / 5.0, 2,
                  (enum flyMode[]) {up, right_back, left_back, rf_f, lf_f}, 5,
-                 (Skill[4]) {defend}, (int[]) {10, 5, 5, 5});
+                 (Skill[2]) {defend, cure}, (int[]) {10, 5});
     set_airplane(&playerPrefabs[3], airplaneImgs[3], 90, 4, bulletImgs[6], 1.0 / 6.0, 1.5,
                  (enum flyMode[]) {down, right_back, left_back, rb_b, lb_b}, 5,
-                 (Skill[4]) {launch_big_arrow}, (int[]) {5, 5, 5, 5});
+                 (Skill[2]) {launch_big_arrow, thin_circle}, (int[]) {5, 5});
     set_airplane(&playerPrefabs[4], airplaneImgs[4], 80, 5, bulletImgs[9], 1.0 / 9.0, 2.2,
                  (enum flyMode[]) {right_front, left_front, right_back, left_back}, 4,
-                 (Skill[4]) {big_blow, thin_circle}, (int[]) {6, 3, 5, 5});
+                 (Skill[2]) {big_blow, thin_circle}, (int[]) {6, 3});
     set_airplane(&playerPrefabs[5], airplaneImgs[5], 90, 7, bulletImgs[8], 1.0 / 6.0, 2,
                  (enum flyMode[]) {up, down, right, left}, 4,
-                 (Skill[4]) {big_blow, horizontal_blow}, (int[]) {4, 5, 5, 5});
+                 (Skill[2]) {big_blow, horizontal_blow}, (int[]) {4, 5});
+    set_airplane(&playerPrefabs[6], airplaneImgs[6], 130, 4, bulletImgs[10], 1.0, 1.5,
+                 (enum flyMode[]) {up, right_front, left_front, right, left, right_back, left_back, down,
+                                   rf_f, lf_f, rf_r, lf_l, rb_r, lb_l, rb_b, lb_b}, 16,
+                 (Skill[2]) {thick_circle, landmine}, (int[]) {7, 10});
+    set_airplane(&playerPrefabs[7], airplaneImgs[7], 110, 10, bulletImgs[11], 1.0 / 12.0, 2.4,
+                 (enum flyMode[]) {up}, 1,
+                 (Skill[2]) {ten_thousands_arrows, horizontal_blow}, (int[]) {10, 6});
+    set_airplane(&playerPrefabs[8], airplaneImgs[8], 160, 7, bulletImgs[12], 1.0 / 5.0, 1.7,
+                 (enum flyMode[]) {up, rf_f, lf_f, right, left}, 5,
+                 (Skill[2]) {product_rule, plus_point2}, (int[]) {3, 5});
 
     // TODO: set enemyPrefabs
     set_enemy(&enemyPrefabs[0], enemyImgs[0], bulletImgs[3], 12, 8, 30, (Vector2) {-1, 0}, 5, 180, 1.8,
@@ -315,10 +355,20 @@ void game_begin() {
     set_level(&settings[3], 3, 888, 7, 20, enemyImgs[10], bulletImgs[3], 1.0 / 2.0, 1,
               (enum flyMode[]) {down, rb_b, lb_b, right, left}, 5, 2, (int[]) {90, 150},
               bulletImgs[4], 1.0 / 4.0, 0.8);
+    set_level(&settings[4], 4, 1000, 9, 14, enemyImgs[10], bulletImgs[7], 1.0 / 3.0, 1,
+              (enum flyMode[]) {down, rb_b, lb_b, right_back, left_back, right_front, left_front}, 7,
+              2, (int[]) {75, 115}, bulletImgs[4], 1.0 / 4.0, 0.8);
+    set_level(&settings[5], 5, 1500, 10, 14, enemyImgs[10], bulletImgs[4], 1.0, 1,
+              (enum flyMode[]) {rf_f, lf_f, rb_b, lb_b, rf_r, lf_l, rb_r, lb_l, right, left}, 10,
+              2, (int[]) {80, 140}, bulletImgs[4], 1.0 / 4.0, 1);
     settings[1].enemy_prefab[0] = &enemyPrefabs[0];
     settings[2].enemy_prefab[0] = &enemyPrefabs[0];
     settings[3].enemy_prefab[0] = &enemyPrefabs[0];
     settings[3].enemy_prefab[1] = &enemyPrefabs[1];
+    settings[4].enemy_prefab[0] = &enemyPrefabs[0];
+    settings[4].enemy_prefab[1] = &enemyPrefabs[1];
+    settings[5].enemy_prefab[0] = &enemyPrefabs[0];
+    settings[5].enemy_prefab[1] = &enemyPrefabs[1];
 
 
     send_message("HOW TO PLAY", "Use arrow keys to move\nthe player.");
@@ -486,12 +536,9 @@ int process_event() {
             al_draw_rotated_bitmap(current->image, current->body.center.x, current->body.center.y,
                                    current->pos.x, current->pos.y,
                                    (float) (ALLEGRO_PI / 180 * current->dire_angle), 0);
-//            al_draw_circle(current->pos.x, current->pos.y, current->body.radius, white, 0);
         }
         if (player.health > 0){
             al_draw_bitmap(player.image, player.pos.x, player.pos.y, 0);
-//            al_draw_circle(player.pos.x + player.body.center.x, player.pos.y + player.body.center.y,
-//                           player.body.radius, white, 0);
             if (player.show_shield){
                 al_draw_circle(player.pos.x + player.body.center.x, player.pos.y + player.body.center.y,
                                player.body.radius + 20, al_map_rgba(0, 119, 179, 50), 8);
@@ -500,7 +547,6 @@ int process_event() {
         if (draw_boss){
             al_draw_rotated_bitmap(boss.image, boss.body.center.x, boss.body.center.y, boss.pos.x, boss.pos.y,
                                    (float) ALLEGRO_PI, 0);
-            al_draw_circle(boss.pos.x, boss.pos.y, boss.body.radius, white, 0);
             if (boss.health >= 0){
                 al_draw_filled_rectangle(boss.pos.x - 20, boss.pos.y - 60,
                                          boss.pos.x - 20 + 40 * ((float) boss.health / settings[level].boss_hp),
@@ -596,6 +642,10 @@ int process_event() {
                     score += rand() % 300 + 400;
                     if (boss.health <= 0){
                         score += rand() % 2001 + 4000;
+                        if (level == 5){
+                            win = true;
+                            write_highscore();
+                        }
                         pass = true;
                         draw_boss = false;
                         al_stop_timer(bossMovingTimer);
@@ -604,6 +654,14 @@ int process_event() {
                         al_stop_timer(generateEnemyTimer);
                         al_stop_timer(enemyShootingTimer);
                         al_stop_timer(generateDroppingBulletTimer);
+                        if (score >= 211293 && !unlock_airplane[4]){
+                            send_message("NEW PLANE", "Because your score\n\n"
+                                                      "exceeded 211293, You got\n"
+                                                      "a new airplane: Takekoputa\n"
+                                                      "By the way, Doraemon's\n"
+                                                      "birthday is 2112/9/3.");
+                            unlock_airplane[4] = true;
+                        }
                         switch (level){
                             case 1:
                                 if (!unlock_airplane[1]){
@@ -615,6 +673,32 @@ int process_event() {
                                 if (!unlock_airplane[3]){
                                     send_message("NEW PLANE", "You got a new airplane!");
                                     unlock_airplane[3] = true;
+                                }
+                                if (!have_enter_level3){
+                                    have_enter_level3 = true;
+                                    send_message("DEDUCTION", "From level 3, if you\n"
+                                                              "don't kill the enemy and\n"
+                                                              "let it pass through the\n"
+                                                              "bottom, you will lose\n"
+                                                              "some scores.");
+                                }
+                                break;
+                            case 3:
+                                if (!unlock_airplane[5]){
+                                    send_message("NEW PLANE", "You got a new airplane!");
+                                    unlock_airplane[5] = true;
+                                }
+                                break;
+                            case 4:
+                                if (!unlock_airplane[6]){
+                                    send_message("NEW PLANE", "You got a new airplane!");
+                                    unlock_airplane[6] = true;
+                                }
+                                break;
+                            case 5:
+                                if (!unlock_airplane[7]){
+                                    send_message("NEW PLANE", "You got a new airplane!");
+                                    unlock_airplane[7] = true;
                                 }
                                 break;
                             default:
@@ -640,11 +724,22 @@ int process_event() {
                 player.health -= ene_curr->damage;
                 ene_curr->mode = stopped;
                 printf("HURT\n");
-                if (player.health <= 0 && !unlock_airplane[2]){
-                    send_message("NEW PLANE", "You got a new airplane!");
-                    unlock_airplane[2] = true;
+                if (player.health <= 0){
                     printf("DEAD\n");
                     player.damage = 0;
+                    write_highscore();
+                    if (!unlock_airplane[2]){
+                        send_message("NEW PLANE", "You got a new airplane!");
+                        unlock_airplane[2] = true;
+                    }
+                    if (score >= 211293 && !unlock_airplane[4]){
+                        send_message("NEW PLANE", "Because your score\n\n"
+                                                  "exceeded 211293, You got\n"
+                                                  "a new airplane: Takekoputa\n"
+                                                  "By the way, Doraemon's\n"
+                                                  "birthday is 2112/9/3.");
+                        unlock_airplane[4] = true;
+                    }
                 }
             }
         }
@@ -681,7 +776,16 @@ int process_event() {
 
             if (current->health <= 0 || current->pos.y < -100 || current->pos.y > HEIGHT + 100 ||
                 current->pos.x < -50 || current->pos.x > WIDTH + 50){
-                // printf("one enemy stopped: %f\n", current->pos.y);
+                if (level >= 3 && current->pos.y > HEIGHT + 100){
+                    int penalty = rand() % 400 + 800;
+                    if (score < penalty){
+                        score = 0;
+                    }
+                    else {
+                        score -= penalty;
+                    }
+                }
+
                 destroy_enemy(current, &prev);
                 current = prev;
                 if (current == NULL){
@@ -748,7 +852,7 @@ int process_event() {
         if (boss.pos.x < boss.size.x / 6 || boss.pos.x > WIDTH - boss.size.x / 6){
             boss.speed.x *= -1;
         }
-        if (boss.pos.y < 20 || boss.pos.y > 120){
+        if ((boss.pos.y < 20) || (boss.pos.y > (level == 5 ? 150 : 120))){
             boss.speed.y *= -1;
         }
 
@@ -773,7 +877,7 @@ int process_event() {
             player.can[W] = true;
             player.show[W] = true;
             strncpy(hint, "Press 'W' to use skill.", 47);
-            send_message("SKILL W", "You can press W to use a skill.");
+            send_message("SKILL W", "You can press W to use a\nskill.");
             al_start_timer(hintTimer);
         }
         if (level >= 1 && boss.skills[1] && boss.health < 0.5 * settings[level].boss_hp){
@@ -821,13 +925,12 @@ int process_event() {
         }
     }
     else if (event.timer.source == defendTimer){
-        static int times = 0;
         al_set_timer_speed(defendTimer, 0.5);
-        times++;
+        defend_sparkle_times++;
         player.show_shield = !player.show_shield;
-        if (times == 5){
+        if (defend_sparkle_times == 5){
             player.invincible = false;
-            times = 0;
+            defend_sparkle_times = 0;
             al_stop_timer(defendTimer);
             al_set_timer_speed(defendTimer, 3.0);
         }
@@ -863,9 +966,70 @@ int process_event() {
         else {
             player.show[W] = !player.show[W];
         }
-
     }
-
+    else if (event.timer.source == thickCircleTimer){
+        Bullet *bt;
+        thick_circle_times++;
+        for (int m = up; m <= lb_b; m++){
+            bt = make_bullet(player.default_bullet, m, (Vector2) {player.pos.x + player.firing_point.x,
+                                                                  player.pos.y + player.firing_point.y},
+                             player.damage, player.bullet_speed);
+            register_bullet(bt, &player_bullet_list);
+        }
+        if (thick_circle_times == 7){
+            thick_circle_times = 0;
+            al_stop_timer(thickCircleTimer);
+        }
+    }
+    else if (event.timer.source == landMineTimer){
+        Bullet *bt;
+        landmine_times++;
+        if (landmine_times < 6){
+            detonate = !detonate;
+        }
+        else if (landmine_times == 6){
+            detonate = false;
+            explode = true;
+        }
+        else {
+            for (int m = up; m <= lb_b; m++){
+                bt = make_bullet(player.default_bullet, m, landminePos,
+                                 player.damage, player.bullet_speed);
+                register_bullet(bt, &player_bullet_list);
+            }
+            if (landmine_times >= 14){
+                explode = !explode;
+                if (landmine_times == 18){
+                    landmine_times = 0;
+                    explode = false;
+                    al_stop_timer(landMineTimer);
+                }
+            }
+        }
+    }
+    else if (event.timer.source == thousandsArrowTimer){
+        thousand_arrow_times++;
+        Bullet *bt = make_bullet(bulletImgs[11], up, (Vector2) {-201, HEIGHT + 25},
+                                 player.damage, player.bullet_speed);
+        register_bullet(bt, &player_bullet_list);
+        if (thousand_arrow_times == 100){
+            al_stop_timer(thousandsArrowTimer);
+            thousand_arrow_times = 0;
+        }
+    }
+    else if (event.timer.source == cureTimer){
+        cure_times++;
+        if (cure_times % 2){
+            player.health += 20;
+        }
+        if (player.health >= playerPrefabs[chosenPlayer].hp){
+            player.health = playerPrefabs[chosenPlayer].hp;
+        }
+        if (cure_times == 4){
+            cure_times = 0;
+            al_stop_timer(cureTimer);
+        }
+    }
 
     static bool normal_fireworks = true;
 
@@ -994,21 +1158,6 @@ int process_event() {
             }
         }
         else if (window == main_game){
-            if (!game_pause && !pass && player.health > 0){
-                if (!game_pause && within(event.mouse.x, event.mouse.y, 1, HEIGHT - 55, 100, HEIGHT)){
-                    al_start_timer(warningTimer);
-                    printf("Fire 1");
-                }
-                else if (!game_pause && within(event.mouse.x, event.mouse.y, 101, HEIGHT - 55, 200, HEIGHT)){
-                    printf("Fire 2");
-                }
-                else if (!game_pause && within(event.mouse.x, event.mouse.y, 201, HEIGHT - 55, 300, HEIGHT)){
-                    printf("FIRE3");
-                }
-                else if (!game_pause && within(event.mouse.x, event.mouse.y, 301, HEIGHT - 55, 400, HEIGHT)){
-                    printf("Fire4");
-                }
-            }
             if (player.health > 0 && !pass && within(event.mouse.x, event.mouse.y, 10, 10, 31, 30)){
                 printf("Pause / Resume");
                 if (!game_pause){
@@ -1037,10 +1186,43 @@ int process_event() {
                 printf("RESTART\n");
                 reset_level();
             }
-            else if (pass && within(event.mouse.x, event.mouse.y, WIDTH / 2 - 90,
-                                    HEIGHT / 2 + 60, WIDTH / 2 + 150, HEIGHT / 2 + 100)){
+            else if (!win && pass && within(event.mouse.x, event.mouse.y, WIDTH / 2 - 90,
+                                            HEIGHT / 2 + 60, WIDTH / 2 + 150, HEIGHT / 2 + 100)){
                 printf("NEXT\n");
                 next_level();
+            }
+            else if (win && within(event.mouse.x, event.mouse.y, WIDTH / 2 - 90,
+                                   HEIGHT / 2 + 60, WIDTH / 2 + 150, HEIGHT / 2 + 100)){
+                window = menu;
+                printf("\nRETURN");
+                if (score >= 211293 && !unlock_airplane[4]){
+                    send_message("NEW PLANE", "Because your score\n\n"
+                                              "exceeded 211293, You got\n"
+                                              "a new airplane: Takekoputa\n"
+                                              "By the way, Doraemon's\n"
+                                              "birthday is 2112/9/3.");
+                    unlock_airplane[4] = true;
+                }
+                reset_level();
+                al_stop_timer(playerMovingTimer);
+                al_stop_timer(enemyMovingTimer);
+                al_stop_timer(bulletUpdateTimer);
+                al_stop_timer(drawingTimer);
+                al_stop_timer(playerShootingTimer);
+                al_stop_timer(enemyShootingTimer);
+                al_stop_timer(collisionDetectTimer);
+                al_stop_timer(generateDroppingBulletTimer);
+                al_stop_timer(generateEnemyTimer);
+                al_stop_timer(bossComingOutTimer);
+                al_stop_timer(bossMovingTimer);
+                al_stop_timer(bossShootingTimer);
+                enter_game_window = false;
+                game_pause = false;
+                al_stop_samples();
+                if (musicOn){
+                    al_play_sample(menuMusic, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
+                }
+                draw_menu();
             }
             else if ((player.health <= 0 || pass || game_pause) && within(event.mouse.x, event.mouse.y,
                                                                           WIDTH - 60, HEIGHT - 48, WIDTH - 8,
@@ -1084,6 +1266,11 @@ int process_event() {
                 al_start_timer(fireworksTickTimer);
                 al_start_timer(generateFirework1Timer);
             }
+            else if (within(event.mouse.x, event.mouse.y, WIDTH / 2 - 150, 280, WIDTH / 2 + 150, 320)){
+                window = highscores;
+                draw_highscore();
+                printf("Highscore");
+            }
         }
         else if (window == stage_choosing){
             if (within(event.mouse.x, event.mouse.y, 60, 90, 190, 180)){
@@ -1102,16 +1289,34 @@ int process_event() {
                 hintOut[Q] = true;
                 hintOut[W] = true;
                 enter_game_window = true;
+                if (!have_enter_level3){
+                    have_enter_level3 = true;
+                    send_message("DEDUCTION", "From level 3, if you\n"
+                                              "don't kill the enemy and\n"
+                                              "let it pass through the\n"
+                                              "bottom, you will lose\n"
+                                              "some scores.");
+                }
                 printf("3");
             }
             else if (within(event.mouse.x, event.mouse.y, 210, 200, 340, 290)){
+                level = 4;
+                hintOut[Q] = true;
+                hintOut[W] = true;
+                enter_game_window = true;
                 printf("4");
             }
             else if (within(event.mouse.x, event.mouse.y, 60, 310, 340, 400)){
+                level = 5;
+                hintOut[Q] = true;
+                hintOut[W] = true;
+                enter_game_window = true;
                 printf("5");
             }
-            else if (within(event.mouse.x, event.mouse.y, 60, 420, 340, 510)){
-                printf("ENDLESS");
+            else if (within(event.mouse.x, event.mouse.y, WIDTH / 2 - 120, 460, WIDTH / 2 + 120, 500)){
+                printf("BACK");
+                window = menu;
+                draw_menu();
             }
         }
         else if (window == message_box){
@@ -1133,26 +1338,51 @@ int process_event() {
                     }
                 }
             }
+            else if (within(event.mouse.x, event.mouse.y, WIDTH / 2 + 170, HEIGHT / 2 - 15,
+                            WIDTH / 2 + 190, HEIGHT / 2 + 15)){
+                printf("NEXT PG");
+                if (messagePage != (message_count - 1) / 5){
+                    messagePage++;
+                }
+                draw_message_box();
+            }
+            else if (within(event.mouse.x, event.mouse.y, WIDTH / 2 - 190, HEIGHT / 2 - 15,
+                            WIDTH / 2 - 170, HEIGHT / 2 + 15)){
+                printf("PREV PG");
+                if (messagePage != 0){
+                    messagePage--;
+                }
+                draw_message_box();
+            }
             else {
-                for (int i = 1; i <= message_count; i++){
+                for (int i = 1; i <= 5 && messagePage * 5 + i <= message_count; i++){
                     if (within(event.mouse.x, event.mouse.y, WIDTH / 2 - 150, 90 * i - 30,
                                WIDTH / 2 + 150, 90 * i + 30)){
                         printf("Message %d", i);
                         reading = i;
                         draw_message_box();
+                        break;
                     }
                 }
             }
+
         }
         else if (window == options){
             if (within(event.mouse.x, event.mouse.y, 205, 175, 235, 205)){
                 printf("Music ON");
                 musicOn = true;
+                if (bulletUpdateTimer && al_get_timer_started(bulletUpdateTimer)){
+                    al_play_sample(gameMusic, 0.6, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
+                }
+                else {
+                    al_play_sample(menuMusic, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
+                }
                 draw_options();
             }
             else if (within(event.mouse.x, event.mouse.y, 325, 175, 355, 205)){
                 printf("Music OFF");
                 musicOn = false;
+                al_stop_samples();
                 draw_options();
             }
             else if (within(event.mouse.x, event.mouse.y, 205, 255, 235, 285)){
@@ -1190,6 +1420,15 @@ int process_event() {
                 else {
                     window = menu;
                     printf("\nRETURN");
+                    if (score >= 211293 && !unlock_airplane[4]){
+                        send_message("NEW PLANE", "Because your score\n\n"
+                                                  "exceeded 211293, You got\n"
+                                                  "a new airplane: Takekoputa\n"
+                                                  "By the way, Doraemon's\n"
+                                                  "birthday is 2112/9/3.");
+                        unlock_airplane[4] = true;
+                    }
+                    write_highscore();
                     reset_level();
                     al_stop_timer(playerMovingTimer);
                     al_stop_timer(enemyMovingTimer);
@@ -1205,7 +1444,9 @@ int process_event() {
                     enter_game_window = false;
                     game_pause = false;
                     al_stop_samples();
-                    al_play_sample(menuMusic, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
+                    if (musicOn){
+                        al_play_sample(menuMusic, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
+                    }
                     draw_menu();
                 }
             }
@@ -1254,6 +1495,13 @@ int process_event() {
                 draw_character_choosing();
             }
         }
+        else if (window == highscores){
+            if (within(event.mouse.x, event.mouse.y, WIDTH / 2 - 120, 530, WIDTH / 2 + 120, 570)){
+                printf("BACK");
+                window = menu;
+                draw_menu();
+            }
+        }
         printf("\n");
     }
 
@@ -1265,6 +1513,10 @@ int process_event() {
             static int tick = 0, tick_saved = -100;
 
             if (finish && fireworks_bullet_list == NULL){
+                if (!unlock_airplane[8]){
+                    unlock_airplane[8] = true;
+                    send_message("DUNG YUNG", "Dung Yung comes to your\nrescue!");
+                }
                 al_draw_text(smallFont, white, WIDTH / 2, HEIGHT / 2, ALLEGRO_ALIGN_CENTER, "REPLAY?");
                 al_draw_rectangle(WIDTH / 2 - 120, HEIGHT / 2 - 10, WIDTH / 2 + 120, HEIGHT / 2 + 30, white, 0);
                 al_draw_text(smallFont, white, WIDTH / 2 + 60, HEIGHT / 2 + 55, ALLEGRO_ALIGN_CENTER, "BACK");
@@ -1301,7 +1553,9 @@ int process_event() {
                     tmp.y -= 240;
                 }
                 if (tick == tick_saved + 15){
-                    al_play_sample(letoff, 0.8, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                    if (soundOn){
+                        al_play_sample(letoff, 0.8, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                    }
                     draw_fireworks1(size, tmp);
                 }
                 if (tick == tick_saved + 20){
@@ -1313,13 +1567,17 @@ int process_event() {
             }
         }
         else if (event.timer.source == generateFirework1Timer){
-            al_play_sample(letoff, (float) (1.0 / (rand() % 4 + 2)), 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+            if (soundOn){
+                al_play_sample(letoff, (float) (1.0 / (rand() % 4 + 2)), 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+            }
             draw_fireworks1(rand() % 4 + 16, (Vector2) {rand() % 240 + 80, rand() % 400 + 200});
             al_set_timer_speed(generateFirework1Timer, 1.0 / (rand() % 3 + 1));
         }
         else if (event.timer.source == happyTimer){
-            al_play_sample(letoff, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-            al_play_sample(letoff2, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+            if (soundOn){
+                al_play_sample(letoff, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                al_play_sample(letoff2, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+            }
             draw_H((Vector2) {48, 200}, true, 1);
             draw_A((Vector2) {138, 200}, true, 2);
             draw_P2((Vector2) {238, 200}, true, 2);
@@ -1346,20 +1604,30 @@ int process_event() {
                 draw_9((Vector2) {340, 450}, true, 3);
             }
             if (tick == 105){
-                al_play_sample_instance(letoffInstance[0]);
+                if (soundOn){
+                    al_play_sample_instance(letoffInstance[0]);
+                }
             }
             else if (tick == 115){
-                al_play_sample_instance(letoffInstance[1]);
+                if (soundOn){
+                    al_play_sample_instance(letoffInstance[1]);
+                }
             }
             else if (tick == 125){
-                al_play_sample_instance(letoffInstance[0]);
+                if (soundOn){
+                    al_play_sample_instance(letoffInstance[0]);
+                }
             }
             else if (tick == 135){
-                al_play_sample_instance(letoffInstance[1]);
+                if (soundOn){
+                    al_play_sample_instance(letoffInstance[1]);
+                }
             }
             else if (tick == 150){
-                al_play_sample(letoff, 1.2, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-                al_play_sample(letoff2, 1.5, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                if (soundOn){
+                    al_play_sample(letoff, 1.2, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                    al_play_sample(letoff2, 1.5, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                }
                 tick = 0;
                 finish = true;
                 al_stop_timer(the2019Timer);
@@ -1470,6 +1738,10 @@ int game_run() {
                 skillQTimer = al_create_timer(player.skill_CD[Q]);
                 skillWTimer = al_create_timer(player.skill_CD[W]);
                 defendTimer = al_create_timer(3.0);
+                thickCircleTimer = al_create_timer(1.0 / 10.0);
+                landMineTimer = al_create_timer(1.0 / 6.0);
+                thousandsArrowTimer = al_create_timer(1.0 / 25.0);
+                cureTimer = al_create_timer(0.3);
                 al_register_event_source(event_queue, al_get_timer_event_source(playerMovingTimer));
                 al_register_event_source(event_queue, al_get_timer_event_source(enemyMovingTimer));
                 al_register_event_source(event_queue, al_get_timer_event_source(bulletUpdateTimer));
@@ -1487,6 +1759,10 @@ int game_run() {
                 al_register_event_source(event_queue, al_get_timer_event_source(skillQTimer));
                 al_register_event_source(event_queue, al_get_timer_event_source(skillWTimer));
                 al_register_event_source(event_queue, al_get_timer_event_source(defendTimer));
+                al_register_event_source(event_queue, al_get_timer_event_source(thickCircleTimer));
+                al_register_event_source(event_queue, al_get_timer_event_source(landMineTimer));
+                al_register_event_source(event_queue, al_get_timer_event_source(thousandsArrowTimer));
+                al_register_event_source(event_queue, al_get_timer_event_source(cureTimer));
                 al_start_timer(playerMovingTimer);
                 al_start_timer(enemyMovingTimer);
                 al_start_timer(bulletUpdateTimer);
@@ -1496,9 +1772,10 @@ int game_run() {
                 al_start_timer(collisionDetectTimer);
                 al_start_timer(generateDroppingBulletTimer);
                 al_start_timer(generateEnemyTimer);
-
                 al_stop_samples();
-                al_play_sample(gameMusic, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
+                if (musicOn){
+                    al_play_sample(gameMusic, 0.6, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
+                }
             }
         }
     }
@@ -1513,6 +1790,11 @@ int game_run() {
         }
     }
     else if (window == airplane_choosing){
+        if (!al_is_event_queue_empty(event_queue)){
+            error = process_event();
+        }
+    }
+    else if (window == highscores){
         if (!al_is_event_queue_empty(event_queue)){
             error = process_event();
         }
@@ -1576,10 +1858,17 @@ void draw_menu() {
 
 void draw_about() {
     al_clear_to_color(al_map_rgb(60, 60, 30));
+    al_draw_text(smallFont, white, WIDTH / 2, 520, ALLEGRO_ALIGN_CENTER, "made by 107062303.");
+    al_draw_text(hintFont, white, WIDTH / 2, 80, ALLEGRO_ALIGN_CENTER, "Remember to check");
+    al_draw_text(hintFont, white, WIDTH / 2, 120, ALLEGRO_ALIGN_CENTER, "your message box,");
+    al_draw_text(hintFont, white, WIDTH / 2, 160, ALLEGRO_ALIGN_CENTER, "and,");
+    al_draw_text(hintFont, white, WIDTH / 2, 200, ALLEGRO_ALIGN_CENTER, "enjoy it!");
     al_draw_text(smallFont, white, WIDTH / 2, 450, ALLEGRO_ALIGN_CENTER, "BACK");
     al_draw_rectangle(WIDTH / 2 - 120, 440, WIDTH / 2 + 120, 480, white, 0);
     al_draw_text(smallFont, white, WIDTH / 2, 370, ALLEGRO_ALIGN_CENTER, "SPECIAL");
     al_draw_rectangle(WIDTH / 2 - 120, 360, WIDTH / 2 + 120, 400, white, 0);
+    al_draw_text(smallFont, white, WIDTH / 2, 290, ALLEGRO_ALIGN_CENTER, "HIGHSCORE");
+    al_draw_rectangle(WIDTH / 2 - 150, 280, WIDTH / 2 + 150, 320, white, 0);
     al_flip_display();
 }
 
@@ -1589,6 +1878,15 @@ void draw_game_scene() {
     char score_text[10];
     sprintf(score_text, "%08d", score);
     al_draw_text(bigFont, white, WIDTH - 5, 5, ALLEGRO_ALIGN_RIGHT, score_text);
+    if (detonate){
+        al_draw_circle(landminePos.x, landminePos.y, 48, al_map_rgba(255, 80, 80, 50), 8);
+    }
+    if (explode){
+        al_draw_bitmap(leafImg, landminePos.x - 50, landminePos.y - 50, 0);
+    }
+    if (cure_times % 2){
+        al_draw_bitmap(cureImg, player.pos.x, player.pos.y, 0);
+    }
     if (player.health > 0){
         double ratio = (double) player.health / playerPrefabs[chosenPlayer].hp;
         ALLEGRO_COLOR hp_bar = al_map_rgb((unsigned char) (150 + 50 * (1 - ratio)),
@@ -1599,9 +1897,19 @@ void draw_game_scene() {
             al_draw_text(bigFont, white, 180, HEIGHT - 44, ALLEGRO_ALIGN_LEFT, "Q");
         }
         if (player.show[W]){
-            al_draw_text(bigFont, white, 210, HEIGHT - 44, ALLEGRO_ALIGN_LEFT, "W");
+            al_draw_text(bigFont, white, 220, HEIGHT - 44, ALLEGRO_ALIGN_LEFT, "W");
         }
-        if (pass){
+        if (win){
+            al_draw_rectangle(WIDTH / 2 - 150, HEIGHT / 2 - 20, WIDTH / 2 + 150, HEIGHT / 2 + 50,
+                              al_map_rgb(102, 255, 153), 0);
+            al_draw_text(bigFont, al_map_rgb(102, 255, 153), WIDTH / 2, HEIGHT / 2,
+                         ALLEGRO_ALIGN_CENTER, "YOU WIN!!");
+            al_draw_rectangle(WIDTH / 2 - 90, HEIGHT / 2 + 60, WIDTH / 2 + 150, HEIGHT / 2 + 100, white, 0);
+            al_draw_text(smallFont, white, WIDTH / 2 + 30, HEIGHT / 2 + 70, ALLEGRO_ALIGN_CENTER, "MENU");
+            al_draw_bitmap(messageImg, WIDTH - 64, HEIGHT - 56, 0);
+            al_draw_bitmap(optionsImg, WIDTH - 128, HEIGHT - 60, 0);
+        }
+        else if (pass){
             al_draw_rectangle(WIDTH / 2 - 150, HEIGHT / 2 - 20, WIDTH / 2 + 150, HEIGHT / 2 + 50, white, 0);
             al_draw_text(bigFont, white, WIDTH / 2, HEIGHT / 2, ALLEGRO_ALIGN_CENTER, "LEVEL CLEAR");
             al_draw_rectangle(WIDTH / 2 - 90, HEIGHT / 2 + 60, WIDTH / 2 + 150, HEIGHT / 2 + 100, white, 0);
@@ -1645,16 +1953,14 @@ void draw_stage_choosing() {
     al_draw_text(fnt, white, 275, 220, ALLEGRO_ALIGN_CENTER, "4");
     al_draw_rectangle(60, 310, 340, 400, white, 0);
     al_draw_text(fnt, white, 200, 330, ALLEGRO_ALIGN_CENTER, "5");
-    al_draw_rectangle(60, 420, 340, 510, white, 0);
-    al_draw_text(bigFont, white, 200, 450, ALLEGRO_ALIGN_CENTER, "ENDLESS");
+    al_draw_rectangle(WIDTH / 2 - 120, 460, WIDTH / 2 + 120, 500, white, 0);
+    al_draw_text(smallFont, white, WIDTH / 2, 470, ALLEGRO_ALIGN_CENTER, "BACK");
 
     al_flip_display();
     al_destroy_font(fnt);
 }
 
 void draw_message_box() {
-    static int page = 0;
-
     al_clear_to_color(al_map_rgb(31, 64, 96));
 
     al_draw_text(smallFont, white, WIDTH / 2, 530, ALLEGRO_ALIGN_CENTER, "BACK");
@@ -1666,18 +1972,22 @@ void draw_message_box() {
         al_draw_text(hintFont, white, WIDTH / 2, HEIGHT / 2 - 10, ALLEGRO_ALIGN_CENTER, "There's no message yet");
     }
     else if (reading == 0){
-        for (int i = 1; i <= message_count; i++){
-            ALLEGRO_COLOR color = (has_read[page * 5 + i - 1] ? white : al_map_rgb(255, 230, 0));
+        for (int i = 1; i <= 5 && messagePage * 5 + i - 1 < message_count; i++){
+            ALLEGRO_COLOR color = (has_read[messagePage * 5 + i - 1] ? white : al_map_rgb(255, 230, 0));
             al_draw_rectangle(WIDTH / 2 - 150, 90 * i - 30, WIDTH / 2 + 150, 90 * i + 30, white, 0);
             al_draw_text(midFont, color, WIDTH / 2, 90 * i - 12, ALLEGRO_ALIGN_CENTER,
-                         messageTitle[page * 5 + i - 1]);
+                         messageTitle[messagePage * 5 + i - 1]);
         }
+        al_draw_filled_triangle(WIDTH / 2 + 170, HEIGHT / 2 - 15, WIDTH / 2 + 170, HEIGHT / 2 + 15, WIDTH / 2 + 190,
+                                HEIGHT / 2, white);
+        al_draw_filled_triangle(WIDTH / 2 - 170, HEIGHT / 2 - 15, WIDTH / 2 - 170, HEIGHT / 2 + 15, WIDTH / 2 - 190,
+                                HEIGHT / 2, white);
     }
     else {
         al_draw_rectangle(WIDTH / 2 - 160, 60, WIDTH / 2 + 160, 480, white, 0);
-        has_read[page * 5 + reading - 1] = true;
-        char tmp_content[30];
-        strcpy(tmp_content, messageContent[page * 5 + reading - 1]);
+        has_read[messagePage * 5 + reading - 1] = true;
+        char tmp_content[256];
+        strcpy(tmp_content, messageContent[messagePage * 5 + reading - 1]);
         char *line = strtok(tmp_content, "\n");
         int i = 0;
         do {
@@ -1743,7 +2053,7 @@ void draw_character_choosing() {
     al_draw_rectangle(WIDTH / 2 - 120, 510, WIDTH / 2 + 120, 550, white, 0);
 
     // TODO: design UI, make player can Choose Character
-    for (int i = 0; i < 3 && airplanePage * 3 + i < 6; i++){
+    for (int i = 0; i < 3 && airplanePage * 3 + i < 9; i++){
         int index = airplanePage * 3 + i;
         ALLEGRO_COLOR fore;
         fore = (index == chosenPlayer ? bg : white);
@@ -1763,7 +2073,7 @@ void draw_character_choosing() {
         al_draw_rotated_bitmap((unlock_airplane[index] ? airLargeImgs[index] : airGrayImgs[index]),
                                al_get_bitmap_width(airLargeImgs[index]) / 2,
                                al_get_bitmap_height(airLargeImgs[index]) / 2, WIDTH / 2 + 80,
-                               105 + 150 * i + (index == 5 ? 20 : 0), angle, 0);
+                               105 + 150 * i + (index == 5 ? 20 : 0) + (index == 8 ? 20 : 0), angle, 0);
         al_draw_rectangle(WIDTH / 2 - 150, 60 + 150 * i, WIDTH / 2 + 150, 170 + 150 * i, white, 0);
     }
 
@@ -1978,9 +2288,6 @@ void draw_bullets(Bullet *list) {
                 show_err_msg(1);
                 break;
         }
-//        al_draw_circle(current->pos.x + current->hit_area.center.x,
-//                       current->pos.y + current->hit_area.center.y,
-//                       current->hit_area.radius, al_map_rgb(255, 220, 188), 0);
     }
 }
 
@@ -2050,6 +2357,7 @@ void next_level() {
         ct = ct->next;
         free(temp);
     }
+    enemy_list = NULL;
 
     level++;
     player.pos.x = 200;
@@ -2081,4 +2389,50 @@ void send_message(char *title, char *content) {
     strcpy(messageTitle[message_count], title);
     strcpy(messageContent[message_count], content);
     message_count++;
+}
+
+int cmp(const void *pa, const void *pb) {
+    int *a = (int *) pa;
+    int *b = (int *) pb;
+    return *b - *a;
+}
+
+void write_highscore() {
+    FILE *fin = fopen("highscores", "r");
+    unsigned int i = 1, scs[11] = {0};
+    scs[0] = score;
+    while (fscanf(fin, "%d", &scs[i]) != EOF){
+        printf("read %d\n", scs[i]);
+        i++;
+    }
+    fclose(fin);
+    qsort(scs, i, sizeof(unsigned int), cmp);
+
+    FILE *fout = fopen("highscores", "w");
+    for (int j = 0; j < (i > 10 ? 10 : i); j++){
+        fprintf(fout, "%d\n", scs[j]);
+        printf("write %d\n", scs[j]);
+    }
+
+    fclose(fout);
+}
+
+void draw_highscore() {
+    al_clear_to_color((al_map_rgb(240, 230, 210)));
+    FILE *fin = fopen("highscores", "r");
+    unsigned int i = 0, scs[11] = {0};
+    while (fscanf(fin, "%d", &scs[i]) != EOF){
+        i++;
+    }
+    fclose(fin);
+
+    for (i = 0; i < 10; i++){
+        al_draw_textf(midFont, al_map_rgb(30, 20, 20), 85, i * 50 + 30,
+                      ALLEGRO_ALIGN_RIGHT, "%d.", i + 1);
+        al_draw_textf(midFont, al_map_rgb(30, 20, 20), WIDTH - 80, i * 50 + 30,
+                      ALLEGRO_ALIGN_RIGHT, "%d", scs[i]);
+    }
+    al_draw_text(smallFont, al_map_rgb(30, 20, 20), WIDTH / 2, 540, ALLEGRO_ALIGN_CENTER, "BACK");
+    al_draw_rectangle(WIDTH / 2 - 120, 530, WIDTH / 2 + 120, 570, al_map_rgb(30, 20, 20), 0);
+    al_flip_display();
 }

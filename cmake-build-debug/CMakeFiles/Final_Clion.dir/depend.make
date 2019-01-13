@@ -277,6 +277,8 @@ CMakeFiles/Final_Clion.dir/main.c.obj: ../skill.h
 
 CMakeFiles/Final_Clion.dir/skill.c.obj: D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/alcompat.h
 CMakeFiles/Final_Clion.dir/skill.c.obj: D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/allegro.h
+CMakeFiles/Final_Clion.dir/skill.c.obj: D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/allegro_acodec.h
+CMakeFiles/Final_Clion.dir/skill.c.obj: D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/allegro_audio.h
 CMakeFiles/Final_Clion.dir/skill.c.obj: D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/altime.h
 CMakeFiles/Final_Clion.dir/skill.c.obj: D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/base.h
 CMakeFiles/Final_Clion.dir/skill.c.obj: D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/bitmap.h

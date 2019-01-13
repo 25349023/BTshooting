@@ -17,5 +17,10 @@ void big_blow(Vector2 pos, enum flyMode mode, Bullet **list, int dmg, float mul)
 void horizontal_blow(Vector2 pos, enum flyMode mode, Bullet **list, int dmg, float mul);
 void thin_circle(Vector2 pos, enum flyMode mode, Bullet **list, int dmg, float mul);
 void thick_circle(Vector2 pos, enum flyMode mode, Bullet **list, int dmg, float mul);
+void landmine(Vector2 pos, enum flyMode mode, Bullet **list, int dmg, float mul);
+void ten_thousands_arrows(Vector2 pos, enum flyMode mode, Bullet **list, int dmg, float mul);
+void product_rule(Vector2 pos, enum flyMode mode, Bullet **list, int dmg, float mul);
+void plus_point2(Vector2 pos, enum flyMode mode, Bullet **list, int dmg, float mul);
+void cure(Vector2 pos, enum flyMode mode, Bullet **list, int dmg, float mul);
 
 #endif //FINAL_CLION_SKILL_H

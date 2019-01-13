@@ -278,6 +278,8 @@ CMakeFiles/Final_Clion.dir/main.c.obj
 CMakeFiles/Final_Clion.dir/skill.c.obj
  D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/alcompat.h
  D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/allegro.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/allegro_acodec.h
+ D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/allegro_audio.h
  D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/altime.h
  D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/base.h
  D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/bitmap.h

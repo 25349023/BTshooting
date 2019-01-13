@@ -11,7 +11,7 @@
 
 typedef void (*Skill)(Vector2, enum flyMode, Bullet **, int, float);
 
-enum skillButton { Q, W, E, R };
+enum skillButton { Q, W };
 
 typedef struct character {
     int health, damage;
@@ -29,9 +29,9 @@ typedef struct character {
     ALLEGRO_BITMAP *image;
     ALLEGRO_BITMAP *default_bullet;
     enum flyMode bullet_mode[MODE_COUNT];
-    Skill skill[4];
-    bool can[4], show[4];
-    int skill_CD[4];
+    Skill skill[2];
+    bool can[2], show[2];
+    int skill_CD[2];
     bool invincible, show_shield;
 
     struct character *next;
@@ -53,8 +53,8 @@ typedef struct playerSetting {
     double shooting_rate;
     enum flyMode modes[MODE_COUNT];
     int count_of_mode;
-    Skill skill[4];
-    int skill_CD[4];
+    Skill skill[2];
+    int skill_CD[2];
 } PlayerSetting;
 
 void set_player(const PlayerSetting *prefab);
