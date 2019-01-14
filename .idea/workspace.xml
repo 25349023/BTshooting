@@ -22,17 +22,16 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="def17dde-3e6d-444b-925d-22175e2bd139" name="Default Changelist" comment="clean something">
+    <list default="true" id="def17dde-3e6d-444b-925d-22175e2bd139" name="Default Changelist" comment="clean TODOs and comments. Destroy all sources while exiting.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/airplane10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/Final_Clion.dir/C.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/Final_Clion.dir/C.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/Final_Clion.dir/main.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/Final_Clion.dir/main.c.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/Final_Clion.dir/objects.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/Final_Clion.dir/objects.a" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/Final_Clion.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/Final_Clion.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/highscores" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/highscores" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fireworks.c" beforeDir="false" afterPath="$PROJECT_DIR$/fireworks.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/levelSetting.h" beforeDir="false" afterPath="$PROJECT_DIR$/levelSetting.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/C.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/C.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/fireworks.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/fireworks.c.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/levelSetting.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/levelSetting.c.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/main.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/main.c.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/objects.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Final_Clion.dir/objects.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Final_Clion.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Final_Clion.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/allegro.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/allegro.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/highscores" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/highscores" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/cmake-build-release/" />
@@ -56,12 +55,12 @@
     <expand />
     <select />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release" />
   <component name="FavoritesManager">
     <favorites_list name="Final_Clion" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.61963516">
+    <splitter split-orientation="horizontal" split-proportion="0.69957083">
       <split-first>
         <splitter split-orientation="horizontal" split-proportion="0.31862313">
           <split-first>
@@ -120,7 +119,7 @@
               <file pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/character.c">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="-2317">
+                    <state relative-caret-position="1728">
                       <caret line="64" column="19" selection-start-line="64" selection-start-column="19" selection-end-line="64" selection-end-column="19" />
                       <folding>
                         <element signature="e#41#58#0" expanded="true" />
@@ -132,7 +131,7 @@
               <file pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/levelSetting.c">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="545">
+                    <state relative-caret-position="1890">
                       <caret line="70" column="24" selection-start-line="70" selection-start-column="24" selection-end-line="70" selection-end-column="24" />
                     </state>
                   </provider>
@@ -141,8 +140,8 @@
               <file pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/fireworks.c">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="270">
-                      <caret line="10" column="6" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
+                    <state relative-caret-position="405">
+                      <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
                       <folding>
                         <element signature="e#41#63#0" expanded="true" />
                       </folding>
@@ -154,11 +153,11 @@
           </split-first>
           <split-second>
             <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-              <file pinned="false" current-in-tab="false">
+              <file pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/main.c">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="-1340">
-                      <caret line="28" column="20" lean-forward="true" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
+                    <state relative-caret-position="-943">
+                      <caret line="602" column="17" selection-start-line="602" selection-start-column="17" selection-end-line="602" selection-end-column="17" />
                       <folding>
                         <element signature="e#0#18#0" expanded="true" />
                         <marker date="1547448527539" expanded="true" signature="13257:21220" ph="{...}" />
@@ -199,7 +198,7 @@
               <file pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/skill.c">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="284">
+                    <state relative-caret-position="5832">
                       <caret line="216" column="5" selection-start-line="216" selection-start-column="5" selection-end-line="216" selection-end-column="5" />
                       <folding>
                         <element signature="e#40#57#0" expanded="true" />
@@ -225,11 +224,11 @@
                   </provider>
                 </entry>
               </file>
-              <file pinned="false" current-in-tab="true">
+              <file pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/levelSetting.h">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="154">
-                      <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+                    <state relative-caret-position="203">
+                      <caret line="10" selection-start-line="10" selection-end-line="10" />
                       <folding>
                         <element signature="e#110#139#0" expanded="true" />
                       </folding>
@@ -240,7 +239,7 @@
               <file pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/bullet.c">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="419">
+                    <state relative-caret-position="1701">
                       <caret line="63" column="5" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
                     </state>
                   </provider>
@@ -252,11 +251,11 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/main.c">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="168">
-                  <caret line="1786" selection-start-line="1786" selection-end-line="1786" />
+                <state relative-caret-position="48276">
+                  <caret line="1788" column="29" selection-start-line="1788" selection-start-column="29" selection-end-line="1788" selection-end-column="29" />
                   <folding>
                     <element signature="e#0#18#0" expanded="true" />
                     <marker date="1547448527539" expanded="true" signature="13257:21220" ph="{...}" />
@@ -297,13 +296,13 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/character.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-499">
+                <state relative-caret-position="702">
                   <caret line="26" column="32" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="32" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/general.h">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="540">
@@ -315,7 +314,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/bullet.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="122">
+                <state relative-caret-position="324">
                   <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
                   <folding>
                     <element signature="e#100#129#0" expanded="true" />
@@ -327,7 +326,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/fireworks.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="513">
+                <state relative-caret-position="540">
                   <caret line="20" column="6" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
                 </state>
               </provider>
@@ -410,8 +409,8 @@
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="221" />
-    <option name="y" value="-11" />
+    <option name="x" value="164" />
+    <option name="y" value="-8" />
     <option name="width" value="1515" />
     <option name="height" value="1047" />
   </component>
@@ -432,7 +431,7 @@
             <path>
               <item name="Final_Clion" type="b2602c69:ProjectViewProjectNode" />
               <item name="Final_Clion" type="462c0819:PsiDirectoryNode" />
-              <item name="cmake-build-debug" type="462c0819:PsiDirectoryNode" />
+              <item name="cmake-build-release" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -567,7 +566,9 @@
       <workItem from="1547385661721" duration="14874000" />
       <workItem from="1547424634972" duration="180000" />
       <workItem from="1547428861866" duration="1383000" />
-      <workItem from="1547445220660" duration="3068000" />
+      <workItem from="1547445220660" duration="3445000" />
+      <workItem from="1547456304590" duration="718000" />
+      <workItem from="1547461700690" duration="2028000" />
     </task>
     <task id="LOCAL-00001" summary="make enemy shoot bullets">
       <created>1545925863420</created>
@@ -646,11 +647,18 @@
       <option name="project" value="LOCAL" />
       <updated>1547227096427</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="clean TODOs and comments. Destroy all sources while exiting.">
+      <created>1547448605288</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1547448605288</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="397378000" />
+    <option name="totallyTimeSpent" value="400501000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -667,20 +675,20 @@
     <layout>
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="1" sideWeight="0.50080776" side_tool="true" weight="0.09710301" />
-      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.49919224" weight="0.13465665" />
+      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.49919224" visible="true" weight="0.1362661" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3288889" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49892703" weight="0.15111111" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49785408" weight="0.15111111" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.41" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info active="true" anchor="bottom" id="TODO" order="6" visible="true" />
+      <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50107294" side_tool="true" weight="0.3122222" />
-      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49839056" weight="0.38666666" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50214595" side_tool="true" weight="0.2611111" />
+      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.89002144" weight="0.38666666" />
       <window_info anchor="bottom" id="CMake" order="11" weight="0.3288889" />
-      <window_info anchor="bottom" id="Messages" order="12" weight="0.2611111" />
+      <window_info active="true" anchor="bottom" id="Messages" order="12" sideWeight="0.49892703" visible="true" weight="0.2611111" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -761,7 +769,8 @@
     <MESSAGE value="change Drawing way, warning and hint" />
     <MESSAGE value="skill complete" />
     <MESSAGE value="Message Box, Options UI, Character Prefab, Skill notation Change" />
-    <option name="LAST_COMMIT_MESSAGE" value="Message Box, Options UI, Character Prefab, Skill notation Change" />
+    <MESSAGE value="clean TODOs and comments. Destroy all sources while exiting." />
+    <option name="LAST_COMMIT_MESSAGE" value="clean TODOs and comments. Destroy all sources while exiting." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -888,13 +897,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/events.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="974">
-          <caret line="141" column="16" selection-start-line="141" selection-start-column="16" selection-end-line="141" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/Allegro/allegro-5.0.10-mingw-4.7.0/include/allegro5/mouse_cursor.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="258">
@@ -1028,9 +1030,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cmake-build-debug/airplane10.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/airplane10.png" />
     <entry file="file://$PROJECT_DIR$/cmake-build-debug/boss0.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -1079,6 +1079,9 @@
     <entry file="file://$PROJECT_DIR$/cmake-build-debug/airGray8.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/cmake-build-release/highscores">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
@@ -1086,12 +1089,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cmake-build-debug/bullet3.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/character.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2317">
+        <state relative-caret-position="1728">
           <caret line="64" column="19" selection-start-line="64" selection-start-column="19" selection-end-line="64" selection-end-column="19" />
           <folding>
             <element signature="e#41#58#0" expanded="true" />
@@ -1099,9 +1099,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/levelSetting.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1890">
+          <caret line="70" column="24" selection-start-line="70" selection-start-column="24" selection-end-line="70" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/skill.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
+        <state relative-caret-position="5832">
           <caret line="216" column="5" selection-start-line="216" selection-start-column="5" selection-end-line="216" selection-end-column="5" />
           <folding>
             <element signature="e#40#57#0" expanded="true" />
@@ -1109,19 +1116,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/levelSetting.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="545">
-          <caret line="70" column="24" selection-start-line="70" selection-start-column="24" selection-end-line="70" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/character.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-499">
-          <caret line="26" column="32" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="32" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/bullet3.png">
+      <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/skill.h">
       <provider selected="true" editor-type-id="text-editor">
@@ -1133,16 +1129,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/general.h">
+    <entry file="file://$PROJECT_DIR$/bullet.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="20" column="50" selection-start-line="19" selection-start-column="13" selection-end-line="20" selection-end-column="50" />
+        <state relative-caret-position="1701">
+          <caret line="63" column="5" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/character.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="702">
+          <caret line="26" column="32" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bullet.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
+        <state relative-caret-position="324">
           <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
           <folding>
             <element signature="e#100#129#0" expanded="true" />
@@ -1152,32 +1155,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/fireworks.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
+        <state relative-caret-position="540">
           <caret line="20" column="6" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/general.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="20" column="50" selection-start-line="19" selection-start-column="13" selection-end-line="20" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/levelSetting.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="e#110#139#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fireworks.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="10" column="6" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
+        <state relative-caret-position="405">
+          <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
           <folding>
             <element signature="e#41#63#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bullet.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="419">
-          <caret line="63" column="5" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1340">
-          <caret line="28" column="20" lean-forward="true" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
+        <state relative-caret-position="-943">
+          <caret line="602" column="17" selection-start-line="602" selection-start-column="17" selection-end-line="602" selection-end-column="17" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
             <marker date="1547448527539" expanded="true" signature="13257:21220" ph="{...}" />
@@ -1210,16 +1223,6 @@
             <marker date="1547448527539" expanded="false" signature="66595:67262" ph="{...}" />
             <marker date="1547448527539" expanded="false" signature="67315:68800" ph="{...}" />
             <marker date="1547448527539" expanded="true" signature="68870:69689" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/levelSetting.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-          <folding>
-            <element signature="e#110#139#0" expanded="true" />
           </folding>
         </state>
       </provider>
