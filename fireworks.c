@@ -269,9 +269,5 @@ void draw_9(Vector2 pt, bool standing, int speed) {
                                   (Vector2) {pt.x + 30, pt.y + (i + 1) * 20}, tm, speed, true);
         register_bullet(bt, &fireworks_bullet_list);
     }
-    //bt = make_firework_bullet(bulletImgs[rand() % 3], left,
-    //                          (Vector2) {pt.x - 44, pt.y + 50}, tm, speed, true);
-    //register_bullet(bt, &fireworks_bullet_list);
-
 }
 

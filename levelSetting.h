@@ -9,8 +9,6 @@
 #include "general.h"
 #include "character.h"
 
-// TODO: edit this struct if necessary
-
 typedef struct levelSetting {
     int level;
     int boss_hp;
