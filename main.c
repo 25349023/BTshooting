@@ -320,10 +320,10 @@ void game_begin() {
                  (Skill[2]) {defend, cure}, (int[]) {10, 5});
     set_airplane(&playerPrefabs[3], airplaneImgs[3], 90, 4, bulletImgs[6], 1.0 / 6.0, 1.5,
                  (enum flyMode[]) {down, right_back, left_back, rb_b, lb_b}, 5,
-                 (Skill[2]) {launch_big_arrow, thin_circle}, (int[]) {5, 5});
+                 (Skill[2]) {launch_big_arrow, thin_circle}, (int[]) {4, 3});
     set_airplane(&playerPrefabs[4], airplaneImgs[4], 80, 5, bulletImgs[9], 1.0 / 9.0, 2.2,
                  (enum flyMode[]) {right_front, left_front, right_back, left_back}, 4,
-                 (Skill[2]) {big_blow, thin_circle}, (int[]) {6, 3});
+                 (Skill[2]) {big_blow, thin_circle}, (int[]) {6, 2});
     set_airplane(&playerPrefabs[5], airplaneImgs[5], 90, 7, bulletImgs[8], 1.0 / 6.0, 2,
                  (enum flyMode[]) {up, down, right, left}, 4,
                  (Skill[2]) {big_blow, horizontal_blow}, (int[]) {4, 5});
