@@ -1873,6 +1873,8 @@ bool collide_with(Circle a, Circle b) {
 }
 
 void draw_menu() {
+    win = false;
+
     al_clear_to_color(al_map_rgb(70, 70, 80));
     // draw button
     al_draw_text(bigFont, al_map_rgb(255, 255, 200), WIDTH / 2, HEIGHT / 2 - 60, ALLEGRO_ALIGN_CENTRE, "S T A R T");

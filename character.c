@@ -8,7 +8,7 @@
 extern int WIDTH, HEIGHT;
 extern Character player, boss;
 extern Character *enemy_list;
-extern bool hintOut[4];
+extern bool hintOut[2];
 extern ALLEGRO_TIMER *defendTimer, *thickCircleTimer, *thousandsArrowTimer, *cureTimer;
 extern int defend_sparkle_times, thick_circle_times, thousand_arrow_times, cure_times;
 
