@@ -77,7 +77,7 @@ ALLEGRO_MOUSE_CURSOR *cursor = NULL;
 ALLEGRO_COLOR white;
 
 //Custom Definition
-const char *title = "Final Project 107062303";
+const char *title = "BTshooting";
 const double FPS = 60;
 const int WIDTH = 400;
 const int HEIGHT = 600;
